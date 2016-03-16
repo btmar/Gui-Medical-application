@@ -7,152 +7,226 @@
  *
  * Main module of the application.
  */
-angular
-  .module('sbAdminApp', [
-    'oc.lazyLoad',
-    'ui.router',
-    'ui.bootstrap',
-    'angular-loading-bar',
+ angular
+ .module('sbAdminApp', [
+  'oc.lazyLoad',
+  'ui.router',
+  'ui.bootstrap',
+  'angular-loading-bar',
+  'ngSanitize',
+  'ngWYSIWYG',
+  'textAngular'
   ])
-  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
-    
-    $ocLazyLoadProvider.config({
-      debug:false,
-      events:true,
-    });
+ .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
+  
+  $ocLazyLoadProvider.config({
+    debug:false,
+    events:true,
+  });
 
-    $urlRouterProvider.otherwise('/dashboard/home');
+  $urlRouterProvider.otherwise('/dashboard/krankheit');
 
-    $stateProvider
-      .state('dashboard', {
-        url:'/dashboard',
-        templateUrl: 'views/dashboard/main.html',
-        resolve: {
-            loadMyDirectives:function($ocLazyLoad){
-                return $ocLazyLoad.load(
-                {
-                    name:'sbAdminApp',
-                    files:[
-                    'scripts/directives/header/header.js',
-                    'scripts/directives/header/header-notification/header-notification.js',
-                    'scripts/directives/sidebar/sidebar.js',
-                    'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
-                    ]
-                }),
-                $ocLazyLoad.load(
-                {
-                   name:'toggle-switch',
-                   files:["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
-                          "bower_components/angular-toggle-switch/angular-toggle-switch.css"
-                      ]
-                }),
-                $ocLazyLoad.load(
-                {
-                  name:'ngAnimate',
-                  files:['bower_components/angular-animate/angular-animate.js']
-                })
-                $ocLazyLoad.load(
-                {
-                  name:'ngCookies',
-                  files:['bower_components/angular-cookies/angular-cookies.js']
-                })
-                $ocLazyLoad.load(
-                {
-                  name:'ngResource',
-                  files:['bower_components/angular-resource/angular-resource.js']
-                })
-                $ocLazyLoad.load(
-                {
-                  name:'ngSanitize',
-                  files:['bower_components/angular-sanitize/angular-sanitize.js']
-                })
-                $ocLazyLoad.load(
-                {
-                  name:'ngTouch',
-                  files:['bower_components/angular-touch/angular-touch.js']
-                })
-            }
+  $stateProvider
+  .state('dashboard', {
+    url:'/dashboard',
+    templateUrl: 'views/dashboard/main.html',
+    resolve: {
+      loadMyDirectives:function($ocLazyLoad){
+        return $ocLazyLoad.load(
+        {
+          name:'sbAdminApp',
+          files:[
+          'scripts/directives/header/header.js',
+          'scripts/directives/sidebar/sidebar.js',
+          'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
+          ]
+        }),
+        $ocLazyLoad.load(
+        {
+         name:'toggle-switch',
+         files:["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
+         "bower_components/angular-toggle-switch/angular-toggle-switch.css"
+         ]
+       }),
+        $ocLazyLoad.load(
+        {
+          name:'ngAnimate',
+          files:['bower_components/angular-animate/angular-animate.js']
+        })
+        $ocLazyLoad.load(
+        {
+          name:'ngCookies',
+          files:['bower_components/angular-cookies/angular-cookies.js']
+        })
+        $ocLazyLoad.load(
+        {
+          name:'ngResource',
+          files:['bower_components/angular-resource/angular-resource.js']
+        })
+        $ocLazyLoad.load(
+        {
+          name:'ngSanitize',
+          files:['bower_components/angular-sanitize/angular-sanitize.js']
+        })
+        $ocLazyLoad.load(
+        {
+          name:'ngTouch',
+          files:['bower_components/angular-touch/angular-touch.js']
+        })
+      }
+    }
+  })
+  .state('dashboard.notfall',{
+    url:'/notfall',
+    templateUrl:'views/notfall.html'
+  })
+  .state('dashboard.uebersicht',{
+    templateUrl:'views/uebersicht.html',
+    url:'/uebersicht'
+  })
+    .state('dashboard.ausstattung',{
+    templateUrl:'views/ausstattung.html',
+    controller: 'CkeditorCtrl',
+    url:'/ausstattung'
+  })
+
+  .state('dashboard.krankheitDetail',{
+    templateUrl:'views/krankheit/krankheitDetail.html',
+    url:'/krankheit/detail/:title',
+    controller: 'KrankheitDetailCtrl',
+    resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+              'scripts/controllers/krankheit/krankheitDetail.js'
+              ]
+            })
+          }
         }
-    })
-      .state('dashboard.home',{
-        url:'/home',
-        controller: 'MainCtrl',
-        templateUrl:'views/dashboard/home.html',
+  })     
+  .state('dashboard.krankheitSuchen',{
+    templateUrl:'views/krankheit/krankheitSuchen.html',
+    url:'/krankheit/suchen'
+  })
+  .state('dashboard.krankheitHinzufuegen',{
+    templateUrl:'views/krankheit/krankheitHinzufuegen.html',
+    url:'/krankheit/hinzufuegen',
+    controller: 'KrankheitHinzufuegenCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/krankheit/krankheitHinzufuegen.js'          ]
+        })
+      }
+    }
+  })
+
+  .state('dashboard.krankheitBearbeiten',{
+    templateUrl:'views/krankheit/krankheitBearbeiten.html',
+    url:'/krankheit/bearbeiten/:title',
+    controller: 'KrankheitBearbeitenCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/krankheit/krankheitBearbeiten.js'
+          ]
+        })
+      }
+    }
+  })
+  
+  .state('dashboard.krankheit',{
+    templateUrl:'views/krankheit.html',
+    url:'/krankheit',
+        controller:'KrankheitCtrl',
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
-              'scripts/controllers/main.js',
-              'scripts/directives/timeline/timeline.js',
-              'scripts/directives/notifications/notifications.js',
-              'scripts/directives/chat/chat.js',
-              'scripts/directives/dashboard/stats/stats.js'
-              ]
+              'scripts/controllers/krankheit/krankheit.js'              ]
             })
           }
         }
-      })
-      .state('dashboard.form',{
-        templateUrl:'views/form.html',
-        url:'/form'
-    })
-      .state('dashboard.blank',{
-        templateUrl:'views/pages/blank.html',
-        url:'/blank'
-    })
-      .state('login',{
-        templateUrl:'views/pages/login.html',
-        url:'/login'
-    })
-      .state('dashboard.chart',{
-        templateUrl:'views/chart.html',
-        url:'/chart',
-        controller:'ChartCtrl',
+      
+  })
+  .state('dashboard.test',{
+    templateUrl:'views/test.html',
+    url:'/test'
+  })
+  .state('dashboard.prozedur',{
+    templateUrl:'views/prozedur.html',
+    url:'/prozedur',
+    controller:'ProzedurCtrl',
         resolve: {
-          loadMyFile:function($ocLazyLoad) {
+          loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
-              name:'chart.js',
+              name:'sbAdminApp',
               files:[
-                'bower_components/angular-chart.js/dist/angular-chart.min.js',
-                'bower_components/angular-chart.js/dist/angular-chart.css'
+              'scripts/controllers/prozedur/prozedur.js',
               ]
-            }),
-            $ocLazyLoad.load({
-                name:'sbAdminApp',
-                files:['scripts/controllers/chartContoller.js']
             })
           }
         }
-    })
-      .state('dashboard.table',{
-        templateUrl:'views/table.html',
-        url:'/table'
-    })
-      .state('dashboard.panels-wells',{
-          templateUrl:'views/ui-elements/panels-wells.html',
-          url:'/panels-wells'
-      })
-      .state('dashboard.buttons',{
-        templateUrl:'views/ui-elements/buttons.html',
-        url:'/buttons'
-    })
-      .state('dashboard.notifications',{
-        templateUrl:'views/ui-elements/notifications.html',
-        url:'/notifications'
-    })
-      .state('dashboard.typography',{
-       templateUrl:'views/ui-elements/typography.html',
-       url:'/typography'
-   })
-      .state('dashboard.icons',{
-       templateUrl:'views/ui-elements/icons.html',
-       url:'/icons'
-   })
-      .state('dashboard.grid',{
-       templateUrl:'views/ui-elements/grid.html',
-       url:'/grid'
-   })
-  }]);
+  })
+  .state('dashboard.prozedurDetail',{
+    templateUrl:'views/prozedur/prozedurDetail.html',
+    url:'/prozedur/detail/:title',
+    controller: 'ProzedurDetailCtrl',
+    resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+              'scripts/controllers/prozedur/prozedurDetail.js'
+              ]
+            })
+          }
+        }
+  })     
+  .state('dashboard.prozedurHinzufuegen',{
+    templateUrl:'views/prozedur/prozedurHinzufuegen.html',
+    url:'/prozedur/Hinzufuegen',
+    controller: 'ProzedurHinzufuegenCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/prozedur/prozedurHinzufuegen.js'          ]
+        })
+      }
+    }
+  })
 
-    
+  .state('dashboard.prozedurBearbeiten',{
+    templateUrl:'views/prozedur/prozedurBearbeiten.html',
+    url:'/prozedur/bearbeiten/:title',
+    controller: 'ProzedurBearbeitenCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/prozedur/prozedurBearbeiten.js'
+          ]
+        })
+      }
+    }
+  })
+  .state('dashboard.blank',{
+    templateUrl:'views/pages/blank.html',
+       
+    url:'/blank'
+  })
+}]
+
+  
+);
+
+ 

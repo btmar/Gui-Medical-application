@@ -6,7 +6,6 @@
  * # MainCtrl
  * Controller of the sbAdminApp
  */
-angular.module('sbAdminApp')
-  .controller('FormCtrl', function($scope) {
-    
-});
+angular.module('sbAdminApp', ["ng.ckeditor"]).controller('controller', ['$scope', function($scope) {
+  $scope.htmlEditor = '...';
+}]);

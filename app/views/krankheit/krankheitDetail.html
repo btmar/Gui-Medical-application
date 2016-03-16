@@ -1,0 +1,77 @@
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-11">
+			<h1 class="page-header"ng-bind-html="krankheit.title | nl2br"></h1>
+		</div>
+		    <div class="col-m-1">                                    
+        <a ui-sref="dashboard.krankheitBearbeiten({ title: krankheit.title })"> 
+            <button type="button" class="page-header btn btn-info btn-circle btn-lg"><i class="fa fa-pencil "></i> 
+            </button>    
+        </a>
+
+
+    </div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading" ng-bind-html="krankheit.title | nl2br">
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="/dashboard/krankheit/detail/#uebersicht" data-toggle="tab">Übersicht</a>
+							</li>
+							<li><a href="/dashboard/krankheit/detail/#diagnostik" data-toggle="tab">Diagnostik</a>
+							</li>
+							<li><a href="/dashboard/krankheit/detail/#therapie" data-toggle="tab">Therapie</a>
+							</li>
+							<li><a href="/dashboard/krankheit/detail/#beratung" data-toggle="tab">Beratung</a>
+							</li>
+							<li><a href="/dashboard/krankheit/detail/#notes" data-toggle="tab">Notes</a>
+							</li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div class="tab-pane fade in active" id="uebersicht">
+								<p ng-bind-html="krankheit.uebersicht.flowchart| nl2br"></p>
+								
+								<h3 id="notfall-col">Notfall</h3>
+								<p ng-bind-html="krankheit.uebersicht.notfall| nl2br"></p>
+							</div>
+							<div class="tab-pane fade" id="diagnostik">
+								<p ng-bind-html="krankheit.diagnostik.anamnese| nl2br"></p>
+								
+								<h3 id="notfall-col">Notfall</h3>
+								<p ng-bind-html="krankheit.diagnostik.notfall| nl2br"></p>
+							</div>
+							<div class="tab-pane fade" id="therapie">
+								<p ng-bind-html="krankheit.therapie.initialtherapie| nl2br"></p>
+								
+								<h3 id="notfall-col">Notfall</h3>
+								<p ng-bind-html="krankheit.therapie.notfall| nl2br"></p>
+							</div>
+							<div class="tab-pane fade" id="beratung">
+								
+								<h3 id="notfall-col">Notfall</h3>
+								<p ng-bind-html="krankheit.beratung.notfall| nl2br"></p>
+							</div>
+							<div class="tab-pane fade" id="notes">
+								
+
+								<p ng-bind-html="krankheit.notes.icdnummern| nl2br"></p>
+								
+							</div>
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

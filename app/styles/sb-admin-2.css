@@ -352,3 +352,19 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+
+#table-person {
+  max-height: 230px;
+}
+.selected {
+  background-color: red;
+}
+#btn-margin-top{
+    margin-top: 25px;
+}
+#boite-diag{
+width: 1000px;
+}
+#notfall-col{
+    color: #F82006;
+}
