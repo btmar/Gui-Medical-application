@@ -15,7 +15,8 @@
   'angular-loading-bar',
   'ngSanitize',
   'ngWYSIWYG',
-  'textAngular'
+  'textAngular',
+  'ngDialog'
   ])
  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
   

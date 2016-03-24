@@ -1,125 +1,86 @@
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">Prozedur hinzufügen</h1>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="panel-body">
+<div class="container-fluid"><div class="row">
+	<div class="container-fluid">
+		<h1 class="page-header">Prozedur hinzufügen</h1>
+		<form role="form">
+			<div class="form-group">
+				<div class="row">
+					<div class="col-lg-6">
+						<label>Title:</label>
+						<div><input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="prozedur.title"/></div>
+					</div>
+				</div> 
+				<div class="row">
+					<div class="col-lg-6">
+						<label>Autor:</label>
+						<input id='input-to-add' class='form-control' placeholder='Enter text' ng-model="prozedur.autor"/>
+					</div>
+				</div> 
+				<div class="row">
+					<div class="col-md-6">
+						<label>date:</label>
+						<p class="input-group">
+							<input type="text" placeholder="Date" class="form-control" uib-datepicker-popup ng-model="prozedur.date" is-open="popup2.opened" datepicker-options="inlineOptions" ng-required="true" close-text="Close" />
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
+						</p></div>
+					</div> 
 					<div class="row">
-						<form role="form">
-							<div class="form-group">
-								<div class="row">
-									<label>Title:</label>
-									<div><input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="document.title"/></div>
-								</div> 
-								<div class="row">
-									<label>Autor:</label>
-									<div><input id='input-to-add' class='form-control' placeholder='Enter text' ng-model="document.autor"/></div>
-								</div> 
-								<div class="row">
-									<label>date:</label>
-									<div><input id='input-to-add' class='form-control' placeholder='Enter date'  ng-model="document.date"/></div>
-								</div> 
-								<div class="row">
-									<label>Übersicht:</label>
-									<div class="col-md-11 col-md-offset-1">
+						<div class="col-lg-12">
+							<label>Übersicht:</label>
+							<div class="col-md-11 col-md-offset-1">
+								<text-angular ng-model="prozedur.uebersicht.text" ></text-angular>
+								<label id="notfall-col">Notfall</label>
+								<text-angular ng-model="prozedur.uebersicht.notfall"></text-angular>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<label>Diagnostik:</label>
+							<div class="col-md-11 col-md-offset-1">
+								<text-angular ng-model="prozedur.diagnostik.text" ></text-angular>
+								<label id="notfall-col">Notfall</label>
+								<text-angular ng-model="prozedur.diagnostik.notfall" ></text-angular>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<label>Therapie:</label>
+							<div class="col-md-11 col-md-offset-1">
 
-										<label>Flowchart</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.uebersicht.flowchart"/></div>
-
-										<label>Tabelle</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.uebersicht.tabelle"/></div>
-
-										<label>Notfall</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.uebersicht.notfall"/></div>
-
-									</div>
-								</div>
-								<div class="row">
-
-									<label>Vorbereitung:</label>
-									<div class="col-md-11 col-md-offset-1">
-
-										<label>Indikation</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.vorbereitung.indikation" /></div>
-
-										<label>Kontraindikation</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.vorbereitung.kontraindikation" /></div>
-
-										<label>Notfall</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.vorbereitung.notfall" /></div>
-
-									</div>
-								</div>
-								<div class="row">
-									<label>Therapie:</label>
-									<div class="col-md-11 col-md-offset-1">
-
-										<label>Initialtherapie</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.therapie.initialtherapie"/></div>
-
-										<label>Monitoring</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.therapie.monitoring"/></div>
-
-										<label>Weiteres Therapieregime</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.therapie.weiteresTherapieregime" /></div>
-
-										<label>Notfall</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.therapie.notfall"/></div>
-
-
-									</div>
-
-								</div>
-								<div class="row">
-									<label>Auswertung (Beratung):</label>
-									<div class="col-md-11 col-md-offset-1">
-
-										<label>Auswertung</label>
-								<p ng-bind="prozedur.auswertung.auswertung"></p>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.auswertung.auswertung"/></div>
-
-										<label>Interpretation</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.auswertung.interpretation"/></div>
-
-										<label>Weiteres Prozedere</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.auswertung.weiteresProzedere"/></div>
-
-										<label>Notfall</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.auswertung.notfall"/></div>
-
-									</div>
-								</div>
-								<div class="row">
-									<label>Notes:</label>
-									<div class="col-md-11 col-md-offset-1">
-
-										<label>ICD-Nummern</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.notes.icdnummern"/></div>
-
-										<label>Definitionen/Hintergrund</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.notes.definitionen"/></div>
-
-										<label>Standardarztbrief</label>
-										<div><textarea class="form-control" rows="2" class='form-control' placeholder='Enter text' ng-model="document.notes.standardarztbrief"/></div>
-
-									</div>
-
-								</div>
-								<div class="row">
-								<div class="col-md-4 col-md-offset-9">
-									 
-									<button  type="submit" id='btn-margin' ng-click="save()" class="btn btn-primary">hinzufügen</button>
-									<button type="reset" id='btn-margin' class="btn btn-default">Reset</button>
-								</div>
-								</div>
-
-							</form>
+								<text-angular ng-model="prozedur.therapie.text"></text-angular>										
+								<label id="notfall-col">Notfall</label>
+								<text-angular ng-model="prozedur.therapie.notfall"></text-angular>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<label>Beratung:</label>
+							<div class="col-md-11 col-md-offset-1">
+								<text-angular ng-model="prozedur.beratung.text"></text-angular>
+								<label id="notfall-col">Notfall</label>
+								<text-angular ng-model="prozedur.beratung.notfall"></text-angular>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<label>Notes:</label>
+							<div class="col-md-11 col-md-offset-1">
+								<text-angular ng-model="prozedur.notes"></text-angular>
+							</div>	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-9">
+							<button  type="submit" id="btn-margin-top" ng-click="save()" class="btn btn-primary">hinzufügen</button>
+							<button type="reset" id="btn-margin-top" class="btn btn-default">Reset</button>
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
-

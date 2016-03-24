@@ -1,12 +1,13 @@
 angular.module('sbAdminApp')
-  .controller('ProzedurBearbeitenCtrl', function ($scope, $state, $stateParams, serviceAjax) {
-        var title = $stateParams.title;
+.controller('ProzedurBearbeitenCtrl', function ($scope, $state, $stateParams, serviceAjax) {
+    var title = $stateParams.title;
 
-        serviceAjax.infoProzedur(title).success(function(data){
-            $scope.prozedur = data;
-        })
+    serviceAjax.infoProzedur(title).success(function(data){
+        $scope.prozedur = data;
+        $scope.prozedur.date = new Date($scope.prozedur.date);
+    })
 
-        $scope.save = function(item, event) {
+    $scope.save = function(item, event) {
         formData = $scope.prozedur;
 
         serviceAjax.hinzuProzedur(formData).success(function(data){
@@ -14,4 +15,25 @@ angular.module('sbAdminApp')
 
         })
     };
-  });
+    $scope.today = function() {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+    $scope.clear = function() {
+        $scope.dt = null;
+    };
+
+    $scope.inlineOptions = {
+        showWeeks: true
+    };
+
+    $scope.open2 = function() {
+        $scope.popup2.opened = true;
+    };
+
+
+    $scope.popup2 = {
+        opened: false
+    };
+});

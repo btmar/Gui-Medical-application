@@ -1,93 +1,59 @@
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-11">
-			<h1 class="page-header"ng-bind-html="prozedur.title | nl2br"></h1>
+			<h1 class="page-header"ng-bind-html="prozedur.title "></h1>
 		</div>
-		    <div class="col-m-1">                                    
-        <a ui-sref="dashboard.prozedurBearbeiten({ title: prozedur.title })"> 
-            <button type="button" class="page-header btn btn-info btn-circle btn-lg"><i class="fa fa-pencil "></i> 
-            </button>    
-        </a>
-    </div>
+		<div class="col-m-1">                                    
+			<a ui-sref="dashboard.prozedurBearbeiten({ title: prozedur.title })"> 
+				<button type="button" class="page-header btn btn-info btn-circle btn-lg"><i class="fa fa-pencil "></i> 
+				</button>    
+			</a>
+		</div>
 	</div>
-
-	<div class="row">
 		<div class="col-lg-12">
-			<div class="row">
-				<div class="panel panel-default">
-					<div class="panel-heading" ng-bind-html="prozedur.title | nl2br">
-					</div>
-					<!-- /.panel-heading -->
-					<div class="panel-body">
-						<!-- Nav tabs -->
-						<ul class="nav nav-tabs">
-							<li class="active"><a href="/dashboard/prozedur/detail/#uebersicht" data-toggle="tab">Übersicht</a>
-							</li>
-							<li><a href="/dashboard/prozedur/detail/#diagnostik" data-toggle="tab">Vorbereitung (Diagnostik)</a>
-							</li>
-							<li><a href="/dashboard/prozedur/detail/#therapie" data-toggle="tab">Durchführung(Therapie)</a>
-							</li>
-							<li><a href="/dashboard/prozedur/detail/#beratung" data-toggle="tab">Auswertung(Beratung)</a>
-							</li>
-							<li><a href="/dashboard/prozedur/detail/#notes" data-toggle="tab">Notes</a>
-							</li>
-						</ul>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="/dashboard/prozedur/detail/#uebersicht" data-toggle="tab">Übersicht</a>
+						</li>
+						<li><a  href="/dashboard/prozedur/detail/#diagnostik" data-toggle="tab">Diagnostik</a>
+						</li>
+						<li><a href="/dashboard/prozedur/detail/#therapie" data-toggle="tab">Therapie</a>
+						</li>
+						<li><a href="/dashboard/prozedur/detail/#beratung" data-toggle="tab">Beratung</a>
+						</li>
+						<li><a href="/dashboard/prozedur/detail/#notes" data-toggle="tab">Notes</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="uebersicht">
+							<p ng-bind-html="prozedur.uebersicht.text"></p>
 
-						<!-- Tab panes -->
-						<div class="tab-content">
-							<div class="tab-pane fade in active" id="uebersicht">
-								<h3>Flowchart</h3>
-								<p ng-bind-html="prozedur.uebersicht.flowchart| nl2br"></p>
-								<h3>Tabelle</h3>
-								<p ng-bind-html="prozedur.uebersicht.tabelle| nl2br"></p>
-								<h3>Notfall</h3>
-								<p ng-bind-html="prozedur.uebersicht.notfall| nl2br"></p>
-							</div>
-							<div class="tab-pane fade" id="diagnostik">
-								<h3>Indikation</h3>
-								<p ng-bind-html="prozedur.vorbereitung.indikation| nl2br"></p>
-								<h3>Kontraindikation</h3>
-								<p ng-bind-html="prozedur.vorbereitung.kontraindikation| nl2br"></p>
-								<h3>Notfall</h3>
-								<p ng-bind-html="prozedur.vorbereitung.notfall| nl2br"></p>
-							</div>
-							<div class="tab-pane fade" id="therapie">
-								<h3>Initialtherapie</h3>
-								<p ng-bind-html="prozedur.therapie.initialtherapie| nl2br"></p>
-								<h3>Monitoring</h3>
-								<p ng-bind-html="prozedur.therapie.monitoring| nl2br"></p>
-								<h3>Weiteres Therapieregime</h3>
-								<p ng-bind-html="prozedur.therapie.weiteresTherapieregime| nl2br"></p>
-								<h3>Notfall</h3>
-								<p ng-bind-html="prozedur.therapie.notfall| nl2br"></p>
-							</div>
-							<div class="tab-pane fade" id="beratung">
-								<h3>Auswertung</h3>
-								<p ng-bind-html="prozedur.auswertung.auswertung| nl2br"></p>
-								<h3>Interpretation</h3>
-								<p ng-bind-html="prozedur.auswertung.interpretation| nl2br"></p>
-								<h3>Weiteres Prozedere</h3>
-								<p ng-bind-html="prozedur.auswertung.weiteresProzedere| nl2br"></p>
-								<h3>Notfall</h3>
-								<p ng-bind-html="prozedur.auswertung.notfall| nl2br"></p>
-							</div>
-							<div class="tab-pane fade" id="notes">
-								
-
-								<h3>ICD-Nummern</h3>
-								<p ng-bind-html="prozedur.notes.icdnummern| nl2br"></p>
-								<h3>Definitionen/Hintergrund</h3>
-								<p ng-bind-html="prozedur.notes.definitionen| nl2br"></p>
-								<h3>Standardarztbrief</h3>
-								<p ng-bind-html="prozedur.notes.standardarztbrief| nl2br"></p>
-							</div>
+							<h3 ng-if="prozedur.uebersicht.notfall" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.uebersicht.notfall"></p>
 						</div>
-						<!-- /.panel-body -->
+						<div class="tab-pane fade" id="diagnostik">
+							<p ng-bind-html="prozedur.diagnostik.text"></p>
+
+							<h3 ng-if="prozedur.diagnostik.notfall" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.diagnostik.notfall"></p>
+						</div>
+						<div class="tab-pane fade" id="therapie">
+							<p ng-bind-html="prozedur.therapie.text"></p>
+
+							<h3 ng-if="prozedur.therapie.notfall" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.therapie.notfall"></p>
+						</div>
+						<div class="tab-pane fade" id="beratung">
+							<p ng-bind-html="prozedur.beratung.text"></p>
+							<h3 ng-if="prozedur.beratung.notfall" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.beratung.notfall"></p>
+						</div>
+						<div class="tab-pane fade" id="notes">
+							<p ng-bind-html="prozedur.notes"></p>
+						</div>
 					</div>
-					<!-- /.panel -->
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
