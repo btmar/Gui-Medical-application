@@ -18,6 +18,9 @@
  		infoKrankheit: function(title){
  			return $http.get("http://localhost:8080/krankheit/" + title);
  		},
+ 		search: function(searchWord){
+ 			return $http.get("http://localhost:8080/search/" + searchWord);
+ 		},
  		krankheitEntfernen: function(title){
  			return $http.delete("http://localhost:8080/krankheit/" + title);
  		},

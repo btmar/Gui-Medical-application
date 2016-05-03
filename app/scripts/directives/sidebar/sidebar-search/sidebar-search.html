@@ -1,10 +1,13 @@
 <li class="sidebar-search">
     <div class="input-group custom-search-form">
-        <input type="text" class="form-control" placeholder="Search...">
+        <input type="text" ng-model="searchWord" class="form-control" placeholder="Search...">
         <span class="input-group-btn">
+                    <a ui-sref="dashboard.search({ searchWord: searchWord })"> 
+
             <button class="btn btn-default" type="button">
                 <i class="fa fa-search"></i>
             </button>
+                            </a>
         </span>
     </div>
 </li>

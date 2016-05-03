@@ -29,5 +29,13 @@ angular.module('sbAdminApp')
 	$scope.popup2 = {
 		opened: false
 	};
+  // Editor options.
+  $scope.options = {
+  	language: 'de'
+  };
 
+  // Called when the editor is completely ready.
+  $scope.onReady = function () {
+    // ...
+};
 });

@@ -6,6 +6,16 @@
  * # MainCtrl
  * Controller of the sbAdminApp
  */
-angular.module('sbAdminApp', ["ng.ckeditor"]).controller('controller', ['$scope', function($scope) {
-  $scope.htmlEditor = '...';
+angular.module('sbAdminApp')
+.controller('CkeditorCtrl', ['$scope', function ($scope) {
+
+  // Editor options.
+  $scope.options = {
+    language: 'de'
+  };
+
+  // Called when the editor is completely ready.
+  $scope.onReady = function () {
+    // ...
+  };
 }]);

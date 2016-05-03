@@ -4,7 +4,9 @@ angular.module('sbAdminApp')
 
     serviceAjax.infoProzedur(title).success(function(data){
         $scope.prozedur = data;
-        $scope.prozedur.date = new Date($scope.prozedur.date);
+        if ($scope.prozedur.date !== null){
+            $scope.prozedur.date = new Date($scope.prozedur.date);
+        }
     })
 
     $scope.save = function(item, event) {
@@ -36,4 +38,13 @@ angular.module('sbAdminApp')
     $scope.popup2 = {
         opened: false
     };
+      // Editor options.
+      $scope.options = {
+        language: 'de'
+    };
+
+  // Called when the editor is completely ready.
+  $scope.onReady = function () {
+    // ...
+};
 });

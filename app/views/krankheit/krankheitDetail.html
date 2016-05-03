@@ -39,6 +39,11 @@
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="uebersicht">
+						
+						<!--<a ng-repeat="headline in headlines" ng-click="scrollTo(headline)">{{headline.label}}</a>
+						<div table-of-contents ng-model="krankheit.uebersicht.notfall">{{krankheit.uebersicht.notfall}}</div>
+						<h3 ng-if="krankheit.uebersicht.notfall" id="notfall-col">Notfall</h3>
+						<div ng-model="krankheit.uebersicht.notfall">{{krankheit.uebersicht.notfall}}</div>-->
 						<p ng-bind-html="krankheit.uebersicht.text"></p>
 
 						<h3 ng-if="krankheit.uebersicht.notfall" id="notfall-col">Notfall</h3>

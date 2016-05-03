@@ -1,27 +1,26 @@
 <div class="container-fluid"><div class="row">
 	<div class="container-fluid">
 		<h1 class="page-header">Krankheit bearbeiten</h1>
-		<form role="form">
+				<form role="form">
 			<div class="form-group">
-					<div class="col-lg-12">
+			<div class="col-lg-6">
+                        <div class="form-group">
 						<label>Title:</label>
-				<div class="row">
-						<div class="col-md-6 col-md-offset-1">
-						<input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="krankheit.title"/></div>
-					</div>
-				</div> 
-					<div class="col-lg-12">
-						<label>Autor:</label>
-										<div class="row">
-													<div class="col-md-6 col-md-offset-1">
-						<input id='input-to-add' class='form-control' placeholder='Enter text' ng-model="krankheit.autor"/>
+				
+						
+						<input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="krankheit.title"/>
 						</div>
-					</div>
-				</div> 
-					<div class="col-md-12">
+						                        <div class="form-group">
+
+						<label>Autor:</label>
+						<input id='input-to-add' class='form-control' placeholder='Enter text' ng-model="krankheit.autor"/>
+						
+				 </div>
+				 </div>
+				                         <div class="form-group">
+
 						<label>date:</label>
-										<div class="row">
-													<div class="col-md-6 col-md-offset-1">
+													
 						<p class="input-group">
 							<input type="text" placeholder="Date" class="form-control" uib-datepicker-popup ng-model="krankheit.date" is-open="popup2.opened" datepicker-options="inlineOptions" ng-required="true" close-text="Close" />
 							<span class="input-group-btn">
@@ -29,70 +28,55 @@
 							</span>
 						</p>
 						</div>
-					</div> 
-					</div>
-						<div class="col-lg-12">
-							<label>Übersicht:</label>
-												<div class="row">
-							<div class="col-md-11 col-md-offset-1">
-								<text-angular ng-model="krankheit.uebersicht.text" ></text-angular>
-								<label id="notfall-col">Notfall</label>
-								<text-angular ng-model="krankheit.uebersicht.notfall"></text-angular>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-12">
-							<label>Diagnostik:</label>
-							<div class="col-md-11 col-md-offset-1">
-								<text-angular ng-model="krankheit.diagnostik.text" ></text-angular>
-								<label id="notfall-col">Notfall</label>
-								<text-angular ng-model="krankheit.diagnostik.notfall" ></text-angular>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-12">
-							<label>Therapie:</label>
-							<div class="col-md-11 col-md-offset-1">
-
-								<text-angular ng-model="krankheit.therapie.text"></text-angular>										
-								<label id="notfall-col">Notfall</label>
-								<text-angular ng-model="krankheit.therapie.notfall"></text-angular>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-12">
-							<label>Beratung:</label>
-							<div class="col-md-11 col-md-offset-1">
-								<text-angular ng-model="krankheit.beratung.text"></text-angular>
-								<label id="notfall-col">Notfall</label>
-								<text-angular ng-model="krankheit.beratung.notfall"></text-angular>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-12">
-							<label>Notes:</label>
-							<div class="col-md-11 col-md-offset-1">
-								<text-angular ng-model="krankheit.notes"></text-angular>
-							</div>	
-						</div>
-					</div>
-					<div class="col-lg-12">
+										                         <div class="form-group">
 						<label>Prozedur:</label>
-						<div class="row">
-							<div class="col-md-6 col-md-offset-1">
 								<p class="input-group">
 									<input class="form-control" placeholder="Prozedur" id="disabledInput" ng-model="krankheit.prozedur.title">
 									<span class="input-group-btn">
 										<button class="btn btn-default" ng-click="openProzedurForm()"><i class="fa fa-medkit"></i></button>
 									</span>
 								</p>
-							</div>
-						</div>
+								</div>
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="/dashboard/krankheit/detail/#uebersicht" data-toggle="tab">Übersicht</a>
+					</li>
+					<li><a  href="/dashboard/krankheit/detail/#diagnostik" data-toggle="tab">Diagnostik</a>
+					</li>
+					<li><a href="/dashboard/krankheit/detail/#therapie" data-toggle="tab">Therapie</a>
+					</li>
+					<li><a href="/dashboard/krankheit/detail/#beratung" data-toggle="tab">Beratung</a>
+					</li>
+					<li><a href="/dashboard/krankheit/detail/#notes" data-toggle="tab">Notes</a>
+					</li>
+				</ul>
+				<div class="tab-content"id="ckeditor-margin-top">
+					<div class="tab-pane fade in active" id="uebersicht">
+
+								<div ckeditor="options" ready="onReady()" ng-model="krankheit.uebersicht.text" ></div>
+								<h3 id="notfall-col">Übersicht Notfall</h3>
+								<div ckeditor="options" ready="onReady()" ng-model="krankheit.uebersicht.notfall"></div>
+							
 					</div>
+					<div class="tab-pane fade" id="diagnostik">
+						<div ckeditor="options" ready="onReady()" ng-model="krankheit.diagnostik.text" ></div>
+								<h3 id="notfall-col">Diagnostik Notfall</h3>
+								<div ckeditor="options" ready="onReady()" ng-model="krankheit.diagnostik.notfall"></div>
+					</div>
+					<div class="tab-pane fade" id="therapie">
+						<div ckeditor="options" ready="onReady()" ng-model="krankheit.therapie.text" ></div>
+								<h3 id="notfall-col">Therapie Notfall</h3>
+								<div ckeditor="options" ready="onReady()" ng-model="krankheit.therapie.notfall"></div>
+					</div>
+					<div class="tab-pane fade" id="beratung">
+						<div ckeditor="options" ready="onReady()" ng-model="krankheit.beratung.text" ></div>
+								<h3 id="notfall-col">Beratung Notfall</h3>
+								<div ckeditor="options" ready="onReady()" ng-model="krankheit.beratung.notfall"></div>
+					</div>
+					<div class="tab-pane fade" id="notes">
+						<div ckeditor="options" ready="onReady()" ng-model="krankheit.notes" ></div>
+								
+					</div>
+				</div>
 					<div class="row">
 						<div class="col-md-4 col-md-offset-9">
 							<button  type="submit" id="btn-margin-top" ng-click="save()" class="btn btn-primary">bearbeiten</button>

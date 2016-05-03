@@ -16,7 +16,8 @@
   'ngSanitize',
   'ngWYSIWYG',
   'textAngular',
-  'ngDialog'
+  'ngDialog',
+  'ckeditor'
   ])
  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
   
@@ -88,7 +89,17 @@
     .state('dashboard.ausstattung',{
     templateUrl:'views/ausstattung.html',
     controller: 'CkeditorCtrl',
-    url:'/ausstattung'
+    url:'/ausstattung',
+    resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+              'scripts/controllers/form.js'
+              ]
+            })
+          }
+        }
   })
 
   .state('dashboard.krankheitDetail',{
@@ -140,7 +151,21 @@
       }
     }
   })
-  
+  .state('dashboard.search',{
+    templateUrl:'views/search.html',
+    url:'/search/:searchWord',
+    controller: 'SearchCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/search/search.js'
+          ]
+        })
+      }
+    }
+  })
   .state('dashboard.krankheit',{
     templateUrl:'views/krankheit.html',
     url:'/krankheit',

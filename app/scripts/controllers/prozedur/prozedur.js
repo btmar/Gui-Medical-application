@@ -12,6 +12,7 @@ angular.module('sbAdminApp')
         serviceAjax.prozed().success(function(data){
          //   $scope.loading = true;
          $scope.prozedurs = data;
+        console.log(data);
                // $scope.loading = false;
 
 

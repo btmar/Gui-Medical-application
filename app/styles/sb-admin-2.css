@@ -362,6 +362,11 @@ table.dataTable thead .sorting:after {
 #btn-margin-top{
     margin-top: 25px;
 }
+
+#ckeditor-margin-top{
+    padding-top: 15px;
+}
+
 #boite-diag{
 width: 1000px;
 }
