@@ -52,28 +52,34 @@
 				<div class="tab-content"id="ckeditor-margin-top">
 					<div class="tab-pane fade in active" id="uebersicht">
 
-						<div ckeditor="options" ready="onReady()" ng-model="krankheit.uebersicht.text" ></div>
+						<text-angular ng-model="krankheit.uebersicht.text" ></text-angular>
 						<h3 id="notfall-col">Übersicht Notfall</h3>
-						<div ckeditor="options" ready="onReady()" ng-model="krankheit.uebersicht.notfall"></div>
+						<text-angular ng-model="krankheit.uebersicht.notfall"></text-angular>
 						
 					</div>
 					<div class="tab-pane fade" id="diagnostik">
-						<div ckeditor="options" ready="onReady()" ng-model="krankheit.diagnostik.text" ></div>
+						<text-angular ng-model="krankheit.diagnostik.text" ></text-angular>
 						<h3 id="notfall-col">Diagnostik Notfall</h3>
-						<div ckeditor="options" ready="onReady()" ng-model="krankheit.diagnostik.notfall"></div>
+						<text-angular ng-model="krankheit.diagnostik.notfall"></text-angular>
 					</div>
 					<div class="tab-pane fade" id="therapie">
-						<div ckeditor="options" ready="onReady()" ng-model="krankheit.therapie.text" ></div>
+						<text-angular ng-model="krankheit.therapie.text" ></text-angular>
 						<h3 id="notfall-col">Therapie Notfall</h3>
-						<div ckeditor="options" ready="onReady()" ng-model="krankheit.therapie.notfall"></div>
+						<text-angular ng-model="krankheit.therapie.notfall"></text-angular>
 					</div>
 					<div class="tab-pane fade" id="beratung">
-						<div ckeditor="options" ready="onReady()" ng-model="krankheit.beratung.text" ></div>
+						<text-angular ng-model="krankheit.beratung.text" ></text-angular>
 						<h3 id="notfall-col">Beratung Notfall</h3>
-						<div ckeditor="options" ready="onReady()" ng-model="krankheit.beratung.notfall"></div>
+						<text-angular ng-model="krankheit.beratung.notfall"></text-angular>
 					</div>
 					<div class="tab-pane fade" id="notes">
-						<div ckeditor="options" ready="onReady()" ng-model="krankheit.notes" ></div>
+						<text-angular ng-model="krankheit.notes" ></text-angular>
+						<!--<h3 id="notfall-col">ICD Nummer</h3>
+						<text-angular ng-model="krankheit.notes" ></text-angular>
+						<button type="button" class="page-header btn btn-default btn-circle btn-lg"ng-click="openIcdForm()"><i class="fa fa-search"></i>  
+
+						</button> -->
+
 						
 					</div>
 				</div>

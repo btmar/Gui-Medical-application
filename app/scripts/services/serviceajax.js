@@ -38,6 +38,9 @@
  		},
  		hinzuProzedur: function(document){
  			return $http.post("http://localhost:8080/prozedur/save", document);
+ 		},
+ 		queryICD: function(){
+ 			return $http.get("http://localhost:8080/icdnummer/read/neben");
  		}
  	}
 

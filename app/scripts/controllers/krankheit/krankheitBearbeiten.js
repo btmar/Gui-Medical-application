@@ -15,7 +15,7 @@ angular.module("sbAdminApp")
 
     serviceAjax.hinzuKrankheit(formData).success(function(data){
      $state.go('dashboard.krankheit')
-
+ 
    })
   };
   var loadProzedurs = function(){
@@ -25,6 +25,14 @@ angular.module("sbAdminApp")
 
    });
 
+
+  };
+  var loadKrankheits = function(){
+
+    serviceAjax.krank().success(function(data){
+     $scope.krankheits = data;
+
+   });
   };
   $scope.openProzedurForm = function() {
     loadProzedurs();
@@ -44,6 +52,7 @@ angular.module("sbAdminApp")
     $scope.krankheit.prozedur=prozedur;
     ngDialog.closeAll();
   };
+
   $scope.today = function() {
     $scope.dt = new Date();
   };
@@ -73,4 +82,14 @@ angular.module("sbAdminApp")
   $scope.onReady = function () {
     // ...
   };
+
+
+var titreBearbeitung = function(title){
+  var find = " ";
+  var re = new RegExp(find, 'g');
+
+  return title.replace(re,"%20");
+
+
+};
 });

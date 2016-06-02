@@ -47,4 +47,5 @@ angular.module('sbAdminApp')
   $scope.onReady = function () {
     // ...
 };
+
 });

@@ -9,8 +9,8 @@ var searchWord = $stateParams.searchWord;
     $scope.krankheits = [];
     $scope.prozedurs = [];
     serviceAjax.search(searchWord).success(function(data){
-      console.log(data.krankheiten);
     $scope.krankheits = data.krankheiten;
+    $scope.HaufKrankheits = data.HaufKrankheiten;
     $scope.prozedurs = data.prozeduren;
 
     });
