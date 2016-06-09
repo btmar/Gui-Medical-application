@@ -39,7 +39,16 @@
  		hinzuProzedur: function(document){
  			return $http.post("http://localhost:8080/prozedur/save", document);
  		},
- 		queryICD: function(){
+ 		medikament: function(){
+ 			return $http.get("http://localhost:8080/medikament/query");
+ 		},
+ 		icdGesamt: function(){
+ 			return $http.get("http://localhost:8080/icdnummer/query");
+ 		},
+ 		icdHaupt: function(){
+ 			return $http.get("http://localhost:8080/icdnummer/read/haupt");
+ 		},
+ 		icdNeben: function(){
  			return $http.get("http://localhost:8080/icdnummer/read/neben");
  		}
  	}

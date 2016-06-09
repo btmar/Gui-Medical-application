@@ -4,9 +4,7 @@ angular.module('sbAdminApp')
 	
 	$scope.save = function(item, event) {
 		formData = $scope.krankheit;
-		console.log(formData);
 		formData.prozedur = $scope.prozedur;
-    console.log($scope.prozedur);
     console.log(formData);
 
     serviceAjax.hinzuKrankheit(formData).success(function(data){
@@ -18,23 +16,41 @@ angular.module('sbAdminApp')
 
     serviceAjax.prozed().success(function(data){
      $scope.prozedurs = data;
+     $scope.viewbyP = 10;
+     $scope.totalItemsP = $scope.prozedurs.length;
+     $scope.currentPageP = 1;
+     $scope.itemsPerPageP = $scope.viewbyP;
+     $scope.maxSizeP = 5; 
 
-   });
+     $scope.setPageP = function (pageNoP) {
+      $scope.currentPageP = pageNoP;
+    };
+
+    $scope.pageChangedP = function() {
+      console.log('Page changed to: ' + $scope.currentPageP);
+    };
+
+    $scope.setItemsPerPageP = function(num) {
+      $scope.itemsPerPageP = num;
+      $scope.currentPageP = 1; 
+    };
+
+
+  });
   };
   
   $scope.openProzedurForm = function() {
     loadProzedurs();
 
     ngDialog.openConfirm({template: 'views/krankheit/prozedurForm.html',
-      scope: $scope //Pass the scope object if you need to access in the template
+      scope: $scope 
     }).then(
     function(value) {
 
     },
     function(value) {
-        //Cancel or do nothing
-      }
-      );
+    }
+    );
   };
 
   $scope.checkProzedur = function(prozedur){
@@ -42,6 +58,7 @@ angular.module('sbAdminApp')
    $scope.prozedur=prozedur;
    ngDialog.closeAll();
  };
+ 
  $scope.today = function() {
   $scope.dt = new Date();
 };
@@ -62,13 +79,10 @@ $scope.open2 = function() {
 $scope.popup2 = {
   opened: false
 };
-  // Editor options.
-  $scope.options = {
-    language: 'de'
-  };
+$scope.options = {
+  language: 'de'
+};
 
-  // Called when the editor is completely ready.
-  $scope.onReady = function () {
-    // ...
-  };
+$scope.onReady = function () {
+};
 });

@@ -13,7 +13,15 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="dataTable_wrapper">
-            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+        <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Prozedur" ng-model="search">
+                    </div>      
+                </div>
+            </form>
+                    <table class="table table-striped table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -22,7 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="prozedur in prozedurs">
+                    <tr ng-repeat="prozedur in (prozedurs|filter:search).slice(((currentPageP-1)*itemsPerPageP), ((currentPageP)*itemsPerPageP))">
                         <td ng-bind="prozedur.title"></td>
                         <td ng-bind="prozedur.autor"></td>
                         <td ng-bind="prozedur.date"></td>
@@ -41,6 +49,8 @@
                     </tr>
                 </tbody>
             </table>
+            <uib-pagination total-items="totalItemsP" ng-model="currentPageP" max-size="maxSizeP" class="pagination-sm" boundary-link-numbers="true" style="
+            margin-left: 40%;"></uib-pagination>
         </div>
     </div>
 </div>

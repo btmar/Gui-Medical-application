@@ -9,10 +9,13 @@ var searchWord = $stateParams.searchWord;
     $scope.krankheits = [];
     $scope.prozedurs = [];
     serviceAjax.search(searchWord).success(function(data){
+      console.log(data);
     $scope.krankheits = data.krankheiten;
-    $scope.HaufKrankheits = data.HaufKrankheiten;
+    $scope.HauptKrankheits = data.HauptKrankheiten;
+    $scope.NebenKrankheits = data.NebenKrankheiten;
     $scope.prozedurs = data.prozeduren;
-
+    $scope.HauptProzedurs = data.HauptProzeduren;
+    $scope.NebenProzedurs = data.NebenProzeduren;
     });
   };
 

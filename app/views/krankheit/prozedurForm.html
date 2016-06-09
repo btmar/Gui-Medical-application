@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="prozedur in prozedurs | filter:searchTitle">
+                    <tr ng-repeat="prozedur in (prozedurs | filter:searchTitle).slice(((currentPageP-1)*itemsPerPageP), ((currentPageP)*itemsPerPageP))">
                         <td ng-bind="prozedur.title"></td>
 
                         
@@ -31,5 +31,7 @@
                 </tbody>
             </table>
         </div>
+        <uib-pagination total-items="totalItemsP" ng-model="currentPageP" max-size="maxSizeP" class="pagination-sm" boundary-link-numbers="true" style="
+        margin-left: 20%;"></uib-pagination>     
     </div>
 </div>

@@ -17,7 +17,8 @@
   'ngWYSIWYG',
   'textAngular',
   'ngDialog',
-  'ckeditor'
+  'ckeditor',
+  'ngTouch'
   ])
 
  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
@@ -79,29 +80,37 @@
       }
     }
   })
-  .state('dashboard.notfall',{
-    url:'/notfall',
-    templateUrl:'views/notfall.html'
-  })
-  .state('dashboard.uebersicht',{
-    templateUrl:'views/uebersicht.html',
-    url:'/uebersicht'
-  })
-  .state('dashboard.ausstattung',{
-    templateUrl:'views/ausstattung.html',
-    controller: 'CkeditorCtrl',
-    url:'/ausstattung',
+  .state('dashboard.icdNummern',{
+    url:'/icdNummern',
+    templateUrl:'views/icdNummern.html',
+    controller: 'IcdNummernCtrl',
     resolve: {
       loadMyFiles:function($ocLazyLoad) {
         return $ocLazyLoad.load({
           name:'sbAdminApp',
           files:[
-          'scripts/controllers/form.js'
+          'scripts/controllers/icd/icdNummern.js'
           ]
         })
       }
     }
   })
+  .state('dashboard.medikament',{
+    url:'/medikament',
+    templateUrl:'views/medikament.html',
+    controller: 'MedikamentCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/medikament/medikament.js'
+          ]
+        })
+      }
+    }
+  })
+  
 
   .state('dashboard.krankheitDetail',{
     templateUrl:'views/krankheit/krankheitDetail.html',
@@ -278,9 +287,7 @@ $provide.decorator('taOptions', ['taRegisterTool', '$delegate','$uibModal', func
         controller :function ($scope, $uibModalInstance) {
           $scope.invitation ={};
           $scope.ok = function () {
-            console.log($scope.newtable);
             $uibModalInstance.close($scope.newtable);
-            console.log($scope.newtable);
 
           };
 
@@ -320,74 +327,163 @@ angular.module('sbAdminApp').config(function($provide){
     if (link[1] != null){
       return '<a href=/#/dashboard/prozedur/detail/'+link[1]+'>'+link[1]+' </a> ';}
       if (link[2] != null){
-        return '<font color="#008000">'+link[2]+' </front>';}
-      }
+        return '<font color="#008000">'+link[2]+' </front><font color="#000000"> .</front>';}
+        if (link[3] != null){
+          return '<font color="#FF0000">'+link[3]+' </front><font color="#000000"> .</front>';}
+        }
 
 
-      $provide.decorator('taOptions', ['taRegisterTool', 'serviceAjax','$delegate','$uibModal', function(taRegisterTool,serviceAjax, taOptions,$uibModal,$scope){
-        taRegisterTool('link', {
-          iconclass: 'fa fa-external-link',
-          tooltiptext: 'insert internal link',
-          action: function(promise, restoreSelection){
-            var that=this;
-            var uibModalInstance=$uibModal.open({
-              templateUrl: 'views/krankheit/popup.html',
-              controller :function ($scope,$http, $uibModalInstance,serviceAjax) {
-                $scope.invitation ={};
-                serviceAjax.krank().success(function(data){
-                  $scope.krankheits = data;
-                });
-                serviceAjax.prozed().success(function(data){
-                  $scope.prozedurs = data;
-                });
-                serviceAjax.queryICD().success(function(data){
-                  $scope.icds = data;
-                });      
-                $scope.ok = function () {
-                  $uibModalInstance.close($scope.link);
-                };
+        $provide.decorator('taOptions', ['taRegisterTool', 'serviceAjax','$delegate','$uibModal', function(taRegisterTool,serviceAjax, taOptions,$uibModal,$scope){
+          taRegisterTool('link', {
+            iconclass: 'fa fa-external-link',
+            tooltiptext: 'insert internal link',
+            action: function(promise, restoreSelection){
+              var that=this;
+              var uibModalInstance=$uibModal.open({
+                templateUrl: 'views/krankheit/popup.html',
+                controller :function ($scope,$http, $uibModalInstance,serviceAjax) {
+                  $scope.invitation ={};
+                  serviceAjax.krank().success(function(data){
+                    $scope.krankheits = data;
+                    $scope.viewbyK = 10;
+                    $scope.totalItemsK = $scope.krankheits.length;
+                    $scope.currentPageK = 1;
+                    $scope.itemsPerPageK = $scope.viewbyK;
+                    $scope.maxSizeK = 5; 
+                    $scope.setPageK = function (pageNoK) {
+                      $scope.currentPageK = pageNoK;
+                    };
 
-                $scope.checkKrankheitlink = function(krankheit){
-                  console.log(krankheit);
-                  var reg = [];
-                  reg[0] = krankheit.title;
-                  reg[1] = null;
-                  reg[2] = null;
-                  console.log(reg);
+                    $scope.pageChangedK = function() {
+                      console.log('Page changed to: ' + $scope.currentPageK);
+                    };
 
-                  $scope.link = reg;
-                  $uibModalInstance.close($scope.link);
-                };
-                $scope.checkProzedurlink = function(prozedur){
-                  console.log(prozedur);
-                  var reg = [];
-                  reg[0] = null;
-                  reg[1] = prozedur.title;
-                  reg[2] = null;
-                  console.log(reg);
+                    $scope.setItemsPerPageK = function(num) {
+                      $scope.itemsPerPageK = num;
+                      $scope.currentPageK = 1;
+                    }
+                  });
+                  serviceAjax.prozed().success(function(data){
+                    $scope.prozedurs = data;
+                    $scope.viewbyP = 10;
+                    $scope.totalItemsP = $scope.prozedurs.length;
+                    $scope.currentPageP = 1;
+                    $scope.itemsPerPageP = $scope.viewbyP;
+                    $scope.maxSizeP = 5; 
 
-                  $scope.link = reg;
-                  $uibModalInstance.close($scope.link);
-                };
-                $scope.checkICDlink = function(icd){
-                  console.log(icd);
-                  var reg = [];
-                  reg[0] = null;
-                  reg[1] = null;
-                  reg[2] = icd.code;
-                  console.log(reg);
+                    $scope.setPageP = function (pageNoP) {
+                      $scope.currentPageP = pageNoP;
+                    };
 
-                  $scope.link = reg;
-                  $uibModalInstance.close($scope.link);
-                };
-                $scope.cancel = function () {
-                  $uibModalInstance.dismiss('cancel');
-                };
-              },
+                    $scope.pageChangedP = function() {
+                      console.log('Page changed to: ' + $scope.currentPageP);
+                    };
 
-              size: '500px'
+                    $scope.setItemsPerPageP = function(num) {
+                      $scope.itemsPerPageP = num;
+                      $scope.currentPageP = 1; 
+                    };
 
-            });
+                  });
+                  serviceAjax.icdGesamt().success(function(data){
+                    $scope.icds = data;
+                    $scope.viewbyG = 10;
+                    $scope.totalItemsG = $scope.icds.length;
+                    $scope.currentPageG = 1;
+                    $scope.itemsPerPageG = $scope.viewbyG;
+                    $scope.maxSizeG = 5;
+
+                    $scope.setPageG = function (pageNo) {
+                      $scope.currentPageG = pageNo;
+                    };
+
+                    $scope.pageChangedG = function() {
+                      console.log('Page changed to: ' + $scope.currentPageG);
+                    };
+
+                    $scope.setItemsPerPageG = function(num) {
+                      $scope.itemsPerPageG = num;
+                      $scope.currentPageG = 1;
+                    }
+                  });
+                  serviceAjax.medikament().success(function(data){
+                    $scope.medikaments = data;
+                    $scope.viewbyM = 10;
+                    $scope.totalItemsM = $scope.medikaments.length;
+                    $scope.currentPageM = 1;
+                    $scope.itemsPerPageM = $scope.viewbyM;
+                    $scope.maxSizeM = 5;
+
+                    $scope.setPageM = function (pageNo) {
+                      $scope.currentPageM = pageNo;
+                    };
+
+                    $scope.pageChangedM = function() {
+                      console.log('Page changed to: ' + $scope.currentPageM);
+                    };
+
+                    $scope.setItemsPerPageM = function(num) {
+                      $scope.itemsPerPageM = num;
+                      $scope.currentPageM = 1;
+                    }
+                  });      
+                  $scope.ok = function () {
+                    $uibModalInstance.close($scope.link);
+                  };
+
+                  $scope.checkKrankheitlink = function(krankheit){
+                    console.log(krankheit);
+                    var reg = [];
+                    reg[0] = krankheit.title;
+                    reg[1] = null;
+                    reg[2] = null;
+                    console.log(reg);
+
+                    $scope.link = reg;
+                    $uibModalInstance.close($scope.link);
+                  };
+                  $scope.checkProzedurlink = function(prozedur){
+                    console.log(prozedur);
+                    var reg = [];
+                    reg[0] = null;
+                    reg[1] = prozedur.title;
+                    reg[2] = null;
+                    console.log(reg);
+
+                    $scope.link = reg;
+                    $uibModalInstance.close($scope.link);
+                  };
+                  $scope.checkICDlink = function(icd){
+                    console.log(icd);
+                    var reg = [];
+                    reg[0] = null;
+                    reg[1] = null;
+                    reg[2] = icd.code;
+                    console.log(reg);
+
+                    $scope.link = reg;
+                    $uibModalInstance.close($scope.link);
+                  };
+                  $scope.checkMedikamentlink = function(medikament){
+                    console.log(medikament);
+                    var reg = [];
+                    reg[0] = null;
+                    reg[1] = null;
+                    reg[2]=null;
+                    reg[3] = medikament.name;
+                    console.log(reg);
+
+                    $scope.link = reg;
+                    $uibModalInstance.close($scope.link);
+                  };
+                  $scope.cancel = function () {
+                    $uibModalInstance.dismiss('cancel');
+                  };
+                },
+
+                size: '500px'
+
+              });
                 //define result modal , when user complete result information 
                 uibModalInstance.result.then(function(result){
                   if (result) {
@@ -405,4 +501,4 @@ angular.module('sbAdminApp').config(function($provide){
         taOptions.toolbar[1].push('link');
         return taOptions;
       }])
-    });
+});

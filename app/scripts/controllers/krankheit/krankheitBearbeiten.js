@@ -82,14 +82,4 @@ angular.module("sbAdminApp")
   $scope.onReady = function () {
     // ...
   };
-
-
-var titreBearbeitung = function(title){
-  var find = " ";
-  var re = new RegExp(find, 'g');
-
-  return title.replace(re,"%20");
-
-
-};
 });

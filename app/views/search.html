@@ -1,108 +1,179 @@
 <div class="row">
-        <div ng-if="HaufKrankheits">
-    <div class="col-md-12">
-        <h1 class="page-header">Häufiger Krankheit</h1>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="dataTable_wrapper">
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Autor</th>
-                            <th>Datum</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="krankheit in HaufKrankheits">
-                            <td ng-bind="krankheit.title"></td>
-                            <td ng-bind="krankheit.autor"></td>
-                            <td ng-bind="krankheit.date"></td>
-                            <td>
-                                <a ui-sref="dashboard.krankheitDetail({ title: krankheit.title })"> 
-                                    <button type="button" ng-click="" class="btn btn-primary btn-circle">
-                                        <i class="fa fa-list"></i>
-                                    </button>
-                                </a>
-                            </td>
-                            
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-        <div ng-if="krankheits">
-    <div class="col-md-12">
+    <div ng-if="HauptKrankheits">
+       <div class="col-md-12">
         <h1 class="page-header">Krankheit</h1>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="dataTable_wrapper">
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Autor</th>
-                            <th>Datum</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="krankheit in krankheits">
-                            <td ng-bind="krankheit.title"></td>
-                            <td ng-bind="krankheit.autor"></td>
-                            <td ng-bind="krankheit.date"></td>
-                            <td>
-                                <a ui-sref="dashboard.krankheitDetail({ title: krankheit.title })"> 
-                                    <button type="button" ng-click="" class="btn btn-primary btn-circle">
-                                        <i class="fa fa-list"></i>
-                                    </button>
-                                </a>
-                            </td>
-                            
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <div class="col-md-4">
+        <h3 class="page-header">ICD Hauptdiagnose</h3>
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="krankheit in HauptKrankheits">
+                        <td ng-bind="krankheit.title"></td>
+                        <td>
+                            <a ui-sref="dashboard.krankheitDetail({ title: krankheit.title })"> 
+                                <button type="button" ng-click="" class="btn btn-primary btn-circle">
+                                    <i class="fa fa-list"></i>
+                                </button>
+                            </a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
-        <div ng-if="prozedurs">
+<div ng-if="NebenKrankheits">
+    <div class="col-md-4">
+        <h3 class="page-header">ICD Nebendiagnose</h3>
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th> </th>
 
-    <div class="col-md-12">
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="krankheit in NebenKrankheits">
+                        <td ng-bind="krankheit.title"></td>
+                        <td>
+                            <a ui-sref="dashboard.krankheitDetail({ title: krankheit.title })"> 
+                                <button type="button" ng-click="" class="btn btn-primary btn-circle">
+                                    <i class="fa fa-list"></i>
+                                </button>
+                            </a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div ng-if="krankheits">
+    <div class="col-md-4">
+        <h3 class="page-header">Gesamt</h3>
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th> </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="krankheit in krankheits">
+                        <td ng-bind="krankheit.title"></td>
+                        <td>
+                            <a ui-sref="dashboard.krankheitDetail({ title: krankheit.title })"> 
+                                <button type="button" ng-click="" class="btn btn-primary btn-circle">
+                                    <i class="fa fa-list"></i>
+                                </button>
+                            </a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div ng-if="HauptKrankheits">
+       <div class="col-md-12">
         <h1 class="page-header">Prozedur</h1>
     </div>
-    
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="dataTable_wrapper">
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Autor</th>
-                            <th>Datum</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="prozedur in prozedurs">
-                            <td ng-bind="prozedur.title"></td>
-                            <td ng-bind="prozedur.autor"></td>
-                            <td ng-bind="prozedur.date"></td>
-                            <td>
-                                <a ui-sref="dashboard.prozedurDetail({ title: prozedur.title })"> 
-                                    <button type="button" ng-click="" class="btn btn-primary btn-circle">
-                                        <i class="fa fa-list"></i>
-                                    </button>
-                                </a>
-                            </td>
-                            
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <div class="col-md-4">
+        <h3 class="page-header">ICD Hauptdiagnose</h3>
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="prozedur in HauptProzedurs">
+                        <td ng-bind="prozedur.title"></td>
+                        <td>
+                            <a ui-sref="dashboard.prozedurDetail({ title: prozedur.title })"> 
+                                <button type="button" ng-click="" class="btn btn-primary btn-circle">
+                                    <i class="fa fa-list"></i>
+                                </button>
+                            </a>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div ng-if="NebenProzedurs">
+    <div class="col-md-4">
+        <h3 class="page-header">ICD Nebendiagnose</h3>
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th> </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="prozedur in NebenProzedurs">
+                        <td ng-bind="prozedur.title"></td>
+                        <td>
+                            <a ui-sref="dashboard.prozedurDetail({ title: prozedur.title })"> 
+                                <button type="button" ng-click="" class="btn btn-primary btn-circle">
+                                    <i class="fa fa-list"></i>
+                                </button>
+                            </a>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div ng-if="prozedurs">
+    <div class="col-md-4">
+        <h3 class="page-header">Gesamt</h3>
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th> </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="prozedur in prozedurs">
+                        <td ng-bind="prozedur.title"></td>
+                        <td>
+                            <a ui-sref="dashboard.prozedurDetail({ title: prozedur.title })"> 
+                                <button type="button" ng-click="" class="btn btn-primary btn-circle">
+                                    <i class="fa fa-list"></i>
+                                </button>
+                            </a>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
