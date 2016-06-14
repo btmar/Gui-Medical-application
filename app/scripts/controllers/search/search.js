@@ -8,6 +8,7 @@ var searchWord = $stateParams.searchWord;
   var load = function(){
     $scope.krankheits = [];
     $scope.prozedurs = [];
+    $scope.medikament2s = [];
     serviceAjax.search(searchWord).success(function(data){
       console.log(data);
     $scope.krankheits = data.krankheiten;
@@ -16,6 +17,9 @@ var searchWord = $stateParams.searchWord;
     $scope.prozedurs = data.prozeduren;
     $scope.HauptProzedurs = data.HauptProzeduren;
     $scope.NebenProzedurs = data.NebenProzeduren;
+    $scope.medikament2s = data.medikament2en;
+    $scope.HauptMedikament2s = data.HauptMedikament2en;
+    $scope.NebenMedikament2s = data.NebenMedikament2en;
     });
   };
 
