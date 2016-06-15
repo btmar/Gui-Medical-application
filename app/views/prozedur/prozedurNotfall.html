@@ -1,0 +1,51 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-11">
+			<h1 class="page-header"ng-bind-html="prozedur.title "></h1>
+		</div>
+		<div class="col-m-1">                                    
+			<a ui-sref="dashboard.prozedurBearbeiten({ title: prozedur.title })"> 
+				<button type="button" class="page-header btn btn-info btn-circle btn-lg"><i class="fa fa-pencil "></i> 
+				</button>    
+			</a>
+		</div>
+	</div>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="/dashboard/prozedur/detail/#uebersicht" data-toggle="tab">Übersicht</a>
+						</li>
+						<li><a  href="/dashboard/prozedur/detail/#diagnostik" data-toggle="tab">Diagnostik</a>
+						</li>
+						<li><a href="/dashboard/prozedur/detail/#therapie" data-toggle="tab">Therapie</a>
+						</li>
+						<li><a href="/dashboard/prozedur/detail/#beratung" data-toggle="tab">Beratung</a>
+						</li>
+						
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="uebersicht">
+
+							<h3 ng-if="prozedur.uebersicht.notfall" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.uebersicht.notfall"></p>
+						</div>
+						<div class="tab-pane fade" id="diagnostik">
+
+							<h3 ng-if="prozedur.diagnostik.notfall" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.diagnostik.notfall"></p>
+						</div>
+						<div class="tab-pane fade" id="therapie">
+
+							<h3 ng-if="prozedur.therapie.notfall" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.therapie.notfall"></p>
+						</div>
+						<div class="tab-pane fade" id="beratung">
+							<h3 ng-if="prozedur.beratung.notfall" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.beratung.notfall"></p>
+						</div>
+						
+				</div>
+			</div>
+		</div>
+	</div>

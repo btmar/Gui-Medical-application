@@ -21,8 +21,9 @@ angular.module('sbAdminApp')
         $scope.multiCollapseVar = 0;
         
         $scope.check = function(x){
-          
+
           if(x==$scope.collapseVar)
+            
             $scope.collapseVar = 0;
           else
             $scope.collapseVar = x;

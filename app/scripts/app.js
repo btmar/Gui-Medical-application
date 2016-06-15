@@ -82,7 +82,7 @@
   })
   .state('dashboard.icdNummern',{
     url:'/icdNummern',
-    templateUrl:'views/icdNummern.html',
+    templateUrl:'views/icd/icdNummern.html',
     controller: 'IcdNummernCtrl',
     resolve: {
       loadMyFiles:function($ocLazyLoad) {
@@ -95,6 +95,21 @@
       }
     }
   })
+    .state('dashboard.icdDetail',{
+    templateUrl:'views/icd/icdDetail.html',
+    url:'/icd/detail/:code',
+    controller: 'IcdDetailCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/icd/IcdDetail.js'
+          ]
+        })
+      }
+    }
+  })  
   .state('dashboard.medikament',{
     url:'/medikament',
     templateUrl:'views/medikament.html',
@@ -173,6 +188,21 @@
       }
     }
   })
+  .state('dashboard.krankheitNotfall',{
+    templateUrl:'views/krankheit/krankheitNotfall.html',
+    url:'/krankheit/notfall/:title',
+    controller: 'KrankheitDetailCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/krankheit/krankheitDetail.js'
+          ]
+        })
+      }
+    }
+  })  
   .state('dashboard.krankheit',{
     templateUrl:'views/krankheit.html',
     url:'/krankheit',
@@ -210,6 +240,21 @@
   .state('dashboard.prozedurDetail',{
     templateUrl:'views/prozedur/prozedurDetail.html',
     url:'/prozedur/detail/:title',
+    controller: 'ProzedurDetailCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/prozedur/prozedurDetail.js'
+          ]
+        })
+      }
+    }
+  })
+    .state('dashboard.prozedurNotfall',{
+    templateUrl:'views/prozedur/prozedurNotfall.html',
+    url:'/prozedur/notfall/:title',
     controller: 'ProzedurDetailCtrl',
     resolve: {
       loadMyFiles:function($ocLazyLoad) {
@@ -274,7 +319,7 @@ angular.module('sbAdminApp').config(function($provide){
     trs=trs+ "<tr>"+ tds + "</tr>";
   }
 
-  return '<table  border="1" cellpadding="1" cellspacing="1">' + trs + '</table>';
+  return '<table  border="1" cellpadding="1" cellspacing="1" width="500px">' + trs + '</table>';
 }
 $provide.decorator('taOptions', ['taRegisterTool', '$delegate','$uibModal', function(taRegisterTool, taOptions,$uibModal,$scope){
   taRegisterTool('table', {
@@ -323,13 +368,14 @@ angular.module('sbAdminApp').config(function($provide){
  function createExternalLink(link) {
   console.log(link);
   if (link[0] != null){
-    return '<a href=/#/dashboard/krankheit/detail/'+link[0]+'>'+link[0]+' </a> ';}
+
+    return '<a href=/#/dashboard/krankheit/detail/'+link[0].split(" ").join("%20")+'>'+link[0]+' </a> ';}
     if (link[1] != null){
-      return '<a href=/#/dashboard/prozedur/detail/'+link[1]+'>'+link[1]+' </a> ';}
+      return '<a href=/#/dashboard/prozedur/detail/'+link[1].split(" ").join("%20")+'>'+link[1]+' </a> ';}
       if (link[2] != null){
-        return '<font color="#008000">'+link[2]+' </front><font color="#000000"> .</front>';}
+        return '<a href=/#/dashboard/icd/detail/'+link[2]+'><font color="#008000">'+link[2]+' </font></a><font color="#000000">.</font>';}
         if (link[3] != null){
-          return '<font color="#FF0000">'+link[3]+' </front><font color="#000000"> .</front>';}
+          return ' <font color="#FF0000">'+link[3]+' </font><font color="#000000">.</font>';}
         }
 
 
