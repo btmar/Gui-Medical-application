@@ -60,6 +60,9 @@
  		icdHaupt: function(){
  			return $http.get("http://localhost:8080/icdnummer/read/haupt");
  		},
+ 		infoIcd: function(code){
+ 			return $http.get("http://localhost:8080/icdnummer/" + code);
+ 		},
  		icdNeben: function(){
  			return $http.get("http://localhost:8080/icdnummer/read/neben");
  		}

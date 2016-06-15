@@ -11,6 +11,7 @@
                     <tr>
                         <th>Title</th>
                         <th> </th>
+                        <th> </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,7 +24,13 @@
                                 </button>
                             </a>
                         </td>
-
+                        <td>
+                            <a ui-sref="dashboard.krankheitNotfall({ title: krankheit.title })"> 
+                                <button type="button" ng-click="" class="btn btn-danger btn-circle">
+                                    <i class="fa fa-ambulance"></i>
+                                </button>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -39,6 +46,7 @@
                     <tr>
                         <th>Title</th>
                         <th> </th>
+                        <th> </th>
 
                     </tr>
                 </thead>
@@ -49,6 +57,13 @@
                             <a ui-sref="dashboard.krankheitDetail({ title: krankheit.title })"> 
                                 <button type="button" ng-click="" class="btn btn-primary btn-circle">
                                     <i class="fa fa-list"></i>
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <a ui-sref="dashboard.krankheitNotfall({ title: krankheit.title })"> 
+                                <button type="button" ng-click="" class="btn btn-danger btn-circle">
+                                    <i class="fa fa-ambulance"></i>
                                 </button>
                             </a>
                         </td>
@@ -68,6 +83,7 @@
                     <tr>
                         <th>Title</th>
                         <th> </th>
+                        <th> </th>
 
                     </tr>
                 </thead>
@@ -81,6 +97,13 @@
                                 </button>
                             </a>
                         </td>
+                        <td>
+                            <a ui-sref="dashboard.krankheitNotfall({ title: krankheit.title })"> 
+                                <button type="button" ng-click="" class="btn btn-danger btn-circle">
+                                    <i class="fa fa-ambulance"></i>
+                                </button>
+                            </a>
+                        </td>
 
                     </tr>
                 </tbody>
@@ -89,35 +112,43 @@
     </div>
 </div>
 <div ng-if="HauptKrankheits">
-       <div class="col-md-12">
-        <h1 class="page-header">Prozedur</h1>
+   <div class="col-md-12">
+    <h1 class="page-header">Prozedur</h1>
+</div>
+<div class="col-md-4">
+    <h3 class="page-header">ICD Hauptdiagnose</h3>
+    <div class="dataTable_wrapper">
+        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th> </th>
+                    <th> </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="prozedur in HauptProzedurs">
+                    <td ng-bind="prozedur.title"></td>
+                    <td>
+                        <a ui-sref="dashboard.prozedurDetail({ title: prozedur.title })"> 
+                            <button type="button" ng-click="" class="btn btn-primary btn-circle">
+                                <i class="fa fa-list"></i>
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <a ui-sref="dashboard.prozedurNotfall({ title: prozedur.title })"> 
+                            <button type="button" ng-click="" class="btn btn-danger btn-circle">
+                                <i class="fa fa-ambulance"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="col-md-4">
-        <h3 class="page-header">ICD Hauptdiagnose</h3>
-        <div class="dataTable_wrapper">
-            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="prozedur in HauptProzedurs">
-                        <td ng-bind="prozedur.title"></td>
-                        <td>
-                            <a ui-sref="dashboard.prozedurDetail({ title: prozedur.title })"> 
-                                <button type="button" ng-click="" class="btn btn-primary btn-circle">
-                                    <i class="fa fa-list"></i>
-                                </button>
-                            </a>
-                        </td>
-                        
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+</div>
 </div>
 <div ng-if="NebenProzedurs">
     <div class="col-md-4">
@@ -127,6 +158,7 @@
                 <thead>
                     <tr>
                         <th>Title</th>
+                        <th> </th>
                         <th> </th>
 
                     </tr>
@@ -141,7 +173,13 @@
                                 </button>
                             </a>
                         </td>
-                        
+                        <td>
+                            <a ui-sref="dashboard.prozedurNotfall({ title: prozedur.title })"> 
+                                <button type="button" ng-click="" class="btn btn-danger btn-circle">
+                                    <i class="fa fa-ambulance"></i>
+                                </button>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -157,6 +195,7 @@
                     <tr>
                         <th>Title</th>
                         <th> </th>
+                        <th> </th>
 
                     </tr>
                 </thead>
@@ -170,7 +209,13 @@
                                 </button>
                             </a>
                         </td>
-                        
+                        <td>
+                            <a ui-sref="dashboard.prozedurNotfall({ title: prozedur.title })"> 
+                                <button type="button" ng-click="" class="btn btn-danger btn-circle">
+                                    <i class="fa fa-ambulance"></i>
+                                </button>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
