@@ -82,7 +82,7 @@
   })
   .state('dashboard.icdNummern',{
     url:'/icdNummern',
-    templateUrl:'views/icdNummern.html',
+    templateUrl:'views/icd/icdNummern.html',
     controller: 'IcdNummernCtrl',
     resolve: {
       loadMyFiles:function($ocLazyLoad) {
@@ -95,7 +95,6 @@
       }
     }
   })
-<<<<<<< HEAD
     .state('dashboard.icdDetail',{
     templateUrl:'views/icd/icdDetail.html',
     url:'/icd/detail/:code',
@@ -140,8 +139,7 @@
       }
     }
   })
-=======
->>>>>>> b9de055fb93ba04bb175407acfc9409629c4d8d6
+
   .state('dashboard.medikament',{
     url:'/medikament',
     templateUrl:'views/medikament.html',
