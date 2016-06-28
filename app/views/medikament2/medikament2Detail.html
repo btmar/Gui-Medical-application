@@ -1,0 +1,38 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-11">
+			<h1 class="page-header"ng-bind-html="medikament2.title "></h1>
+		</div>
+		<div class="col-m-1">                                    
+			<a ui-sref="dashboard.medikament2Bearbeiten({ title: medikament2.title })"> 
+				<button type="button" class="page-header btn btn-info btn-circle btn-lg"><i class="fa fa-pencil "></i> 
+				</button>    
+			</a>
+		</div>
+	</div>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="/dashboard/medikament2/detail/#uebersicht" data-toggle="tab">Übersicht</a>
+						</li>
+						<li><a  href="/dashboard/medikament2/detail/#nebenwirkungen" data-toggle="tab">Nebenwirkungen</a>
+						</li>
+						<li><a href="/dashboard/medikament2/detail/#notes" data-toggle="tab">Notes</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="uebersicht">
+							<p ng-bind-html="medikament2.uebersicht.text"></p>
+						</div>
+						<div class="tab-pane fade" id="nebenwirkungen">
+							<p ng-bind-html="medikament2.nebenwirkungen.text"></p>
+						</div>
+						<div class="tab-pane fade" id="notes">
+							<p ng-bind-html="medikament2.notes"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

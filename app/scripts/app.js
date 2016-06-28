@@ -82,7 +82,7 @@
   })
   .state('dashboard.icdNummern',{
     url:'/icdNummern',
-    templateUrl:'views/icd/icdNummern.html',
+    templateUrl:'views/icdNummern.html',
     controller: 'IcdNummernCtrl',
     resolve: {
       loadMyFiles:function($ocLazyLoad) {
@@ -95,6 +95,7 @@
       }
     }
   })
+<<<<<<< HEAD
     .state('dashboard.icdDetail',{
     templateUrl:'views/icd/icdDetail.html',
     url:'/icd/detail/:code',
@@ -139,6 +140,8 @@
       }
     }
   })
+=======
+>>>>>>> b9de055fb93ba04bb175407acfc9409629c4d8d6
   .state('dashboard.medikament',{
     url:'/medikament',
     templateUrl:'views/medikament.html',
@@ -217,21 +220,6 @@
       }
     }
   })
-  .state('dashboard.krankheitNotfall',{
-    templateUrl:'views/krankheit/krankheitNotfall.html',
-    url:'/krankheit/notfall/:title',
-    controller: 'KrankheitDetailCtrl',
-    resolve: {
-      loadMyFiles:function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name:'sbAdminApp',
-          files:[
-          'scripts/controllers/krankheit/krankheitDetail.js'
-          ]
-        })
-      }
-    }
-  })  
   .state('dashboard.krankheit',{
     templateUrl:'views/krankheit.html',
     url:'/krankheit',
@@ -280,21 +268,6 @@
         })
       }
     }
-  })
-    .state('dashboard.prozedurNotfall',{
-    templateUrl:'views/prozedur/prozedurNotfall.html',
-    url:'/prozedur/notfall/:title',
-    controller: 'ProzedurDetailCtrl',
-    resolve: {
-      loadMyFiles:function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name:'sbAdminApp',
-          files:[
-          'scripts/controllers/prozedur/prozedurDetail.js'
-          ]
-        })
-      }
-    }
   })     
   .state('dashboard.prozedurHinzufuegen',{
     templateUrl:'views/prozedur/prozedurHinzufuegen.html',
@@ -326,6 +299,66 @@
       }
     }
   })
+    .state('dashboard.medikament2',{
+    templateUrl:'views/medikament2.html',
+    url:'/medikament2',
+    controller:'medikament2Ctrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/medikament2/medikament2.js',
+          ]
+        })
+      }
+    }
+  })
+  .state('dashboard.medikament2Detail',{
+    templateUrl:'views/medikament2/medikament2Detail.html',
+    url:'/medikament2/detail/:title',
+    controller: 'medikament2DetailCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/medikament2/medikament2Detail.js'
+          ]
+        })
+      }
+    }
+  })     
+  .state('dashboard.medikament2Hinzufuegen',{
+    templateUrl:'views/medikament2/medikament2Hinzufuegen.html',
+    url:'/medikament2/Hinzufuegen',
+    controller: 'medikament2HinzufuegenCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/medikament2/medikament2Hinzufuegen.js'          ]
+        })
+      }
+    }
+  })
+
+  .state('dashboard.medikament2Bearbeiten',{
+    templateUrl:'views/medikament2/medikament2Bearbeiten.html',
+    url:'/medikament2/bearbeiten/:title',
+    controller: 'medikament2BearbeitenCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/medikament2/medikament2Bearbeiten.js'
+          ]
+        })
+      }
+    }
+  })
   .state('dashboard.blank',{
     templateUrl:'views/pages/blank.html',
 
@@ -348,7 +381,7 @@ angular.module('sbAdminApp').config(function($provide){
     trs=trs+ "<tr>"+ tds + "</tr>";
   }
 
-  return '<table  border="1" cellpadding="1" cellspacing="1" width="500px">' + trs + '</table>';
+  return '<table  border="1" cellpadding="1" cellspacing="1">' + trs + '</table>';
 }
 $provide.decorator('taOptions', ['taRegisterTool', '$delegate','$uibModal', function(taRegisterTool, taOptions,$uibModal,$scope){
   taRegisterTool('table', {
@@ -397,14 +430,15 @@ angular.module('sbAdminApp').config(function($provide){
  function createExternalLink(link) {
   console.log(link);
   if (link[0] != null){
-
-    return '<a href=/#/dashboard/krankheit/detail/'+link[0].split(" ").join("%20")+'>'+link[0]+' </a> ';}
+    return '<a href=/#/dashboard/krankheit/detail/'+link[0]+'>'+link[0]+' </a> ';}
     if (link[1] != null){
-      return '<a href=/#/dashboard/prozedur/detail/'+link[1].split(" ").join("%20")+'>'+link[1]+' </a> ';}
+      return '<a href=/#/dashboard/prozedur/detail/'+link[1]+'>'+link[1]+' </a> ';}
       if (link[2] != null){
-        return '<a href=/#/dashboard/icd/detail/'+link[2]+'><font color="#008000">'+link[2]+' </font></a><font color="#000000">.</font>';}
+        return '<font color="#008000">'+link[2]+' </front><font color="#000000"> .</front>';}
         if (link[3] != null){
-          return ' <font color="#FF0000">'+link[3]+' </font><font color="#000000">.</font>';}
+          return '<font color="#FF0000">'+link[3]+' </front><font color="#000000"> .</front>';}
+          if (link[4] != null){
+            return '<a href=/#/dashboard/medikament2/detail/'+link[4]+'>'+link[4]+' </a> ';}
         }
 
 
@@ -458,7 +492,6 @@ angular.module('sbAdminApp').config(function($provide){
                       $scope.itemsPerPageP = num;
                       $scope.currentPageP = 1; 
                     };
-
                   });
                   serviceAjax.icdGesamt().success(function(data){
                     $scope.icds = data;
@@ -501,7 +534,28 @@ angular.module('sbAdminApp').config(function($provide){
                       $scope.itemsPerPageM = num;
                       $scope.currentPageM = 1;
                     }
-                  });      
+                  });
+                  serviceAjax.medika2().success(function(data){
+                    $scope.medikament2s = data;
+                    $scope.viewbyM2 = 10;
+                    $scope.totalItemsM2 = $scope.medikament2s.length;
+                    $scope.currentPageM2 = 1;
+                    $scope.itemsPerPageM2 = $scope.viewbyP;
+                    $scope.maxSizeM2 = 5; 
+
+                    $scope.setPageM2 = function (pageNoM2) {
+                      $scope.currentPageM2 = pageNoM2;
+                    };
+
+                    $scope.pageChangedM2 = function() {
+                      console.log('Page changed to: ' + $scope.currentPageM2);
+                    };
+
+                    $scope.setItemsPerPageM2 = function(num) {
+                      $scope.itemsPerPageM2 = num;
+                      $scope.currentPageM2 = 1; 
+                    };
+                  });
                   $scope.ok = function () {
                     $uibModalInstance.close($scope.link);
                   };
@@ -544,8 +598,21 @@ angular.module('sbAdminApp').config(function($provide){
                     var reg = [];
                     reg[0] = null;
                     reg[1] = null;
-                    reg[2]=null;
+                    reg[2] = null;
                     reg[3] = medikament.name;
+                    console.log(reg);
+
+                    $scope.link = reg;
+                    $uibModalInstance.close($scope.link);
+                  };
+                                    $scope.checkMedikamentlink = function(medikament2){
+                    console.log(medikament2);
+                    var reg = [];
+                    reg[0] = null;
+                    reg[1] = null;
+                    reg[2] = null;
+                    reg[3] = null;
+                    reg[4] = medikament2.name;
                     console.log(reg);
 
                     $scope.link = reg;
