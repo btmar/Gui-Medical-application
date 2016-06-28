@@ -37,44 +37,47 @@
 						</span>
 					</p>
 				</div>
-				<ul class="nav nav-tabs">
-					<li class="active"><a href="/dashboard/krankheit/detail/#uebersicht" data-toggle="tab">Übersicht</a>
-					</li>
-					<li><a  href="/dashboard/krankheit/detail/#diagnostik" data-toggle="tab">Diagnostik</a>
-					</li>
-					<li><a href="/dashboard/krankheit/detail/#therapie" data-toggle="tab">Therapie</a>
-					</li>
-					<li><a href="/dashboard/krankheit/detail/#beratung" data-toggle="tab">Beratung</a>
-					</li>
-					<li><a href="/dashboard/krankheit/detail/#notes" data-toggle="tab">Notes</a>
-					</li>
-				</ul>
-				<div class="tab-content"id="ckeditor-margin-top">
-					<div class="tab-pane fade in active" id="uebersicht">
+				<div class="col-lg-12">
 
-						<text-angular ng-model="krankheit.uebersicht.text" ></text-angular>
-						<h3 id="notfall-col">Übersicht Notfall</h3>
-						<text-angular ng-model="krankheit.uebersicht.notfall"></text-angular>
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="/dashboard/krankheit/detail/#uebersicht" data-toggle="tab">Übersicht</a>
+						</li>
+						<li><a  href="/dashboard/krankheit/detail/#diagnostik" data-toggle="tab">Diagnostik</a>
+						</li>
+						<li><a href="/dashboard/krankheit/detail/#therapie" data-toggle="tab">Therapie</a>
+						</li>
+						<li><a href="/dashboard/krankheit/detail/#beratung" data-toggle="tab">Beratung</a>
+						</li>
+						<li><a href="/dashboard/krankheit/detail/#notes" data-toggle="tab">Notes</a>
+						</li>
+					</ul>
+					<div class="tab-content"id="ckeditor-margin-top">
+						<div class="tab-pane fade in active" id="uebersicht">
 
-					</div>
-					<div class="tab-pane fade" id="diagnostik">
-						<text-angular  ng-model="krankheit.diagnostik.text" ></text-angular>
-						<h3 id="notfall-col">Diagnostik Notfall</h3>
-						<text-angular ng-model="krankheit.diagnostik.notfall"></text-angular>
-					</div>
-					<div class="tab-pane fade" id="therapie">
-						<text-angular ng-model="krankheit.therapie.text" ></text-angular>
-						<h3 id="notfall-col">Therapie Notfall</h3>
-						<text-angular ng-model="krankheit.therapie.notfall"></text-angular>
-					</div>
-					<div class="tab-pane fade" id="beratung">
-						<text-angular ng-model="krankheit.beratung.text" ></text-angular>
-						<h3 id="notfall-col">Beratung Notfall</h3>
-						<text-angular ng-model="krankheit.beratung.notfall"></text-angular>
-					</div>
-					<div class="tab-pane fade" id="notes">
-						<text-angular ng-model="krankheit.notes" ></text-angular>
+							<text-angular ng-model="krankheit.uebersicht.text" ></text-angular>
+							<h3 id="notfall-col">Übersicht Notfall</h3>
+							<text-angular ng-model="krankheit.uebersicht.notfall"></text-angular>
 
+						</div>
+						<div class="tab-pane fade" id="diagnostik">
+							<text-angular  ng-model="krankheit.diagnostik.text" ></text-angular>
+							<h3 id="notfall-col">Diagnostik Notfall</h3>
+							<text-angular ng-model="krankheit.diagnostik.notfall"></text-angular>
+						</div>
+						<div class="tab-pane fade" id="therapie">
+							<text-angular ng-model="krankheit.therapie.text" ></text-angular>
+							<h3 id="notfall-col">Therapie Notfall</h3>
+							<text-angular ng-model="krankheit.therapie.notfall"></text-angular>
+						</div>
+						<div class="tab-pane fade" id="beratung">
+							<text-angular ng-model="krankheit.beratung.text" ></text-angular>
+							<h3 id="notfall-col">Beratung Notfall</h3>
+							<text-angular ng-model="krankheit.beratung.notfall"></text-angular>
+						</div>
+						<div class="tab-pane fade" id="notes">
+							<text-angular ng-model="krankheit.notes" ></text-angular>
+
+						</div>
 					</div>
 				</div>
 				<div class="row">

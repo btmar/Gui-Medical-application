@@ -109,7 +109,36 @@
         })
       }
     }
-  })  
+  }) 
+    .state('dashboard.icdHinzufuegen',{
+    templateUrl:'views/icd/icdHinzufuegen.html',
+    url:'/icd/hinzufuegen',
+    controller: 'ICDHinzufuegenCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/icd/icdHinzufuegen.js'          ]
+        })
+      }
+    }
+  }) 
+  .state('dashboard.icdBearbeiten',{
+    templateUrl:'views/icd/icdBearbeiten.html',
+    url:'/icd/bearbeiten/:code',
+    controller: 'ICDBearbeitenCtrl',
+    resolve: {
+      loadMyFiles:function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name:'sbAdminApp',
+          files:[
+          'scripts/controllers/icd/icdBearbeiten.js'
+          ]
+        })
+      }
+    }
+  })
   .state('dashboard.medikament',{
     url:'/medikament',
     templateUrl:'views/medikament.html',

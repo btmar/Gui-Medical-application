@@ -10,12 +10,12 @@ app.filter('startFrom', function () {
         return [];
     }
 });
-app.controller('IcdNummernCtrl', function ($scope, serviceAjax) {
+app.controller('IcdNummernCtrl', function ($scope, ngDialog, serviceAjax) {
 
-    serviceAjax.icdNeben().success(function (data) {
-        $scope.icdNebens = data;
+    serviceAjax.icdGefaeh().success(function (data) {
+        $scope.icdGefaehs = data;
         $scope.viewbyN = 10;
-        $scope.totalItemsN = $scope.icdNebens.length;
+        $scope.totalItemsN = $scope.icdGefaehs.length;
         $scope.currentPageN = 1;
         $scope.itemsPerPageN = $scope.viewbyN;
         $scope.maxSizeN = 4; //Number of pager buttons to show
@@ -75,4 +75,90 @@ app.controller('IcdNummernCtrl', function ($scope, serviceAjax) {
             $scope.currentPageG = 1; //reset to first paghe
         }
     })
+
+
+
+
+
+    $scope.removeIcdGesamt = function (icdGesamt) {
+        $scope.icdNum = icdGesamt;
+        serviceAjax.icdListUsed(icdGesamt.code).success(function (data) {
+            console.log(data);
+            $scope.prozedurs = data.prozedurs;
+            $scope.viewbyP = 1;
+            $scope.totalItemsP = $scope.prozedurs.length;
+            $scope.currentPageP = 1;
+            $scope.itemsPerPageP = $scope.viewbyP;
+            $scope.maxSizeP = 5;
+
+            $scope.setPageP = function (pageNoP) {
+                $scope.currentPageP = pageNoP;
+            };
+
+            $scope.pageChangedP = function () {
+                console.log('Page changed to: ' + $scope.currentPageP);
+            };
+
+            $scope.setItemsPerPageP = function (num) {
+                $scope.itemsPerPageP = num;
+                $scope.currentPageP = 1;
+            };
+
+            $scope.krankheits = data.krankheits;
+            $scope.viewbyK = 1;
+            $scope.totalItemsK = $scope.krankheits.length;
+            $scope.currentPageK = 1;
+            $scope.itemsPerPageK = $scope.viewbyK;
+            $scope.maxSizeK = 5;
+            $scope.setPageK = function (pageNoK) {
+                $scope.currentPageK = pageNoK;
+            };
+
+            $scope.pageChangedK = function () {
+                console.log('Page changed to: ' + $scope.currentPageK);
+            };
+
+            $scope.setItemsPerPageK = function (num) {
+                $scope.itemsPerPageK = num;
+                $scope.currentPageK = 1;
+            }
+            console.log(data.krankheits);
+            if (data.krankheits.length === 0 && data.prozedurs.length === 0) {
+                var index = $scope.icdGesamts.indexOf(icdGesamt);
+
+                serviceAjax.icdGesamtEntfernen(icdGesamt.code).success(function (data) {
+                    if (index !== -1) {
+                        $scope.icdGesamts.splice(index, 1);
+
+                    }
+                });
+            } else {
+                ngDialog.openConfirm({template: 'views/icd/entfernenForm.html',
+                    scope: $scope
+                }).then(
+                        function (value) {
+
+                        },
+                        function (value) {
+                        }
+                );
+            }
+        });
+    };
+    $scope.entfernen = function () {
+        var icd = $scope.icdNum;
+        var index = $scope.icdGesamts.indexOf(icd);
+
+        serviceAjax.icdGesamtEntfernen(icd.code).success(function (data) {
+            if (index !== -1) {
+                $scope.icdGesamts.splice(index, 1);
+
+            }
+            ngDialog.closeAll();
+        });
+        console.log($scope.codeIcd);
+
+    };
+
+
 });

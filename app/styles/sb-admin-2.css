@@ -367,6 +367,10 @@ table.dataTable thead .sorting:after {
     padding-top: 15px;
 }
 
+#search-margin-top{
+    padding-top: 10px;
+}
+
 #boite-diag{
 width: 1000px;
 }
