@@ -33,27 +33,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="krankheit in (krankheits| filter:searchKrankheit).slice(((currentPageK-1)*itemsPerPageK), ((currentPageK)*itemsPerPageK))">
-                        <td ng-bind="krankheit.title"></td>
-                        <td ng-bind="krankheit.autor"></td>
-                        <td ng-bind="krankheit.date"></td>
-                        <td>
-                            <a ui-sref="dashboard.krankheitDetail({ title: krankheit.title })"> 
-                                <button type="button" ng-click="" class="btn btn-primary btn-circle">
-                                    <i class="fa fa-list"></i>
-                                </button>
-                            </a>
-                        </td>
-                        <td>
-                            <button type="button" ng-click="removeItem(krankheit)" class="btn btn-danger btn-circle">
-                                <i class="fa fa-times"></i>
+                   <tr ng-repeat="krankheit in (krankheits| filter:searchKrankheit).slice(((currentPageK-1)*itemsPerPageK), ((currentPageK)*itemsPerPageK))">                        <td ng-bind="krankheit.title"></td>
+                    <td ng-bind="krankheit.autor"></td>
+                    <td ng-bind="krankheit.date"></td>
+                    <td>
+                        <a ui-sref="dashboard.krankheitDetail({ title: krankheit.title })"> 
+                            <button type="button" ng-click="" class="btn btn-primary btn-circle">
+                                <i class="fa fa-list"></i>
                             </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <uib-pagination total-items="totalItemsK" ng-model="currentPageK" max-size="maxSizeK" class="pagination-sm" boundary-link-numbers="true" style="
-            margin-left: 40%;"></uib-pagination>
-        </div>
+                        </a>
+                    </td>
+                    <td>
+                        <button type="button" ng-click="removeItem(krankheit)" class="btn btn-danger btn-circle">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <uib-pagination total-items="totalItemsK" ng-model="currentPageK" max-size="maxSizeK" class="pagination-sm" boundary-link-numbers="true"style="
+        margin-left: 40%;"></uib-pagination>
     </div>
+</div>
 </div>

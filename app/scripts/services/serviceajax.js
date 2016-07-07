@@ -39,7 +39,7 @@
  		hinzuProzedur: function(document){
  			return $http.post("http://localhost:8080/prozedur/save", document);
  		},
-                medika2: function(){
+ 		medika2: function(){
  			return $http.get("http://localhost:8080/medikament2/query");
  		},
  		infoMedikament2: function(title){
@@ -64,7 +64,7 @@
  			return $http.get("http://localhost:8080/icdnummer/read/gefaehrlich");
  		},
  		infoIcd: function(code){
- 			return $http.get("http://localhost:8080/icdnummer/" + code);
+ 			return $http.post("http://localhost:8080/icdnummer/read/" , code);
  		},
  		icdNeben: function(){
  			return $http.get("http://localhost:8080/icdnummer/read/neben");
@@ -72,27 +72,21 @@
  		hinzuICDGesamt: function(ICD){
  			return $http.post("http://localhost:8080/icdnummer/save/gesamt/",ICD);
  		},
-                updateICDGesamt: function(ICD){
+ 		updateICDGesamt: function(ICD){
  			return $http.post("http://localhost:8080/icdnummer/update/gesamt/",ICD);
  		},
- 		hinzuICDHaupt: function(ICD){
- 			return $http.post("http://localhost:8080/icdnummer/save/haupt/",ICD);
- 		},
- 		hinzuICDGefaeh: function(ICD){
- 			return $http.post("http://localhost:8080/icdnummer/save/gefaehrlich/",ICD);
- 		},
  		icdGesamtEntfernen: function(code){
- 			return $http.delete("http://localhost:8080/icdnummer/delete/gesamt/" + code);
- 		},
- 		icdHauptEntfernen: function(code){
- 			return $http.delete("http://localhost:8080/icdnummer/delete/haupt/" + code);
- 		},
- 		icdGefaehEntfernen: function(code){
- 			return $http.delete("http://localhost:8080/icdnummer/delete/gefaehrlich/" + code);
+ 			return $http.post("http://localhost:8080/icdnummer/delete/gesamt/" , code);
  		},
  		icdListUsed: function(code){
- 			return $http.get("http://localhost:8080/icdnummer/search/used/" + code);
+ 			return $http.post("http://localhost:8080/icdnummer/search/used/" , code);
+ 		},
+ 		notesBearbeiten: function(response){
+ 			return $http.post("http://localhost:8080/icdnummer/notes/bearbeiten", response);
+ 		},
+ 		notesEntfernen: function(response){
+ 			return $http.post("http://localhost:8080/icdnummer/notes/entfernen", response);
  		}
- 	
+ 		
  	}
  });

@@ -22,7 +22,7 @@
                 <div class="tab-pane fade in active" id="gesamt">
                     <div class="dataTable_wrapper">
                         <form>
-                            <div class="form-group">
+                            <div class="form-group" id="search-margin-top">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-search"></i></div>
                                     <input type="text" class="form-control" placeholder="Code" ng-model="searchGesamt">
@@ -57,13 +57,14 @@
                                 </td>
                             </tr>
                         </table>
-                        <uib-pagination total-items="totalItemsG" ng-model="currentPageG" max-size="maxSizeG" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
+                        <uib-pagination total-items="totalItemsG" ng-model="currentPageG" max-size="maxSizeG" class="pagination-sm" boundary-link-numbers="true"style="
+                        margin-left: 40%;"></uib-pagination>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="haupt">
                     <div class="dataTable_wrapper">
                         <form>
-                            <div class="form-group">
+                            <div class="form-group" id="search-margin-top">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-search"></i></div>
                                     <input type="text" class="form-control"  ng-model="searchHaupt" ng-change="filter()" placeholder="Search">
@@ -84,13 +85,14 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <uib-pagination total-items="totalItemsH" ng-model="currentPageH" max-size="maxSizeH" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
+                        <uib-pagination total-items="totalItemsH" ng-model="currentPageH" max-size="maxSizeH" class="pagination-sm" boundary-link-numbers="true"style="
+                        margin-left: 40%;"></uib-pagination>
 
                     </div>
                 </div>
                 <div class="tab-pane fade" id="gefaehrlich">
                     <form>
-                        <div class="form-group">
+                        <div class="form-group" id="search-margin-top">
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-search"></i></div>
                                 <input type="text" class="form-control"  ng-model="searchGefaeh" ng-change="filter()" placeholder="Search">

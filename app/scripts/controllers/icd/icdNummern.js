@@ -85,19 +85,11 @@ app.controller('IcdNummernCtrl', function ($scope, ngDialog, serviceAjax) {
         serviceAjax.icdListUsed(icdGesamt.code).success(function (data) {
             console.log(data);
             $scope.prozedurs = data.prozedurs;
-            $scope.viewbyP = 1;
-            $scope.totalItemsP = $scope.prozedurs.length;
+
             $scope.currentPageP = 1;
-            $scope.itemsPerPageP = $scope.viewbyP;
-            $scope.maxSizeP = 5;
 
-            $scope.setPageP = function (pageNoP) {
-                $scope.currentPageP = pageNoP;
-            };
 
-            $scope.pageChangedP = function () {
-                console.log('Page changed to: ' + $scope.currentPageP);
-            };
+
 
             $scope.setItemsPerPageP = function (num) {
                 $scope.itemsPerPageP = num;
@@ -105,24 +97,9 @@ app.controller('IcdNummernCtrl', function ($scope, ngDialog, serviceAjax) {
             };
 
             $scope.krankheits = data.krankheits;
-            $scope.viewbyK = 1;
-            $scope.totalItemsK = $scope.krankheits.length;
+
             $scope.currentPageK = 1;
-            $scope.itemsPerPageK = $scope.viewbyK;
-            $scope.maxSizeK = 5;
-            $scope.setPageK = function (pageNoK) {
-                $scope.currentPageK = pageNoK;
-            };
 
-            $scope.pageChangedK = function () {
-                console.log('Page changed to: ' + $scope.currentPageK);
-            };
-
-            $scope.setItemsPerPageK = function (num) {
-                $scope.itemsPerPageK = num;
-                $scope.currentPageK = 1;
-            }
-            console.log(data.krankheits);
             if (data.krankheits.length === 0 && data.prozedurs.length === 0) {
                 var index = $scope.icdGesamts.indexOf(icdGesamt);
 
@@ -149,7 +126,7 @@ app.controller('IcdNummernCtrl', function ($scope, ngDialog, serviceAjax) {
         var icd = $scope.icdNum;
         var index = $scope.icdGesamts.indexOf(icd);
 
-        serviceAjax.icdGesamtEntfernen(icd.code).success(function (data) {
+        serviceAjax.icdGesamtEntfernen(icd.code).success(function () {
             if (index !== -1) {
                 $scope.icdGesamts.splice(index, 1);
 
@@ -160,5 +137,24 @@ app.controller('IcdNummernCtrl', function ($scope, ngDialog, serviceAjax) {
 
     };
 
+    $scope.cancel = function () {
+        ngDialog.closeAll();
+    };
+    $scope.entfernenNotes = function () {
 
+        var response = [{"code": $scope.icdNum.code}, {"krankheits": $scope.krankheits}, {"prozedurs": $scope.prozedurs}];
+        var icd = $scope.icdNum;
+        var index = $scope.icdGesamts.indexOf(icd);
+        console.log(response);
+        serviceAjax.notesEntfernen(response).success(function () {
+            serviceAjax.icdGesamtEntfernen(icd.code).success(function () {
+                if (index !== -1) {
+                    $scope.icdGesamts.splice(index, 1);
+
+                }
+            });
+
+        });
+        ngDialog.closeAll();
+    };
 });
