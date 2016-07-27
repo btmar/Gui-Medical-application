@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid">
+            <h1 class="page-header">Medikament hinzufügen</h1>
+            <form role="form">
+                <div class="form-group">
+
+                    <div class="form-group">
+                        <label>PZN:</label>
+
+
+                        <input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="medikament.pzn"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Bezeichnung:</label>
+
+
+                        <input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="medikament.bezeichnung"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Darr:</label>
+
+
+                        <input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="medikament.darr"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Einheit:</label>
+
+
+                        <input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="medikament.einheit"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Rote Liste:</label>
+
+
+                        <input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="medikament.roteListe"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Inhaltsstoff:</label>
+
+
+                        <input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="medikament.inhaltsstoff"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-9">
+                        <button  type="submit" id="btn-margin-top" ng-click="save()" class="btn btn-primary">hinzufügen</button>
+                        <button type="reset" id="btn-margin-top" class="btn btn-default">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

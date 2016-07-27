@@ -377,3 +377,6 @@ width: 1000px;
 #notfall-col{
     color: #F82006;
 }
+.ngdialog.ngdialog-theme-default.custom-width-1150 .ngdialog-content {
+    width: 1150px;
+}

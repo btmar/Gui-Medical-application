@@ -33,7 +33,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="krankheit in (krankheits| filter:searchKrankheit).slice(((currentPageK-1)*itemsPerPageK), ((currentPageK)*itemsPerPageK))">
+                        <tr ng-repeat="krankheit in (krankheits| filter:searchKrankheit).slice(((currentPageK - 1) * itemsPerPageK), ((currentPageK) * itemsPerPageK))">
                             <td ng-bind="krankheit.title"></td>
 
 
@@ -44,11 +44,11 @@
                     </tbody>
                 </table>
                 <uib-pagination total-items="totalItemsK" ng-model="currentPageK" max-size="maxSizeK" class="pagination-sm" boundary-link-numbers="true"style="
-                margin-left: 30%;"></uib-pagination>
+                                margin-left: 30%;"></uib-pagination>
 
             </div>
 
-            
+
             <div class="tab-pane fade" id="prozedur">
                 <div id="table-prozedur" class="table-responsive">
                     <form>
@@ -68,7 +68,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="prozedur in (prozedurs | filter:searchTitle).slice(((currentPageP-1)*itemsPerPageP), ((currentPageP)*itemsPerPageP))">
+                            <tr ng-repeat="prozedur in (prozedurs| filter:searchTitle).slice(((currentPageP - 1) * itemsPerPageP), ((currentPageP) * itemsPerPageP))">
                                 <td ng-bind="prozedur.title"></td>
                                 <td>
                                     <button type="button" ng-click="checkProzedurlink(prozedur)" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
@@ -79,76 +79,86 @@
 
                 </div>
                 <uib-pagination total-items="totalItemsP" ng-model="currentPageP" max-size="maxSizeP" class="pagination-sm" boundary-link-numbers="true" style="
-                margin-left: 30%;"></uib-pagination>
+                                margin-left: 30%;"></uib-pagination>
             </div>
             <div class="tab-pane fade" id="ICD-Nummer">
-               <div id="table-icd" class="table-responsive">
-                <form>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                            <input type="text" class="form-control" placeholder="ICD" ng-model="searchIcd">
-                        </div>      
-                    </div>
-                </form>
-                <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Diagnose</th>
-                            <th> </th>
+                <div id="table-icd" class="table-responsive">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="ICD" ng-model="searchIcd">
+                            </div>      
+                        </div>
+                    </form>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Diagnose</th>
+                                <th> </th>
 
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="icd in (icds| filter:searchIcd).slice(((currentPageG-1)*itemsPerPageG), ((currentPageG)*itemsPerPageG))">
-                            <td ng-bind="icd.code"></td>
-                            <td ng-bind="icd.diagnose"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="icd in (icds| filter:searchIcd).slice(((currentPageG - 1) * itemsPerPageG), ((currentPageG) * itemsPerPageG))">
+                                <td ng-bind="icd.code"></td>
+                                <td ng-bind="icd.diagnose"></td>
 
-                            <td>
-                                <button type="button" ng-click="checkICDlink(icd)" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <uib-pagination total-items="totalItemsG" ng-model="currentPageG" max-size="maxSizeG" class="pagination-sm" boundary-link-numbers="true"style="
-                margin-left: 20%;"></uib-pagination>
+                                <td>
+                                    <button type="button" ng-click="checkICDlink(icd)" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <uib-pagination total-items="totalItemsG" ng-model="currentPageG" max-size="maxSizeG" class="pagination-sm" boundary-link-numbers="true"style="
+                                    margin-left: 20%;"></uib-pagination>
+                </div>
             </div>
-        </div>
-        <div class="tab-pane fade" id="Medikament">
-            <div id="table-medikament" class="table-responsive">
-                <form>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                            <input type="text" class="form-control" placeholder="Medikament" ng-model="searchMedikament">
-                        </div>      
-                    </div>
-                </form>
-                <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="medikament in (medikaments| filter:searchMedikament).slice(((currentPageM-1)*itemsPerPageM), ((currentPageM)*itemsPerPageM))">
-                            <td ng-bind="medikament.name"></td>
+            <div class="tab-pane fade" id="Medikament">
+                <div id="table-medikament" class="table-responsive">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="Medikament" ng-model="searchMedikament">
+                            </div>      
+                        </div>
+                    </form>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>PZN</th>
+                                <th>Bezeichnung</th>
+                                <th>Einheit</th>
+                                <th>Darr</th>
+                                <th>Rote Liste</th>
+                                <th>Inhaltsstoff</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="medikament in (medikaments| filter:searchMedikament).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">
+                                <td ng-bind="medikament.pzn"></td>
+                                <td ng-bind="medikament.bezeichnung"></td>
+                                <td ng-bind="medikament.einheit"></td>
+                                <td ng-bind="medikament.darr"></td>
+                                <td ng-bind="medikament.roteListe"></td>
+                                <td ng-bind="medikament.inhaltsstoff"></td>
 
-                            <td>
-                                <button type="button" ng-click="checkMedikamentlink(medikament)" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <uib-pagination total-items="totalItemsM" ng-model="currentPageM" max-size="maxSizeM" class="pagination-sm" boundary-link-numbers="true"style="
-                margin-left: 20%;"></uib-pagination>
+                                <td>
+                                    <button type="button" ng-click="checkMedikamentlink(medikament)" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <uib-pagination total-items="totalItemsM" ng-model="currentPageM" max-size="maxSizeM" class="pagination-sm" boundary-link-numbers="true"style="
+                                    margin-left: 20%;"></uib-pagination>
+                </div>
+
             </div>
 
         </div>
-
     </div>
-</div>
 </div>
