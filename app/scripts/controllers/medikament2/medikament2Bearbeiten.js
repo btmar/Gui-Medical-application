@@ -1,19 +1,19 @@
 angular.module('sbAdminApp')
-.controller('ProzedurBearbeitenCtrl', function ($scope, $state, $stateParams, serviceAjax) {
+.controller('Medikament2BearbeitenCtrl', function ($scope, $state, $stateParams, serviceAjax) {
     var title = $stateParams.title;
 
-    serviceAjax.infoProzedur(title).success(function(data){
-        $scope.prozedur = data;
-        if ($scope.prozedur.date !== null){
-            $scope.prozedur.date = new Date($scope.prozedur.date);
+    serviceAjax.infoMedikament2(title).success(function(data){
+        $scope.medikament2 = data;
+        if ($scope.medikament2.date !== null){
+            $scope.medikament2.date = new Date($scope.medikament2.date);
         }
     })
 
     $scope.save = function(item, event) {
-        formData = $scope.prozedur;
+        formData = $scope.medikament2;
 
-        serviceAjax.hinzuProzedur(formData).success(function(data){
-        	$state.go('dashboard.prozedur')
+        serviceAjax.hinzuMedikament2(formData).success(function(data){
+        	$state.go('dashboard.medikament2')
 
         })
     };

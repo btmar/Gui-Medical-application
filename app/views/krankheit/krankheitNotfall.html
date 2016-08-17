@@ -1,13 +1,7 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-11">
+		<div class="col-lg-12">
 			<h1 class="page-header"ng-bind-html="krankheit.title "></h1>
-		</div>
-		<div class="col-m-1">                                    
-			<a ui-sref="dashboard.krankheitBearbeitentext({ title: krankheit.title })"> 
-				<button type="button" class="page-header btn btn-info btn-circle btn-lg"><i class="fa fa-pencil "></i> 
-				</button>    
-			</a>
 		</div>
 	</div>
 	<div class="col-lg-12">
@@ -34,8 +28,7 @@
 					</li>
 					<li><a href="/dashboard/krankheit/detail/#beratung" data-toggle="tab">Beratung</a>
 					</li>
-					<li><a href="/dashboard/krankheit/detail/#notes" data-toggle="tab">Notes</a>
-					</li>
+					
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="uebersicht">
@@ -44,31 +37,25 @@
 						<div table-of-contents ng-model="krankheit.uebersicht.notfall">{{krankheit.uebersicht.notfall}}</div>
 						<h3 ng-if="krankheit.uebersicht.notfall" id="notfall-col">Notfall</h3>
 						<div ng-model="krankheit.uebersicht.notfall">{{krankheit.uebersicht.notfall}}</div>-->
-						<p ng-bind-html="krankheit.uebersicht.text"></p>
 
 						<h3 ng-if="krankheit.uebersicht.notfall" id="notfall-col">Notfall</h3>
 						<p ng-bind-html="krankheit.uebersicht.notfall"></p>
 					</div>
 					<div class="tab-pane fade" id="diagnostik">
-						<p ng-bind-html="krankheit.diagnostik.text"></p>
 
 						<h3 ng-if="krankheit.diagnostik.notfall" id="notfall-col">Notfall</h3>
 						<p ng-bind-html="krankheit.diagnostik.notfall"></p>
 					</div>
 					<div class="tab-pane fade" id="therapie">
-						<p ng-bind-html="krankheit.therapie.text"></p>
 
 						<h3 ng-if="krankheit.therapie.notfall" id="notfall-col">Notfall</h3>
 						<p ng-bind-html="krankheit.therapie.notfall"></p>
 					</div>
 					<div class="tab-pane fade" id="beratung">
-						<p ng-bind-html="krankheit.beratung.text"></p>
 						<h3 ng-if="krankheit.beratung.notfall" id="notfall-col">Notfall</h3>
 						<p ng-bind-html="krankheit.beratung.notfall"></p>
 					</div>
-					<div class="tab-pane fade" id="notes">
-						<p ng-bind-html="krankheit.notes"></p>
-					</div>
+					
 				</div>
 			</div>
 		</div>

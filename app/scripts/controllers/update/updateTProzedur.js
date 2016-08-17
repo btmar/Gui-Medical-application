@@ -1,5 +1,5 @@
 angular.module('sbAdminApp')
-.controller('ProzedurBearbeitenCtrl', function ($scope, $state, $stateParams, serviceAjax) {
+.controller('UpdateTProzedurCtrl', function ($scope, $state, $stateParams, serviceAjax) {
     var title = $stateParams.title;
 
     serviceAjax.infoProzedur(title).success(function(data){
@@ -49,3 +49,4 @@ angular.module('sbAdminApp')
 };
 
 });
+

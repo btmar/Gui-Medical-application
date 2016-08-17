@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col-lg-4">
+        <h1 class="page-header">ICD Gesamt</h1>
+        <div class="dataTable_wrapper">
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Code" ng-model="searchGesamt">
+                    </div>      
+                </div>
+            </form>
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Diagnose</th>
+                    </tr>
+                </thead>
+                
+                    <tr ng-repeat="icdGesamt in (icdGesamts| filter:searchGesamt).slice(((currentPageG - 1) * itemsPerPageG), ((currentPageG) * itemsPerPageG))">
+                        <td ng-bind="icdGesamt.code"></td>
+                        <td ng-bind="icdGesamt.diagnose"></td>
+                    </tr>
+                
+            </table>
+            <uib-pagination total-items="totalItemsG" ng-model="currentPageG" max-size="maxSizeG" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
+        </div>
+    </div>
+
+    <div class="col-lg-4">        
+        <h1 class="page-header">ICD Hauptdiagnose</h1>
+        <div class="dataTable_wrapper">
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control"  ng-model="searchHaupt" ng-change="filter()" placeholder="Search">
+                    </div>      
+                </div>
+            </form>
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Diagnose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="icdHaupt in (icdHaupts| filter:searchHaupt).slice(((currentPageH - 1) * itemsPerPageH), ((currentPageH) * itemsPerPageH))">
+                        <td ng-bind="icdHaupt.code"></td>
+                        <td ng-bind="icdHaupt.diagnose"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <uib-pagination total-items="totalItemsH" ng-model="currentPageH" max-size="maxSizeH" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
+
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <h1 class="page-header">ICD Nebendiagnose</h1>
+    </div>
+
+
+    <div class="col-lg-4">
+        
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control"  ng-model="searchNeben" ng-change="filter()" placeholder="Search">
+                    </div>      
+                </div>
+            </form>
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Diagnose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="icdNeben in filtered = (icdNebens| filter:searchNeben).slice(((currentPageN - 1) * itemsPerPageN), ((currentPageN) * itemsPerPageN))">
+                        <td ng-bind="icdNeben.code"></td>
+                        <td ng-bind="icdNeben.diagnose"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <uib-pagination total-items="totalItemsN" ng-model="currentPageN" max-size="maxSizeN" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
+        
+    </div>
+</div>
