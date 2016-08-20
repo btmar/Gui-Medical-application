@@ -141,6 +141,36 @@ angular
                                 }
                             }
                         })
+                        .state('dashboard.icdVersion', {
+                            templateUrl: 'views/icd/versionICD.html',
+                            url: '/icd/version',
+                            controller: 'ICDNummerVersionCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/icd/icdVersion.js'
+                                        ]
+                                    })
+                                }
+                            }
+                        })
+                        .state('dashboard.uploadIcd', {
+                            url: '/icd/upload',
+                            templateUrl: 'views/icd/uploadICDNummer.html',
+                            controller: 'UploadICDNummerCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/icd/uploadIcdNummer.js'
+                                        ]
+                                    })
+                                }
+                            }
+                        })
                         .state('dashboard.krankheitNotfall', {
                             templateUrl: 'views/krankheit/krankheitNotfall.html',
                             url: '/krankheit/notfall/:title',
@@ -241,7 +271,7 @@ angular
                                         files: [
                                             'scripts/controllers/medikament/uploadMedikament.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -257,7 +287,7 @@ angular
                                         files: [
                                             'scripts/controllers/krankheit/krankheitDetail.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -272,7 +302,7 @@ angular
                                         name: 'sbAdminApp',
                                         files: [
                                             'scripts/controllers/krankheit/krankheitHinzufuegen.js']
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -288,7 +318,7 @@ angular
                                         files: [
                                             'scripts/controllers/krankheit/krankheitBearbeiten.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -303,7 +333,7 @@ angular
                                         files: [
                                             'scripts/controllers/search/search.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -317,7 +347,7 @@ angular
                                         name: 'sbAdminApp',
                                         files: [
                                             'scripts/controllers/krankheit/krankheit.js']
-                                    })
+                                    });
                                 }
                             }
 
@@ -335,9 +365,9 @@ angular
                                     return $ocLazyLoad.load({
                                         name: 'sbAdminApp',
                                         files: [
-                                            'scripts/controllers/prozedur/prozedur.js',
+                                            'scripts/controllers/prozedur/prozedur.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -352,7 +382,7 @@ angular
                                         files: [
                                             'scripts/controllers/prozedur/prozedurDetail.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -366,7 +396,7 @@ angular
                                         name: 'sbAdminApp',
                                         files: [
                                             'scripts/controllers/prozedur/prozedurHinzufuegen.js']
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -382,7 +412,7 @@ angular
                                         files: [
                                             'scripts/controllers/prozedur/prozedurBearbeiten.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -395,9 +425,9 @@ angular
                                     return $ocLazyLoad.load({
                                         name: 'sbAdminApp',
                                         files: [
-                                            'scripts/controllers/medikament2/medikament2.js',
+                                            'scripts/controllers/medikament2/medikament2.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -412,7 +442,7 @@ angular
                                         files: [
                                             'scripts/controllers/medikament2/medikament2Detail.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -426,7 +456,7 @@ angular
                                         name: 'sbAdminApp',
                                         files: [
                                             'scripts/controllers/medikament2/medikament2Hinzufuegen.js']
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -442,14 +472,14 @@ angular
                                         files: [
                                             'scripts/controllers/medikament2/medikament2Bearbeiten.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
                         .state('dashboard.blank', {
                             templateUrl: 'views/pages/blank.html',
                             url: '/blank'
-                        })
+                        });
             }]
 
 
@@ -514,18 +544,18 @@ angular.module('sbAdminApp').config(function ($provide) {
 angular.module('sbAdminApp').config(function ($provide) {
     function createExternalLink(link) {
         console.log(link);
-        if (link[0] != null) {
+        if (link[0] !== null) {
 
             return '<a href=/#/dashboard/krankheit/detail/' + link[0].split(" ").join("%20") + '>' + link[0] + ' </a> ';
         }
-        if (link[1] != null) {
+        if (link[1] !== null) {
             return '<a href=/#/dashboard/prozedur/detail/' + link[1].split(" ").join("%20") + '>' + link[1] + ' </a> ';
         }
-        if (link[2] != null) {
+        if (link[2] !== null) {
             return '<a href=/#/dashboard/icd/detail/' + link[2].split(" ").join("%20") + '>' + link[2] + ' </a>';
         }
-        if (link[3] != null) {
-            return link[3].bezeichnung+' (<a href=/#/dashboard/medikament/detail/' + link[3].pzn.split(" ").join("%20") + '>' +  link[3].pzn + '</a>)';
+        if (link[3] !== null) {
+            return link[3].bezeichnung + ' (<a href=/#/dashboard/medikament/detail/' + link[3].pzn.split(" ").join("%20") + '>' + link[3].pzn + '</a>)';
         }
     }
 
@@ -558,7 +588,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                                 $scope.setItemsPerPageK = function (num) {
                                     $scope.itemsPerPageK = num;
                                     $scope.currentPageK = 1;
-                                }
+                                };
                             });
                             serviceAjax.prozed().success(function (data) {
                                 $scope.prozedurs = data;
@@ -582,7 +612,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                                 };
 
                             });
-                            serviceAjax.icdGesamt().success(function (data) {
+                            serviceAjax.icdRead().success(function (data) {
                                 $scope.icds = data;
                                 $scope.viewbyG = 10;
                                 $scope.totalItemsG = $scope.icds.length;
@@ -601,7 +631,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                                 $scope.setItemsPerPageG = function (num) {
                                     $scope.itemsPerPageG = num;
                                     $scope.currentPageG = 1;
-                                }
+                                };
                             });
                             serviceAjax.medikamentRead().success(function (data) {
                                 $scope.medikaments = data;
@@ -622,7 +652,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                                 $scope.setItemsPerPageM = function (num) {
                                     $scope.itemsPerPageM = num;
                                     $scope.currentPageM = 1;
-                                }
+                                };
                             });
                             $scope.ok = function () {
                                 $uibModalInstance.close($scope.link);
@@ -696,5 +726,5 @@ angular.module('sbAdminApp').config(function ($provide) {
             // add the button to the default toolbar definition
             taOptions.toolbar[1].push('link');
             return taOptions;
-        }])
+        }]);
 });

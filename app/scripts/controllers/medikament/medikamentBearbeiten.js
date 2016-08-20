@@ -6,6 +6,7 @@ angular.module("sbAdminApp")
                 $scope.medikament = data;
                 serviceAjax.medikamentUsed($scope.medikament).success(function (data) {
                     if (data.toString() !== "") {
+                        if (data.krankheits.length !== 0) {
                         $scope.krankheits = data.krankheits;
                         $scope.viewbyK = 10;
                         $scope.totalItemsK = $scope.krankheits.length;
@@ -24,6 +25,7 @@ angular.module("sbAdminApp")
                             $scope.itemsPerPageK = num;
                             $scope.currentPageK = 1;
                         }
+                    }
                         if (data.prozedurs.length !== 0) {
                             $scope.prozedurs = data.prozedurs;
                             $scope.viewbyP = 10;
@@ -56,5 +58,8 @@ angular.module("sbAdminApp")
                     $state.go('dashboard.medikament');
 
                 });
+            };
+            $scope.cancel = function () {
+                $state.go('dashboard.medikamnet')
             };
         });

@@ -3,10 +3,11 @@ angular.module('sbAdminApp')
 
             $scope.save = function (item, event) {
                 formData = $scope.icd;
-                console.log(formData);
-                
-                serviceAjax.hinzuICDGesamt(formData).success(function (data) {
-                    $state.go('dashboard.icdNummern')
-                })
+                serviceAjax.saveICDNummer(formData).success(function () {
+                    $state.go('dashboard.icdNummern');
+                });
+            };
+            $scope.cancel = function () {
+                $state.go('dashboard.icdNummern');
             };
         });

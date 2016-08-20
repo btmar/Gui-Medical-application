@@ -1,88 +1,92 @@
 angular.module('sbAdminApp')
-.controller('KrankheitHinzufuegenCtrl', function ($state,ngDialog,filterFilter, $scope, serviceAjax) {
-	
-	
-	$scope.save = function(item, event) {
-		formData = $scope.krankheit;
-		formData.prozedur = $scope.prozedur;
-    console.log(formData);
-
-    serviceAjax.hinzuKrankheit(formData).success(function(data){
-     $state.go('dashboard.krankheit')
-     
-   })
-  };
-  var loadProzedurs = function(){
-
-    serviceAjax.prozed().success(function(data){
-     $scope.prozedurs = data;
-     $scope.viewbyP = 10;
-     $scope.totalItemsP = $scope.prozedurs.length;
-     $scope.currentPageP = 1;
-     $scope.itemsPerPageP = $scope.viewbyP;
-     $scope.maxSizeP = 5; 
-
-     $scope.setPageP = function (pageNoP) {
-      $scope.currentPageP = pageNoP;
-    };
-
-    $scope.pageChangedP = function() {
-      console.log('Page changed to: ' + $scope.currentPageP);
-    };
-
-    $scope.setItemsPerPageP = function(num) {
-      $scope.itemsPerPageP = num;
-      $scope.currentPageP = 1; 
-    };
+        .controller('KrankheitHinzufuegenCtrl', function ($state, ngDialog, filterFilter, $scope, serviceAjax) {
 
 
-  });
-  };
-  
-  $scope.openProzedurForm = function() {
-    loadProzedurs();
+            $scope.save = function (item, event) {
+                formData = $scope.krankheit;
+                formData.prozedur = $scope.prozedur;
+                console.log(formData);
 
-    ngDialog.openConfirm({template: 'views/krankheit/prozedurForm.html',
-      scope: $scope 
-    }).then(
-    function(value) {
+                serviceAjax.hinzuKrankheit(formData).success(function (data) {
+                    $state.go('dashboard.krankheit')
 
-    },
-    function(value) {
-    }
-    );
-  };
+                })
+            };
+            $scope.cancel = function () {
+                $state.go('dashboard.krankheit')
+            };
 
-  $scope.checkProzedur = function(prozedur){
+            var loadProzedurs = function () {
 
-   $scope.prozedur=prozedur;
-   ngDialog.closeAll();
- };
- 
- $scope.today = function() {
-  $scope.dt = new Date();
-};
-$scope.today();
+                serviceAjax.prozed().success(function (data) {
+                    $scope.prozedurs = data;
+                    $scope.viewbyP = 10;
+                    $scope.totalItemsP = $scope.prozedurs.length;
+                    $scope.currentPageP = 1;
+                    $scope.itemsPerPageP = $scope.viewbyP;
+                    $scope.maxSizeP = 5;
 
-$scope.clear = function() {
-  $scope.dt = null;
-};
+                    $scope.setPageP = function (pageNoP) {
+                        $scope.currentPageP = pageNoP;
+                    };
 
-$scope.inlineOptions = {
-  showWeeks: true
-};
+                    $scope.pageChangedP = function () {
+                        console.log('Page changed to: ' + $scope.currentPageP);
+                    };
 
-$scope.open2 = function() {
-  $scope.popup2.opened = true;
-};
+                    $scope.setItemsPerPageP = function (num) {
+                        $scope.itemsPerPageP = num;
+                        $scope.currentPageP = 1;
+                    };
 
-$scope.popup2 = {
-  opened: false
-};
-$scope.options = {
-  language: 'de'
-};
 
-$scope.onReady = function () {
-};
-});
+                });
+            };
+
+            $scope.openProzedurForm = function () {
+                loadProzedurs();
+
+                ngDialog.openConfirm({template: 'views/krankheit/prozedurForm.html',
+                    scope: $scope
+                }).then(
+                        function (value) {
+
+                        },
+                        function (value) {
+                        }
+                );
+            };
+
+            $scope.checkProzedur = function (prozedur) {
+
+                $scope.prozedur = prozedur;
+                ngDialog.closeAll();
+            };
+
+            $scope.today = function () {
+                $scope.dt = new Date();
+            };
+            $scope.today();
+
+            $scope.clear = function () {
+                $scope.dt = null;
+            };
+
+            $scope.inlineOptions = {
+                showWeeks: true
+            };
+
+            $scope.open2 = function () {
+                $scope.popup2.opened = true;
+            };
+
+            $scope.popup2 = {
+                opened: false
+            };
+            $scope.options = {
+                language: 'de'
+            };
+
+            $scope.onReady = function () {
+            };
+        });

@@ -14,7 +14,7 @@
 
 
         <div ng-if="med" class="col-md-12"  class="row">
-            <h3 class="page-header"> Achtung! Die folgenden Medikamenten werden in mehreren Standards benutzt </h3>
+            <h3 class="page-header"> Achtung! Gelöscht Medikamente werden aber auch in mehreren Standards benutzt </h3>
             <div class="dataTable_wrapper">
                 <form>
                     <div class="form-group">
@@ -34,6 +34,7 @@
                             <th>Rote Liste</th>
                             <th>Inhaltsstoff</th>
                             <th> </th>
+                            <th> </th>
 
                         </tr>
                     </thead>
@@ -47,7 +48,12 @@
                             <td ng-bind="item2.medikament.inhaltsstoff"></td>
                             <td>
                                 <button type="button" ng-click="detail(item2)" class="btn btn-primary btn-circle">
-                                    <i class="fa fa-times"></i>
+                                    <i class="fa fa-list"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" ng-click="hinzufuegen(item2)" class="btn btn-success btn-circle">
+                                    <i class="fa fa-plus"></i>
                                 </button>
                             </td>
                         </tr>
@@ -148,6 +154,210 @@
                     </table>
                     <uib-pagination total-items="totalItemsD" ng-model="currentPageD" max-size="maxSizeD" class="pagination-sm" boundary-link-numbers="true"style="
                                     margin-left: 20%;"></uib-pagination>
+                </div>
+            </div>
+        </div>
+        <div ng-if="bezeichnung"  class="row">
+            <div class="col-md-12">
+                <h3 class="page-header">Updated Bezeichnung</h3>
+            </div>
+
+        </div>
+        <div ng-if="bezeichnung"class="row" >
+            <div class="col-lg-12">
+                <div class="dataTable_wrapper">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="ICD-Nummer" ng-model="searchbezeichnung">
+                            </div>      
+                        </div>
+                    </form>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>PZN</th>
+                                <th>Bezeichnung</th>
+                                <th>Einheit</th>
+                                <th>Darr</th>
+                                <th>Rote Liste</th>
+                                <th>Inhaltsstoff</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="item in bezeichnung | filter:searchbezeichnung|itemsPerPage:10"current-page="currentPageB" pagination-id="2">
+                                <td ng-bind="item.pzn"></td>
+                                <td ng-bind="item.bezeichnung"></td>
+                                <td ng-bind="item.einheit"></td>
+                                <td ng-bind="item.darr"></td>
+                                <td ng-bind="item.roteListe"></td>
+                                <td ng-bind="item.inhaltsstoff"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true"
+                        pagination-id="2"
+                        style="margin-left: 30%;">
+                    </dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+        <div ng-if="einheit"  class="row">
+            <div class="col-md-12">
+                <h3 class="page-header">Updated Einheit</h3>
+            </div>
+
+        </div>
+        <div ng-if="einheit"class="row" >
+            <div class="col-lg-12">
+                <div class="dataTable_wrapper">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="ICD-Nummer" ng-model="searcheinheit">
+                            </div>      
+                        </div>
+                    </form>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>PZN</th>
+                                <th>Bezeichnung</th>
+                                <th>Einheit</th>
+                                <th>Darr</th>
+                                <th>Rote Liste</th>
+                                <th>Inhaltsstoff</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="item in einheit | filter:searcheinheit|itemsPerPage:10"current-page="currentPageE" pagination-id="1">
+                                <td ng-bind="item.pzn"></td>
+                                <td ng-bind="item.bezeichnung"></td>
+                                <td ng-bind="item.einheit"></td>
+                                <td ng-bind="item.darr"></td>
+                                <td ng-bind="item.roteListe"></td>
+                                <td ng-bind="item.inhaltsstoff"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true"
+                        pagination-id="1"
+                        style="margin-left: 30%;">
+                    </dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+        <div ng-if="roteListe"  class="row">
+            <div class="col-md-12">
+                <h3 class="page-header">Updated Rote Liste</h3>
+            </div>
+
+        </div>
+        <div ng-if="roteListe"class="row" >
+            <div class="col-lg-12">
+                <div class="dataTable_wrapper">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="ICD-Nummer" ng-model="searchroteListe">
+                            </div>      
+                        </div>
+                    </form>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>PZN</th>
+                                <th>Bezeichnung</th>
+                                <th>Einheit</th>
+                                <th>Darr</th>
+                                <th>Rote Liste</th>
+                                <th>Inhaltsstoff</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="item in roteListe | filter:searchroteListe|itemsPerPage:10"current-page="currentPageR" pagination-id="3">
+                                <td ng-bind="item.pzn"></td>
+                                <td ng-bind="item.bezeichnung"></td>
+                                <td ng-bind="item.einheit"></td>
+                                <td ng-bind="item.darr"></td>
+                                <td ng-bind="item.roteListe"></td>
+                                <td ng-bind="item.inhaltsstoff"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true"
+                        pagination-id="3"
+                        style="margin-left: 30%;">
+                    </dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+        <div ng-if="inhaltsstoff"  class="row">
+            <div class="col-md-12">
+                <h3 class="page-header">Updated Inhaltsstoff</h3>
+            </div>
+
+        </div>
+        <div ng-if="inhaltsstoff"class="row" >
+            <div class="col-lg-12">
+                <div class="dataTable_wrapper">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="ICD-Nummer" ng-model="searchinhaltsstoff">
+                            </div>      
+                        </div>
+                    </form>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>PZN</th>
+                                <th>Bezeichnung</th>
+                                <th>Einheit</th>
+                                <th>Darr</th>
+                                <th>Rote Liste</th>
+                                <th>Inhaltsstoff</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="item in inhaltsstoff | filter:searchinhaltsstoff|itemsPerPage:10"current-page="currentPageI" pagination-id="4">
+                                <td ng-bind="item.pzn"></td>
+                                <td ng-bind="item.bezeichnung"></td>
+                                <td ng-bind="item.einheit"></td>
+                                <td ng-bind="item.darr"></td>
+                                <td ng-bind="item.roteListe"></td>
+                                <td ng-bind="item.inhaltsstoff"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true"
+                        pagination-id="4"
+                        style="margin-left: 30%;">
+                    </dir-pagination-controls>
                 </div>
             </div>
         </div>

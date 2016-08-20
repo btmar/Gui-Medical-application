@@ -1,77 +1,17 @@
 angular.module("sbAdminApp")
-        .controller("ICDBearbeitenCtrl", function ($scope, $state, ngDialog, $stateParams, serviceAjax) {
+        .controller("ICDBearbeitenCtrl", function ($scope, $state, $stateParams, serviceAjax) {
             var code = $stateParams.code;
 
-            serviceAjax.infoIcd(code).success(function (data) {
+            serviceAjax.infoICDNummer(code).success(function (data) {
                 $scope.icd = data;
-
-            })
-            $scope.bearbeiten = function () {
-                serviceAjax.updateICDGesamt(formData).success(function (data) {
-
-                    $state.go('dashboard.icdNummern')
-
-                })
-                ngDialog.closeAll();
-            };
-
-            $scope.bearbeitenNotes = function () {
-
-                var response = [{"alteCode": code}, {"neuCode": $scope.icd.code}, {"krankheits": $scope.krankheits}, {"prozedurs": $scope.prozedurs}];
-
-                console.log(response);
-                serviceAjax.notesBearbeiten(response).success(function () {
-                    serviceAjax.updateICDGesamt(formData).success(function (data) {
-
-                        $state.go('dashboard.icdNummern')
-
-                    })
-
-                });
-                ngDialog.closeAll();
-            };
-            $scope.cancel = function () {
-                ngDialog.closeAll();
-            };
-
-            $scope.save = function (item, event) {
-                formData = $scope.icd;
-                if (formData.code === code)
-                {
-
-                    serviceAjax.updateICDGesamt(formData).success(function (data) {
-
-                        $state.go('dashboard.icdNummern')
-
-                    })
-                } else {
-                    serviceAjax.icdListUsed(code).success(function (data) {
-                        console.log(data);
-                        $scope.prozedurs = data.prozedurs;
-                        $scope.viewbyP = 1;
-                        $scope.totalItemsP = $scope.prozedurs.length;
-                        $scope.currentPageP = 1;
-                        $scope.itemsPerPageP = $scope.viewbyP;
-                        $scope.maxSizeP = 5;
-
-                        $scope.setPageP = function (pageNoP) {
-                            $scope.currentPageP = pageNoP;
-                        };
-
-                        $scope.pageChangedP = function () {
-                            console.log('Page changed to: ' + $scope.currentPageP);
-                        };
-
-                        $scope.setItemsPerPageP = function (num) {
-                            $scope.itemsPerPageP = num;
-                            $scope.currentPageP = 1;
-                        };
-
+                serviceAjax.icdnummerUsed($scope.icd).success(function (data) {
+                    if (data.toString() !== "") {
+                        if (data.krankheits.length !== 0) {
                         $scope.krankheits = data.krankheits;
-                        $scope.viewbyK = 1;
+                        $scope.viewbyK = 10;
                         $scope.totalItemsK = $scope.krankheits.length;
                         $scope.currentPageK = 1;
-                        $scope.itemsPerPageK = 1;
+                        $scope.itemsPerPageK = $scope.viewbyK;
                         $scope.maxSizeK = 5;
                         $scope.setPageK = function (pageNoK) {
                             $scope.currentPageK = pageNoK;
@@ -85,25 +25,41 @@ angular.module("sbAdminApp")
                             $scope.itemsPerPageK = num;
                             $scope.currentPageK = 1;
                         }
+                    }
+                        if (data.prozedurs.length !== 0) {
+                            $scope.prozedurs = data.prozedurs;
+                            $scope.viewbyP = 10;
+                            $scope.totalItemsP = $scope.prozedurs.length;
+                            $scope.currentPageP = 1;
+                            $scope.itemsPerPageP = $scope.viewbyP;
+                            $scope.maxSizeP = 5;
 
-                        if (data.krankheits.length === 0 && data.prozedurs.length === 0) {
-                            serviceAjax.updateICDGesamt(formData).success(function (data) {
+                            $scope.setPageP = function (pageNoP) {
+                                $scope.currentPageP = pageNoP;
+                            };
 
-                                $state.go('dashboard.icdNummern')
+                            $scope.pageChangedP = function () {
+                                console.log('Page changed to: ' + $scope.currentPageP);
+                            };
 
-                            })
-                        } else {
-                            ngDialog.openConfirm({template: 'views/icd/bearbeitenForm.html',
-                                scope: $scope
-                            }).then(
-                                    function (value) {
-
-                                    },
-                                    function (value) {
-                                    }
-                            );
+                            $scope.setItemsPerPageP = function (num) {
+                                $scope.itemsPerPageP = num;
+                                $scope.currentPageP = 1;
+                            };
                         }
-                    });
-                }
+                    }
+                });
+            });
+
+            $scope.bearbeiten = function (item, event) {
+                formData = $scope.icd;
+                serviceAjax.updateICDNummer(formData).success(function () {
+
+                    $state.go('dashboard.icdNummern');
+
+                });
+            };
+            $scope.cancel = function () {
+                $state.go('dashboard.icdNummern')
             };
         });

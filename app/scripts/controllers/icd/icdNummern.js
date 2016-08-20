@@ -31,8 +31,8 @@ app.controller('IcdNummernCtrl', function ($scope, ngDialog, serviceAjax) {
         $scope.setItemsPerPageN = function (num) {
             $scope.itemsPerPageN = num;
             $scope.currentPageN = 1; //reset to first paghe
-        }
-    })
+        };
+    });
     serviceAjax.icdHaupt().success(function (data) {
         $scope.icdHaupts = data;
         $scope.viewbyH = 10;
@@ -52,9 +52,9 @@ app.controller('IcdNummernCtrl', function ($scope, ngDialog, serviceAjax) {
         $scope.setItemsPerPageH = function (num) {
             $scope.itemsPerPageH = num;
             $scope.currentPageH = 1; //reset to first paghe
-        }
-    })
-    serviceAjax.icdGesamt().success(function (data) {
+        };
+    });
+    serviceAjax.icdRead().success(function (data) {
         $scope.icdGesamts = data;
         $scope.viewbyG = 10;
         $scope.totalItemsG = $scope.icdGesamts.length;
@@ -73,44 +73,77 @@ app.controller('IcdNummernCtrl', function ($scope, ngDialog, serviceAjax) {
         $scope.setItemsPerPageG = function (num) {
             $scope.itemsPerPageG = num;
             $scope.currentPageG = 1; //reset to first paghe
-        }
-    })
+        };
+    });
+    var removeICDNummer = function (icdnummer) {
+
+        $scope.icdnummer = icdnummer;
+
+        ngDialog.openConfirm({template: 'views/entfernenPopup.html',
+            scope: $scope //Pass the scope object if you need to access in the template
+        });
+    };
 
 
+    $scope.entfernen = function () {
+        var index = $scope.icdGefaehs.indexOf($scope.icdnummer);
+        serviceAjax.icdnummerEntfernen($scope.icdnummer).success(function () {
+            if (index !== -1) {
+                $scope.icdGefaehs.splice(index, 1);
+            }
+            ngDialog.closeAll();
+        });
+    };
 
+    $scope.cancel = function () {
+        ngDialog.closeAll();
+    };
+    $scope.deleteICDNummer = function (icdnummer) {
 
+        serviceAjax.icdnummerUsed(icdnummer).success(function (data) {
+            if (data.toString() !== "") {
+                $scope.krankheits = data.krankheits;
+                $scope.viewbyK = 10;
+                $scope.totalItemsK = $scope.krankheits.length;
+                $scope.currentPageK = 1;
+                $scope.itemsPerPageK = $scope.viewbyK;
+                $scope.maxSizeK = 5;
+                $scope.setPageK = function (pageNoK) {
+                    $scope.currentPageK = pageNoK;
+                };
 
-    $scope.removeIcdGesamt = function (icdGesamt) {
-        $scope.icdNum = icdGesamt;
-        serviceAjax.icdListUsed(icdGesamt.code).success(function (data) {
-            console.log(data);
-            $scope.prozedurs = data.prozedurs;
+                $scope.pageChangedK = function () {
+                    console.log('Page changed to: ' + $scope.currentPageK);
+                };
 
-            $scope.currentPageP = 1;
+                $scope.setItemsPerPageK = function (num) {
+                    $scope.itemsPerPageK = num;
+                    $scope.currentPageK = 1;
+                }
+                if (data.prozedurs.length !== 0) {
+                    $scope.prozedurs = data.prozedurs;
+                    $scope.viewbyP = 10;
+                    $scope.totalItemsP = $scope.prozedurs.length;
+                    $scope.currentPageP = 1;
+                    $scope.itemsPerPageP = $scope.viewbyP;
+                    $scope.maxSizeP = 5;
 
+                    $scope.setPageP = function (pageNoP) {
+                        $scope.currentPageP = pageNoP;
+                    };
 
+                    $scope.pageChangedP = function () {
+                        console.log('Page changed to: ' + $scope.currentPageP);
+                    };
 
-
-            $scope.setItemsPerPageP = function (num) {
-                $scope.itemsPerPageP = num;
-                $scope.currentPageP = 1;
-            };
-
-            $scope.krankheits = data.krankheits;
-
-            $scope.currentPageK = 1;
-
-            if (data.krankheits.length === 0 && data.prozedurs.length === 0) {
-                var index = $scope.icdGesamts.indexOf(icdGesamt);
-
-                serviceAjax.icdGesamtEntfernen(icdGesamt.code).success(function (data) {
-                    if (index !== -1) {
-                        $scope.icdGesamts.splice(index, 1);
-
-                    }
-                });
-            } else {
-                ngDialog.openConfirm({template: 'views/icd/entfernenForm.html',
+                    $scope.setItemsPerPageP = function (num) {
+                        $scope.itemsPerPageP = num;
+                        $scope.currentPageP = 1;
+                    };
+                }
+                $scope.name = data.icdnummer.bezeichnung;
+                ngDialog.openConfirm({template: 'views/icd/versionForm.html',
+                    className: 'ngdialog-theme-default custom-width-1150',
                     scope: $scope
                 }).then(
                         function (value) {
@@ -119,42 +152,55 @@ app.controller('IcdNummernCtrl', function ($scope, ngDialog, serviceAjax) {
                         function (value) {
                         }
                 );
+
+
+                $scope.krankheitBearbeiten = function (krankheit) {
+                    var index = $scope.krankheits.indexOf(krankheit);
+                    serviceAjax.versionningIcdKrankheit(krankheit).success(function () {
+
+                        $scope.krankheits.splice(index, 1);
+                        if ($scope.krankheits.length === 0) {
+                            removeICDNummer(icdnummer)
+                            ngDialog.closeAll();
+                        }
+
+                    });
+                };
+
+                $scope.krankheitIgnorieren = function (krankheit) {
+                    var index = $scope.krankheits.indexOf(krankheit);
+                    $scope.krankheits.splice(index, 1);
+                    if ($scope.krankheits.length === 0) {
+                        removeICDNummer(icdnummer);
+                        ngDialog.closeAll();
+                    }
+                };
+                $scope.prozedurBearbeiten = function (prozedur) {
+                    var index = $scope.prozedurs.indexOf(prozedur);
+                    serviceAjax.versionningIcdProzedur(prozedur).success(function () {
+
+                        $scope.prozedurs.splice(index, 1);
+                        if ($scope.prozedurs.length === 0) {
+                            removeICDNummer(icdnummer);
+                            ngDialog.closeAll();
+                        }
+                    });
+                };
+
+                $scope.prozedurIgnorieren = function (prozedur) {
+                    var index = $scope.prozedurs.indexOf(prozedur);
+                    $scope.prozedurs.splice(index, 1);
+                    if ($scope.prozedurs.length === 0) {
+                        removeICDNummer(icdnummer);
+                        ngDialog.closeAll();
+                    }
+                };
+
+            } else
+            {
+                removeICDNummer(icdnummer);
             }
-        });
+        }
+        );
     };
-    $scope.entfernen = function () {
-        var icd = $scope.icdNum;
-        var index = $scope.icdGesamts.indexOf(icd);
-
-        serviceAjax.icdGesamtEntfernen(icd.code).success(function () {
-            if (index !== -1) {
-                $scope.icdGesamts.splice(index, 1);
-
-            }
-            ngDialog.closeAll();
-        });
-        console.log($scope.codeIcd);
-
-    };
-
-    $scope.cancel = function () {
-        ngDialog.closeAll();
-    };
-    $scope.entfernenNotes = function () {
-
-        var response = [{"code": $scope.icdNum.code}, {"krankheits": $scope.krankheits}, {"prozedurs": $scope.prozedurs}];
-        var icd = $scope.icdNum;
-        var index = $scope.icdGesamts.indexOf(icd);
-        console.log(response);
-        serviceAjax.notesEntfernen(response).success(function () {
-            serviceAjax.icdGesamtEntfernen(icd.code).success(function () {
-                if (index !== -1) {
-                    $scope.icdGesamts.splice(index, 1);
-
-                }
-            });
-
-        });
-        ngDialog.closeAll();
-    };
-});
+})

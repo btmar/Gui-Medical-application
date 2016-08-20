@@ -1,0 +1,235 @@
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">ICD-Nummer Update</h1>
+        </div>
+        <div class="col-md-6">
+            <label>Version</label>
+            <input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="version"/>
+
+            <br>
+            <button class="btn btn-primary" ngf-select  ng-model="file" ngf-multiple="false">Datei auswählen</button>
+            {{file.name}}
+        </div>
+
+
+        <div ng-if="icd" class="col-md-12"  class="row">
+            <h3 class="page-header"> Achtung! Gelöscht ICD-Nummern werden aber auch in mehreren Standards benutzt </h3>
+            <div class="dataTable_wrapper">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                            <input type="text" class="form-control" placeholder="ICD-Nummer" ng-model="searchICDNummer">
+                        </div>      
+                    </div>
+                </form>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Diagnose</th>
+                            <th>Type</th>
+                            <th> </th>
+                            <th> </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="item2 in icd|itemsPerPage:10"current-page="currentPageMK" pagination-id="1">
+                            <td ng-bind="item2.icdnummer.code"></td>
+                            <td ng-bind="item2.icdnummer.diagnose"></td>
+                            <td ng-bind="item2.icdnummer.type"></td>
+                            <td>
+                                <button type="button" ng-click="detail(item2)" class="btn btn-primary btn-circle">
+                                    <i class="fa fa-list"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" ng-click="hinzufuegen(item2)" class="btn btn-success btn-circle">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dir-pagination-controls
+                    max-size="5"
+                    direction-links="true"
+                    boundary-links="true"
+                    pagination-id="1"
+                    style="margin-left: 30%;">
+                </dir-pagination-controls>
+            </div>
+        </div>
+        <div ng-if="new"  class="row">
+            <div class="col-md-12">
+                <h3 class="page-header">Neue ICD-Nummer</h3>
+            </div>
+
+        </div>
+        <div ng-if="new"class="row" >
+            <div class="col-lg-12">
+                <div class="dataTable_wrapper">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="ICD-Nummer" ng-model="searchNew">
+                            </div>      
+                        </div>
+                    </form>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Diagnose</th>
+                                <th>Type</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in (new | filter:searchNew).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">
+                                <td ng-bind="item.code"></td>
+                                <td ng-bind="item.diagnose"></td>
+                                <td ng-bind="item.type"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <uib-pagination total-items="totalItemsM" ng-model="currentPageM" max-size="maxSizeM" class="pagination-sm" boundary-link-numbers="true"style="
+                                    margin-left: 20%;"></uib-pagination>
+                </div>
+            </div>
+        </div>
+        <div ng-if="deleted"  class="row">
+            <div class="col-md-12">
+                <h3 class="page-header">Gelöscht ICD-Nummer</h3>
+            </div>
+
+        </div>
+        <div ng-if="deleted"class="row" >
+            <div class="col-lg-12">
+                <div class="dataTable_wrapper">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="ICD-Nummer" ng-model="searchDeleted">
+                            </div>      
+                        </div>
+                    </form>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Diagnose</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="itemDeleted in (deleted| filter:searchDeleted).slice(((currentPageD - 1) * itemsPerPageD), ((currentPageD) * itemsPerPageD))">
+                                <td ng-bind="itemDeleted.code"></td>
+                                <td ng-bind="itemDeleted.diagnose"></td>
+                                <td ng-bind="itemDeleted.type"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <uib-pagination total-items="totalItemsD" ng-model="currentPageD" max-size="maxSizeD" class="pagination-sm" boundary-link-numbers="true"style="
+                                    margin-left: 20%;"></uib-pagination>
+                </div>
+            </div>
+        </div>
+        <div ng-if="diagnose"  class="row">
+            <div class="col-md-12">
+                <h3 class="page-header">Updated Diagnose</h3>
+            </div>
+
+        </div>
+        <div ng-if="diagnose"class="row" >
+            <div class="col-lg-12">
+                <div class="dataTable_wrapper">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="ICD-Nummer" ng-model="searchdiagnose">
+                            </div>      
+                        </div>
+                    </form>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Diagnose</th>
+                                <th>Type</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="item in diagnose | filter:searchdiagnose|itemsPerPage:10"current-page="currentPageD" pagination-id="1">
+                                <td ng-bind="item.code"></td>
+                                <td ng-bind="item.diagnose"></td>
+                                <td ng-bind="item.type"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true"
+                        pagination-id="1"
+                        style="margin-left: 30%;">
+                    </dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+        <div ng-if="type"  class="row">
+            <div class="col-md-12">
+                <h3 class="page-header">Updated Type</h3>
+            </div>
+
+        </div>
+        <div ng-if="type"class="row" >
+            <div class="col-lg-12">
+                <div class="dataTable_wrapper">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="ICD-Nummer" ng-model="searchtype">
+                            </div>      
+                        </div>
+                    </form>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Diagnose</th>
+                                <th>Type</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="item in type | filter:searchtype|itemsPerPage:10"current-page="currentPageT" pagination-id="2">
+                                <td ng-bind="item.code"></td>
+                                <td ng-bind="item.diagnose"></td>
+                                <td ng-bind="item.type"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true"
+                        pagination-id="2"
+                        style="margin-left: 30%;">
+                    </dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

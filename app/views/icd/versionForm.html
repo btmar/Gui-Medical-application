@@ -18,10 +18,8 @@
                         <ul class="list-unstyled">
                             <li dir-paginate="krankheit in krankheits|itemsPerPage:1"current-page="currentPageK" pagination-id="1">
                                 <div class="header"> <strong class="primary-font"><h2 id="notfall-col" ng-bind="krankheit.title"></h2></strong>  </div>
-                                <h4 ng-if="krankheit.therapie.text">Therapie</h4>
-                            <text-angular ng-if="krankheit.therapie.text" ng-model="krankheit.therapie.text" ></text-angular>
-                            <h3 ng-if="krankheit.therapie.notfall" id="notfall-col">Therapie Notfall</h3>
-                            <text-angular ng-if="krankheit.therapie.notfall" ng-model="krankheit.therapie.notfall"></text-angular> 
+                                <h4 ng-if="krankheit.notes">Notes</h4>
+                            <text-angular ng-if="krankheit.notes" ng-model="krankheit.notes" ></text-angular>
                             <button  type="submit" id="btn-margin-top" ng-click="krankheitBearbeiten(krankheit)" class="btn btn-primary">Krankheit bearbeiten</button>
                             <button  type="cancel" id="btn-margin-top" ng-click="krankheitIgnorieren(krankheit)" class="btn btn-default">ignorieren</button>
 
@@ -44,10 +42,8 @@
                         <ul class="list-unstyled">
                             <li dir-paginate="prozedur in prozedurs|itemsPerPage:1"current-page="currentPageK" pagination-id="K">
                                 <div class="header"> <strong class="primary-font"><h2 id="notfall-col" ng-bind="prozedur.title"></h2></strong>  </div>
-                                <h4 ng-if="prozedur.therapie.text">Therapie</h4>
-                            <text-angular ng-if="prozedur.therapie.text" ng-model="prozedur.therapie.text" ></text-angular>
-                            <h3 ng-if="prozedur.therapie.notfall" id="notfall-col">Therapie Notfall</h3>
-                            <text-angular ng-if="prozedur.therapie.notfall" ng-model="prozedur.therapie.notfall"></text-angular> 
+                                <h4 ng-if="prozedur.notes">Notes</h4>
+                            <text-angular ng-if="prozedur.notes" ng-model="prozedur.notes" ></text-angular>
                             <button  type="submit" id="btn-margin-top" ng-click="prozedurBearbeiten(prozedur)" class="btn btn-primary">Prozedur bearbeiten</button>
                             <button  type="cancel" id="btn-margin-top" ng-click="prozedurIgnorieren(prozedur)" class="btn btn-default">ignorieren</button>
 

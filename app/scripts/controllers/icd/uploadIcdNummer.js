@@ -9,7 +9,7 @@ app.filter('startFrom', function () {
         return [];
     };
 });
-app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, Upload, $timeout) {
+app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, Upload, $timeout) {
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
     });
@@ -21,18 +21,18 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
     $scope.log = '';
     $scope.hinzufuegen = function (item) {
 
-        $scope.saveMedikament = item;
+        $scope.saveIcd = item;
 
         ngDialog.openConfirm({template: 'views/addedPopup.html',
             scope: $scope //Pass the scope object if you need to access in the template
         });
     };
     $scope.save = function () {
-        var index = $scope.med.indexOf($scope.saveMedikament);
+        var index = $scope.icd.indexOf($scope.saveIcd);
 
-        serviceAjax.saveMedikament($scope.saveMedikament.medikament).success(function () {
+        serviceAjax.saveICDNummer($scope.saveIcd.icdnummer).success(function () {
             if (index !== -1) {
-                $scope.med.splice(index, 1);
+                $scope.icd.splice(index, 1);
             }
 
             ngDialog.closeAll();
@@ -43,13 +43,12 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
         ngDialog.closeAll();
     };
     $scope.detail = function (item) {
-        console.log(item);
         if (item.krankheits.length === 0 && item.krankheits.length === 0) {
         } else {
             $scope.krankheits = item.krankheits;
             $scope.prozedurs = item.prozedurs;
-            $scope.name = item.medikament.bezeichnung;
-            ngDialog.openConfirm({template: 'views/medikament/versionForm.html',
+            $scope.name = item.icdnummer.bezeichnung;
+            ngDialog.openConfirm({template: 'views/icd/versionForm.html',
                 className: 'ngdialog-theme-default custom-width-1150',
                 scope: $scope
             }).then(
@@ -63,7 +62,7 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
     };
     $scope.krankheitBearbeiten = function (krankheit) {
         var index = $scope.krankheits.indexOf(krankheit);
-        serviceAjax.versionningKrankheit(krankheit).success(function () {
+        serviceAjax.versionningIcdKrankheit(krankheit).success(function () {
 
             $scope.krankheits.splice(index, 1);
             if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {
@@ -82,7 +81,7 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
     };
     $scope.prozedurBearbeiten = function (prozedur) {
         var index = $scope.prozedurs.indexOf(prozedur);
-        serviceAjax.versionningProzedur(prozedur).success(function () {
+        serviceAjax.versionningIcdProzedur(prozedur).success(function () {
 
             $scope.prozedurs.splice(index, 1);
             if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {
@@ -109,7 +108,7 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
         return false;
     }
     $scope.upload = function (files) {
-        serviceAjax.medikamentVersion().success(function (data) {
+        serviceAjax.icdnummerVersion().success(function (data) {
             $scope.versions = data;
         });
         if (contains($scope.versions, $scope.version)) {
@@ -122,7 +121,7 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
             if (files && files.length) {
                 for (var i = 0; i < files.length; i++) {
                     var file = files[i];
-                    if (file !== undefined) {
+                    if (file!== undefined) {
                         Upload.upload({
                             url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
                             data: {
@@ -130,22 +129,18 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
                                 file: file
                             }
                         }).then(function (resp) {
+
                             $scope.new2 = null;
                             $scope.new = null;
+                            $scope.diagnose2 = null;
+                            $scope.diagnose = null;
+                            $scope.type2 = null;
+                            $scope.type = null;
                             $scope.deleted2 = null;
                             $scope.deleted = null;
-                            $scope.med2 = null;
-                            $scope.med = null;
-                            $scope.inhaltsstoff = null;
-                            $scope.inhaltsstoff2 = null;
-                            $scope.bezeichnung = null;
-                            $scope.bezeichnung2 = null;
-                            $scope.einheit = null;
-                            $scope.einheit2 = null;
-                            $scope.roteListe = null;
-                            $scope.roteListe2 = null;
-
-                            serviceAjax.medFile(file, $scope.version).success(function (data) {
+                            $scope.icd2 = null;
+                            $scope.icd = null;
+                            serviceAjax.icdFile(file, $scope.version).success(function (data) {
                                 $scope.new2 = data.new;
                                 if ($scope.new2.length !== 0) {
                                     $scope.new = data.new;
@@ -171,38 +166,24 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
                                 else {
                                     $scope.new = null;
                                 }
-                                $scope.bezeichnung2 = data.bezeichnung;
-                                if ($scope.bezeichnung2.length !== 0) {
-                                    $scope.bezeichnung = data.bezeichnung;
-                                    $scope.currentPageB = 10;
+                                $scope.diagnose2 = data.diagnose;
+                                if ($scope.diagnose2.length !== 0) {
+                                    $scope.diagnose = data.diagnose;
+                                    $scope.currentPageD = 10;
                                 }
                                 else {
-                                    $scope.bezeichnung = null;
+                                    $scope.diagnose = null;
                                 }
-                                $scope.einheit2 = data.einheit;
-                                if ($scope.einheit2.length !== 0) {
-                                    $scope.einheit = data.einheit;
-                                    $scope.currentPageE = 10;
-                                }
-                                else {
-                                    $scope.einheit = null;
-                                }
-                                $scope.roteListe2 = data.roteListe;
-                                if ($scope.roteListe2.length !== 0) {
-                                    $scope.roteListe = data.roteListe;
-                                    $scope.currentPageR = 10;
+                                $scope.type2 = data.type;
+                                if ($scope.type2.length !== 0) {
+                                    $scope.type = data.type;
+                                    $scope.currentPageT = 10;
+
                                 }
                                 else {
-                                    $scope.roteListe = null;
+                                    $scope.type = null;
                                 }
-                                $scope.inhaltsstoff2 = data.inhaltsstoff;
-                                if ($scope.inhaltsstoff2.length !== 0) {
-                                    $scope.inhaltsstoff = data.inhaltsstoff;
-                                    $scope.currentPageI = 10;
-                                }
-                                else {
-                                    $scope.inhaltsstoff = null;
-                                }
+
                                 $scope.deleted2 = data.deleted;
                                 if ($scope.deleted2.length !== 0) {
                                     $scope.deleted = data.deleted;
@@ -225,20 +206,18 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
                                         $scope.currentPageD = 1;
                                     };
 
-                                    serviceAjax.medikamentListUsed($scope.deleted).success(function (data) {
-                                        $scope.med2 = data;
-                                        if ($scope.med2.length !== 0) {
-                                            $scope.med = data;
-
+                                    serviceAjax.icdnummerListUsed($scope.deleted).success(function (data) {
+                                        $scope.icd2 = data;
+                                        if ($scope.icd2.length !== 0) {
+                                            $scope.icd = data;
                                             $scope.currentPageMK = 1;
                                             $scope.currentPageK = 1;
                                         }
                                     });
                                 } else {
                                     $scope.deleted = null;
-                                    $scope.med = null;
+                                    $scope.icd = null;
                                 }
-                                ;
                             });
                             $timeout(function () {
                                 $scope.log = 'file: ' +

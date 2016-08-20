@@ -11,7 +11,6 @@ app.filter('startFrom', function () {
 });
 app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
     serviceAjax.medikamentRead().success(function (data) {
-        console.log(data);
         $scope.medikaments = data;
         $scope.viewbyM = 10;
         $scope.totalItemsM = $scope.medikaments.length;
@@ -33,17 +32,31 @@ app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
         }
     });
     var removeMedikament = function (medikament) {
-        var index = $scope.medikaments.indexOf(medikament);
-        serviceAjax.medikamentEntfernen(medikament).success(function () {
+
+        $scope.med = medikament;
+
+        ngDialog.openConfirm({template: 'views/entfernenPopup.html',
+            scope: $scope //Pass the scope object if you need to access in the template
+        })
+    };
+
+
+    $scope.entfernen = function () {
+        var index = $scope.medikaments.indexOf($scope.med);
+        serviceAjax.medikamentEntfernen($scope.med).success(function () {
             if (index !== -1) {
                 $scope.medikaments.splice(index, 1);
             }
+            ngDialog.closeAll();
         });
+    };
+
+    $scope.cancel = function () {
+        ngDialog.closeAll();
     };
     $scope.deleteMedikament = function (medikament) {
 
         serviceAjax.medikamentUsed(medikament).success(function (data) {
-            console.log(data);
             if (data.toString() !== "") {
                 $scope.krankheits = data.krankheits;
                 $scope.viewbyK = 10;
@@ -62,7 +75,7 @@ app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
                 $scope.setItemsPerPageK = function (num) {
                     $scope.itemsPerPageK = num;
                     $scope.currentPageK = 1;
-                }
+                };
                 if (data.prozedurs.length !== 0) {
                     $scope.prozedurs = data.prozedurs;
                     $scope.viewbyP = 10;
@@ -83,6 +96,7 @@ app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
                         $scope.itemsPerPageP = num;
                         $scope.currentPageP = 1;
                     };
+                }
                     $scope.name = data.medikament.bezeichnung;
                     ngDialog.openConfirm({template: 'views/medikament/versionForm.html',
                         className: 'ngdialog-theme-default custom-width-1150',
@@ -94,7 +108,7 @@ app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
                             function (value) {
                             }
                     );
-                }
+                
 
                 $scope.krankheitBearbeiten = function (krankheit) {
                     var index = $scope.krankheits.indexOf(krankheit);

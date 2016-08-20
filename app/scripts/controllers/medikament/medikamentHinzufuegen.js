@@ -9,4 +9,7 @@ angular.module('sbAdminApp')
                     $state.go('dashboard.medikament')
                 })
             };
+            $scope.cancel = function () {
+                $state.go('dashboard.medikamnet')
+            };
         });
