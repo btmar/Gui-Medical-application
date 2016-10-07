@@ -7,7 +7,7 @@ app.filter('startFrom', function () {
             return input.slice(start);
         }
         return [];
-    }
+    };
 });
 app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
     serviceAjax.medikamentRead().success(function (data) {
@@ -29,7 +29,7 @@ app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
         $scope.setItemsPerPageM = function (num) {
             $scope.itemsPerPageM = num;
             $scope.currentPageM = 1;
-        }
+        };
     });
     var removeMedikament = function (medikament) {
 
@@ -37,7 +37,7 @@ app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
 
         ngDialog.openConfirm({template: 'views/entfernenPopup.html',
             scope: $scope //Pass the scope object if you need to access in the template
-        })
+        });
     };
 
 
@@ -116,7 +116,7 @@ app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
 
                         $scope.krankheits.splice(index, 1);
                         if ($scope.krankheits.length === 0) {
-                            removeMedikament(medikament)
+                            removeMedikament(medikament);
                             ngDialog.closeAll();
                         }
 
@@ -159,4 +159,4 @@ app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
         }
         );
     };
-})
+});

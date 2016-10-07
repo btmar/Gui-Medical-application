@@ -3,16 +3,19 @@
         <div class="col-md-12">
             <h1 class="page-header">Medikament Update</h1>
         </div>
-        <div class="col-md-6">
-            <label>Version</label>
-            <input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="version"/>
+        <form role="form">
 
-            <br>
-            <button class="btn btn-primary" ngf-select  ng-model="file" ngf-multiple="false">Datei auswählen</button>
-            {{file.name}}
-        </div>
-
-
+            <div class="col-md-6">
+                <label>Version</label>
+                <input id='input-to-add' class='form-control' placeholder='Versionsname' ng-required="true" ng-model="version"/>
+                <br>
+                <button class="btn btn-primary" ngf-select  ng-model="file" ngf-multiple="false">Datei auswählen</button>
+                {{file.name}}
+                <div class="col-md-offset-11">
+                    <button class="btn btn-primary"   ng-click="update()" >upload</button>
+                </div>
+            </div>
+        </form>
         <div ng-if="med" class="col-md-12"  class="row">
             <h3 class="page-header"> Achtung! Gelöscht Medikamente werden aber auch in mehreren Standards benutzt </h3>
             <div class="dataTable_wrapper">

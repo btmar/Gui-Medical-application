@@ -8,7 +8,7 @@
                         <label>Title:</label>
 
 
-                        <input id='input-to-add' class='form-control' placeholder='Enter text'  ng-model="prozedur.title"/>
+                        <input id='input-to-add' ng-required="true" class='form-control' placeholder='Enter text'  ng-model="prozedur.title"/>
                     </div>
                     <div class="form-group">
 
@@ -22,7 +22,7 @@
                         <label>date:</label>
 
                         <p class="input-group">
-                            <input type="text" placeholder="Date" class="form-control" uib-datepicker-popup ng-model="prozedur.date" is-open="popup2.opened" datepicker-options="inlineOptions" ng-required="true" close-text="Close" />
+                            <input type="text" placeholder="Date" class="form-control" uib-datepicker-popup ng-model="prozedur.date" is-open="popup2.opened" datepicker-options="inlineOptions" close-text="Close" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>

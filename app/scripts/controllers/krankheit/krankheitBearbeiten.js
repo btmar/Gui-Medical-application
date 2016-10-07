@@ -8,18 +8,17 @@ angular.module("sbAdminApp")
                     $scope.krankheit.date = new Date($scope.krankheit.date);
                 }
 
-            })
+            });
 
             $scope.save = function (item, event) {
                 formData = $scope.krankheit;
 
-                serviceAjax.hinzuKrankheit(formData).success(function (data) {
-                    $state.go('dashboard.krankheit')
-
-                })
+                serviceAjax.bearbeitenKrankheit(formData).success(function (data) {
+                    $state.go('dashboard.krankheit');
+                });
             };
             $scope.cancel = function () {
-                $state.go('dashboard.krankheit')
+                $state.go('dashboard.krankheit');
             };
             var loadProzedurs = function () {
 

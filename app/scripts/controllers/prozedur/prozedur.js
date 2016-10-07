@@ -37,7 +37,7 @@ angular.module('sbAdminApp')
 
                 ngDialog.openConfirm({template: 'views/entfernenPopup.html',
                     scope: $scope //Pass the scope object if you need to access in the template
-                })
+                });
             };
 
             $scope.entfernen = function () {

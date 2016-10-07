@@ -25,7 +25,7 @@ myApp.controller('MedikamentVersionCtrl', function ($scope, serviceAjax) {
         $scope.setItemsPerPageK = function (num) {
             $scope.itemsPerPageK = num;
             $scope.currentPageK = 1;
-        }
+        };
     });
     $scope.listVersion = function (version) {
         serviceAjax.medikamentVersionRead(version).success(function (data) {
@@ -49,7 +49,7 @@ myApp.controller('MedikamentVersionCtrl', function ($scope, serviceAjax) {
             $scope.setItemsPerPageM = function (num) {
                 $scope.itemsPerPageM = num;
                 $scope.currentPageM = 1;
-            }
+            };
         });
     };
 });

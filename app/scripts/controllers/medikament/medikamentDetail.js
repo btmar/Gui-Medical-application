@@ -5,5 +5,5 @@ angular.module('sbAdminApp')
 	serviceAjax.infoMedikament(pzn).success(function(data){
 		$scope.medikament = data;
 		console.log(data);
-	})
+	});
 });

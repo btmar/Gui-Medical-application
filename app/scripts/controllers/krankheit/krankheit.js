@@ -23,7 +23,7 @@ myApp.controller('KrankheitCtrl', function ($scope, serviceAjax, ngDialog) {
             $scope.setItemsPerPageK = function (num) {
                 $scope.itemsPerPageK = num;
                 $scope.currentPageK = 1;
-            }
+            };
         });
     };
 
@@ -34,7 +34,7 @@ myApp.controller('KrankheitCtrl', function ($scope, serviceAjax, ngDialog) {
             scope: $scope //Pass the scope object if you need to access in the template
         });
     };
-    
+
     $scope.entfernen = function () {
         var index = $scope.krankheits.indexOf($scope.kr);
         serviceAjax.krankheitEntfernen($scope.kr.title).success(function () {
@@ -44,7 +44,7 @@ myApp.controller('KrankheitCtrl', function ($scope, serviceAjax, ngDialog) {
             ngDialog.closeAll();
         });
     };
-    
+
     $scope.cancel = function () {
         ngDialog.closeAll();
     };
