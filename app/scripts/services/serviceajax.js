@@ -21,10 +21,13 @@ angular.module('sbAdminApp')
                     return $http.get("http://localhost:8080/search/" + searchWord);
                 },
                 krankheitEntfernen: function (title) {
-                    return $http.delete("http://localhost:8080/krankheit/" + title);
+                    return $http.get("http://localhost:8080/krankheit/delete/" + title);
                 },
                 hinzuKrankheit: function (document) {
                     return $http.post("http://localhost:8080/krankheit/save", document);
+                },
+                bearbeitenKrankheit: function (document) {
+                    return $http.post("http://localhost:8080/krankheit/update", document);
                 },
                 versionningKrankheit: function (krankheit) {
                     return $http.post("http://localhost:8080/krankheit/versionnig/bearbeiten", krankheit);
@@ -39,10 +42,13 @@ angular.module('sbAdminApp')
                     return $http.get("http://localhost:8080/prozedur/" + title);
                 },
                 prozedurEntfernen: function (title) {
-                    return $http.delete("http://localhost:8080/prozedur/" + title);
+                    return $http.get("http://localhost:8080/prozedur/delete/" + title);
                 },
                 hinzuProzedur: function (document) {
                     return $http.post("http://localhost:8080/prozedur/save", document);
+                },
+                bearbeitenProzedur: function (document) {
+                    return $http.post("http://localhost:8080/prozedur/update", document);
                 },
                 versionningProzedur: function (prozedur) {
                     return $http.post("http://localhost:8080/prozedur/versionnig/bearbeiten", prozedur);

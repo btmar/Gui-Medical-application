@@ -1,19 +1,44 @@
 angular.module('sbAdminApp')
         .controller('KrankheitHinzufuegenCtrl', function ($state, ngDialog, filterFilter, $scope, serviceAjax) {
 
-
+            function contains(a, obj) {
+                if (a !== undefined) {
+                    for (var i = 0; i < a.length; i++) {
+                        if (a[i].title === obj) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            var loadKrankheits = function () {
+                $scope.krankheits = [];
+                serviceAjax.krank().success(function (data) {
+                    $scope.krankheits = data;
+                });
+            };
+            loadKrankheits();
             $scope.save = function (item, event) {
                 formData = $scope.krankheit;
                 formData.prozedur = $scope.prozedur;
-                console.log(formData);
+                if (formData.title !== undefined) {
 
-                serviceAjax.hinzuKrankheit(formData).success(function (data) {
-                    $state.go('dashboard.krankheit')
+                    if (contains($scope.krankheits, formData.title)) {
+                        $scope.fehler = "Dieser Krankheitstitle existiert bereits";
+                        ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                            scope: $scope //Pass the scope object if you need to access in the template
+                        });
+                    } else {
+                        serviceAjax.hinzuKrankheit(formData).success(function (data) {
+                            $state.go('dashboard.krankheit');
 
-                })
+                        });
+                    }
+                }
             };
+
             $scope.cancel = function () {
-                $state.go('dashboard.krankheit')
+                $state.go('dashboard.krankheit');
             };
 
             var loadProzedurs = function () {

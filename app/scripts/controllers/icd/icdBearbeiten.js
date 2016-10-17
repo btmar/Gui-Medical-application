@@ -24,7 +24,7 @@ angular.module("sbAdminApp")
                         $scope.setItemsPerPageK = function (num) {
                             $scope.itemsPerPageK = num;
                             $scope.currentPageK = 1;
-                        }
+                        };
                     }
                         if (data.prozedurs.length !== 0) {
                             $scope.prozedurs = data.prozedurs;
@@ -60,6 +60,6 @@ angular.module("sbAdminApp")
                 });
             };
             $scope.cancel = function () {
-                $state.go('dashboard.icdNummern')
+                $state.go('dashboard.icdNummern');
             };
         });

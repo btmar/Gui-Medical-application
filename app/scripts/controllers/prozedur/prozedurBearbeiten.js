@@ -7,18 +7,17 @@ angular.module('sbAdminApp')
                 if ($scope.prozedur.date !== null) {
                     $scope.prozedur.date = new Date($scope.prozedur.date);
                 }
-            })
+            });
 
             $scope.save = function (item, event) {
                 formData = $scope.prozedur;
 
-                serviceAjax.hinzuProzedur(formData).success(function (data) {
-                    $state.go('dashboard.prozedur')
-
-                })
+                serviceAjax.bearbeitenProzedur(formData).success(function (data) {
+                    $state.go('dashboard.prozedur');
+                });
             };
             $scope.cancel = function () {
-                $state.go('dashboard.prozedur')
+                $state.go('dashboard.prozedur');
             };
             $scope.today = function () {
                 $scope.dt = new Date();

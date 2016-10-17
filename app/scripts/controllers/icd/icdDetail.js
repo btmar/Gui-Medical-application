@@ -5,5 +5,5 @@ angular.module('sbAdminApp')
 	serviceAjax.infoICDNummer(code).success(function(data){
 		$scope.icd = data;
 		console.log(data);
-	})
+	});
 });

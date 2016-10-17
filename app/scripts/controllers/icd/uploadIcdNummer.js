@@ -43,7 +43,7 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
         ngDialog.closeAll();
     };
     $scope.detail = function (item) {
-        if (item.krankheits.length === 0 && item.krankheits.length === 0) {
+        if (item.krankheits.length === 0 && item.prozedurs.length === 0) {
         } else {
             $scope.krankheits = item.krankheits;
             $scope.prozedurs = item.prozedurs;
@@ -51,13 +51,7 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
             ngDialog.openConfirm({template: 'views/icd/versionForm.html',
                 className: 'ngdialog-theme-default custom-width-1150',
                 scope: $scope
-            }).then(
-                    function (value) {
-
-                    },
-                    function (value) {
-                    }
-            );
+            });
         }
     };
     $scope.krankheitBearbeiten = function (krankheit) {
@@ -108,133 +102,166 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
         return false;
     }
     $scope.upload = function (files) {
+        if (files && files.length) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                if (file !== undefined) {
+                    Upload.upload({
+                        url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                        data: {
+                            version: $scope.version,
+                            file: file
+                        }
+                    }).then(function (resp) {
+                        $scope.file = file;
+                        $timeout(function () {
+                            $scope.log = 'file: ' +
+                                    resp.config.data.file.name +
+                                    ', Response: ' + JSON.stringify(resp.data) +
+                                    '\n' + $scope.log;
+                        });
+                    }, null, function (evt) {
+                        var progressPercentage = parseInt(100.0 *
+                                evt.loaded / evt.total);
+                        $scope.log = 'progress: ' + progressPercentage +
+                                '% ' + evt.config.data.file.name + '\n' +
+                                $scope.log;
+                    });
+                }
+            }
+        }
+
+    };
+    $scope.update = function () {
         serviceAjax.icdnummerVersion().success(function (data) {
             $scope.versions = data;
         });
-        if (contains($scope.versions, $scope.version)) {
-            ngDialog.openConfirm({template: 'views/versionPopup.html',
-                scope: $scope //Pass the scope object if you need to access in the template
-            });
-        } else {
-
-
-            if (files && files.length) {
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    if (file!== undefined) {
-                        Upload.upload({
-                            url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-                            data: {
-                                version: $scope.version,
-                                file: file
-                            }
-                        }).then(function (resp) {
-
-                            $scope.new2 = null;
-                            $scope.new = null;
-                            $scope.diagnose2 = null;
-                            $scope.diagnose = null;
-                            $scope.type2 = null;
-                            $scope.type = null;
-                            $scope.deleted2 = null;
-                            $scope.deleted = null;
-                            $scope.icd2 = null;
-                            $scope.icd = null;
-                            serviceAjax.icdFile(file, $scope.version).success(function (data) {
-                                $scope.new2 = data.new;
-                                if ($scope.new2.length !== 0) {
-                                    $scope.new = data.new;
-                                    $scope.viewbyM = 10;
-                                    $scope.totalItemsM = $scope.new.length;
-                                    $scope.currentPageM = 1;
-                                    $scope.itemsPerPageM = $scope.viewbyM;
-                                    $scope.maxSizeM = 5;
-
-                                    $scope.setPageM = function (pageNo) {
-                                        $scope.currentPageM = pageNo;
-                                    };
-
-                                    $scope.pageChangedM = function () {
-                                        console.log('Page changed to: ' + $scope.currentPageM);
-                                    };
-
-                                    $scope.setItemsPerPageM = function (num) {
-                                        $scope.itemsPerPageM = num;
-                                        $scope.currentPageM = 1;
-                                    };
-                                }
-                                else {
-                                    $scope.new = null;
-                                }
-                                $scope.diagnose2 = data.diagnose;
-                                if ($scope.diagnose2.length !== 0) {
-                                    $scope.diagnose = data.diagnose;
-                                    $scope.currentPageD = 10;
-                                }
-                                else {
-                                    $scope.diagnose = null;
-                                }
-                                $scope.type2 = data.type;
-                                if ($scope.type2.length !== 0) {
-                                    $scope.type = data.type;
-                                    $scope.currentPageT = 10;
-
-                                }
-                                else {
-                                    $scope.type = null;
-                                }
-
-                                $scope.deleted2 = data.deleted;
-                                if ($scope.deleted2.length !== 0) {
-                                    $scope.deleted = data.deleted;
-                                    $scope.viewbyD = 10;
-                                    $scope.totalItemsD = $scope.deleted.length;
-                                    $scope.currentPageD = 1;
-                                    $scope.itemsPerPageD = $scope.viewbyD;
-                                    $scope.maxSizeD = 5;
-
-                                    $scope.setPageM = function (pageNo) {
-                                        $scope.currentPageD = pageNo;
-                                    };
-
-                                    $scope.pageChangedD = function () {
-                                        console.log('Page changed to: ' + $scope.currentPageD);
-                                    };
-
-                                    $scope.setItemsPerPageM = function (num) {
-                                        $scope.itemsPerPageD = num;
-                                        $scope.currentPageD = 1;
-                                    };
-
-                                    serviceAjax.icdnummerListUsed($scope.deleted).success(function (data) {
-                                        $scope.icd2 = data;
-                                        if ($scope.icd2.length !== 0) {
-                                            $scope.icd = data;
-                                            $scope.currentPageMK = 1;
-                                            $scope.currentPageK = 1;
-                                        }
-                                    });
-                                } else {
-                                    $scope.deleted = null;
-                                    $scope.icd = null;
-                                }
-                            });
-                            $timeout(function () {
-                                $scope.log = 'file: ' +
-                                        resp.config.data.file.name +
-                                        ', Response: ' + JSON.stringify(resp.data) +
-                                        '\n' + $scope.log;
-                            });
-                        }, null, function (evt) {
-                            var progressPercentage = parseInt(100.0 *
-                                    evt.loaded / evt.total);
-                            $scope.log = 'progress: ' + progressPercentage +
-                                    '% ' + evt.config.data.file.name + '\n' +
-                                    $scope.log;
+        if (contains($scope.versions, $scope.version) || $scope.version === undefined || $scope.version === null || $scope.version === "" || $scope.file === undefined || $scope.file === null || $scope.version.indexOf(' ') > -1) {
+            if (contains($scope.versions, $scope.version)) {
+                $scope.fehler = "Diese Versionsname existiert bereits";
+                ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                    scope: $scope //Pass the scope object if you need to access in the template
+                });
+            } else {
+                if ($scope.file === undefined || $scope.file === null) {
+                    $scope.fehler = "Bitte laden Sie eine Datei hoch";
+                    ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                        scope: $scope //Pass the scope object if you need to access in the template
+                    });
+                } else {
+                    if ($scope.file === undefined || $scope.file === null) {
+                        $scope.fehler = "Bitte laden Sie eine Datei hoch";
+                        ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                            scope: $scope //Pass the scope object if you need to access in the template
                         });
+                    } else {
+                        if ($scope.version.indexOf(' ') > -1) {
+                            $scope.fehler = "Die vesionsname darf keine Leerzeichen enhalten";
+                            ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                                scope: $scope //Pass the scope object if you need to access in the template
+                            });
+                        }
                     }
+
                 }
             }
+        } else {
+            $scope.new2 = null;
+            $scope.new = null;
+            $scope.diagnose2 = null;
+            $scope.diagnose = null;
+            $scope.type2 = null;
+            $scope.type = null;
+            $scope.deleted2 = null;
+            $scope.deleted = null;
+            $scope.icd2 = null;
+            $scope.icd = null;
+            serviceAjax.icdFile($scope.file, $scope.version).success(function (data) {
+                if (data === "") {
+                    $scope.fehler = "Datei nicht geeignet";
+                    ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                        scope: $scope //Pass the scope object if you need to access in the template
+                    });
+                } else {
+                    $scope.new2 = data.new;
+                    if ($scope.new2.length !== 0) {
+                        $scope.new = data.new;
+                        $scope.viewbyM = 10;
+                        $scope.totalItemsM = $scope.new.length;
+                        $scope.currentPageM = 1;
+                        $scope.itemsPerPageM = $scope.viewbyM;
+                        $scope.maxSizeM = 5;
+
+                        $scope.setPageM = function (pageNo) {
+                            $scope.currentPageM = pageNo;
+                        };
+
+                        $scope.pageChangedM = function () {
+                            console.log('Page changed to: ' + $scope.currentPageM);
+                        };
+
+                        $scope.setItemsPerPageM = function (num) {
+                            $scope.itemsPerPageM = num;
+                            $scope.currentPageM = 1;
+                        };
+                    }
+                    else {
+                        $scope.new = null;
+                    }
+                    $scope.diagnose2 = data.diagnose;
+                    if ($scope.diagnose2.length !== 0) {
+                        $scope.diagnose = data.diagnose;
+                        $scope.currentPageD = 10;
+                    }
+                    else {
+                        $scope.diagnose = null;
+                    }
+                    $scope.type2 = data.type;
+                    if ($scope.type2.length !== 0) {
+                        $scope.type = data.type;
+                        $scope.currentPageT = 10;
+
+                    }
+                    else {
+                        $scope.type = null;
+                    }
+
+                    $scope.deleted2 = data.deleted;
+                    if ($scope.deleted2.length !== 0) {
+                        $scope.deleted = data.deleted;
+                        $scope.viewbyD = 10;
+                        $scope.totalItemsD = $scope.deleted.length;
+                        $scope.currentPageD = 1;
+                        $scope.itemsPerPageD = $scope.viewbyD;
+                        $scope.maxSizeD = 5;
+
+                        $scope.setPageM = function (pageNo) {
+                            $scope.currentPageD = pageNo;
+                        };
+
+                        $scope.pageChangedD = function () {
+                            console.log('Page changed to: ' + $scope.currentPageD);
+                        };
+
+                        $scope.setItemsPerPageM = function (num) {
+                            $scope.itemsPerPageD = num;
+                            $scope.currentPageD = 1;
+                        };
+
+                        serviceAjax.icdnummerListUsed($scope.deleted).success(function (data) {
+                            $scope.icd2 = data;
+                            if ($scope.icd2.length !== 0) {
+                                $scope.icd = data;
+                                $scope.currentPageMK = 1;
+                                $scope.currentPageK = 1;
+                            }
+                        });
+                    } else {
+                        $scope.deleted = null;
+                        $scope.icd = null;
+                    }
+                }
+            });
         }
     };
 });

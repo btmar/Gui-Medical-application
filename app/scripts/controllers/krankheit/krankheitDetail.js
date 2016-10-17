@@ -4,5 +4,5 @@ angular.module('sbAdminApp')
 
 	serviceAjax.infoKrankheit(title).success(function(data){
 		$scope.krankheit = data;
-	})
+	});
 });
