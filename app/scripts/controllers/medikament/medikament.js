@@ -1,17 +1,6 @@
 'use strict';
 
 angular.module('sbAdminApp')
-//
-//app.filter('startFrom', function() {
-//	return function(input, start) {
-//		if(input) {
-//            start = +start; //parse to int
-//            return input.slice(start);
-//        }
-//        return [];
-//    }
-//});
-
 
         .controller('MedikamentCtrl', function ($scope, serviceAjax) {
             
@@ -40,11 +29,6 @@ angular.module('sbAdminApp')
 		};
 	});
 };
-
-    $scope.setMedikamentList = function(){
-        serviceAjax.medikamentSetList().success(function(){
-        });
-    }
     loadmedikaments();
 
 });

@@ -11,14 +11,17 @@
             <li ui-sref-active="active">
                 <a ui-sref="dashboard.icdNummern"><i class="fa fa-th-list"></i> ICD-Nummern</a>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard.medikament"><i class="fa fa-medkit"></i> Medikament</a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard.medikament2"><i class="fa fa-medkit"></i> Medikament2</a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard.update"><i class="fa fa-medkit"></i> Updatekonflikt</a>
+            <li ng-class="{active: collapseVar == 1}">
+                <a  ui-sref="dashboard.medikament" ng-click="check(1)"><i class="fa fa-medkit"></i> Medikament
+                </a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=1">
+                    <li>
+                        <a ui-sref="dashboard.uploadMedikament" ><i class="fa fa-wrench fa-fw"></i> Upload Medikamentenliste</a>
+                    </li>
+                    <li>
+                        <a ui-sref="dashboard.updateKonflikt" ><i class="fa fa-wrench fa-fw"></i> Updatekonflikte</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

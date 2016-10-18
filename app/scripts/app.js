@@ -18,7 +18,10 @@ angular
             'textAngular',
             'ngDialog',
             'ckeditor',
-            'ngTouch'
+            'ngTouch',
+            'ngFileUpload',
+            'angularUtils.directives.dirPagination'
+
         ])
 
         .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
@@ -139,23 +142,6 @@ angular
                                 }
                             }
                         })
-                        .state('dashboard.medikament', {
-                            url: '/medikament',
-                            templateUrl: 'views/medikament.html',
-                            controller: 'MedikamentCtrl',
-                            resolve: {
-                                loadMyFiles: function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load({
-                                        name: 'sbAdminApp',
-                                        files: [
-                                            'scripts/controllers/medikament/medikament.js'
-                                        ]
-                                    })
-                                }
-                            }
-                        })
-
-
                         .state('dashboard.krankheitDetail', {
                             templateUrl: 'views/krankheit/krankheitDetail.html',
                             url: '/krankheit/detail/:title',
@@ -171,7 +157,6 @@ angular
                                 }
                             }
                         })
-
                         .state('dashboard.krankheitHinzufuegen', {
                             templateUrl: 'views/krankheit/krankheitHinzufuegen.html',
                             url: '/krankheit/hinzufuegen',
@@ -186,7 +171,6 @@ angular
                                 }
                             }
                         })
-
                         .state('dashboard.krankheitBearbeitentext', {
                             templateUrl: 'views/krankheit/krankheitBearbeiten.html',
                             url: '/krankheit/bearbeiten/:title',
@@ -296,76 +280,61 @@ angular
                                 }
                             }
                         })
-                        .state('dashboard.medikament2', {
-                            templateUrl: 'views/medikament2.html',
-                            url: '/medikament2',
-                            controller: 'Medikament2Ctrl',
+                        .state('dashboard.medikament', {
+                            url: '/medikament',
+                            templateUrl: 'views/medikament.html',
+                            controller: 'MedikamentCtrl',
                             resolve: {
                                 loadMyFiles: function ($ocLazyLoad) {
                                     return $ocLazyLoad.load({
                                         name: 'sbAdminApp',
                                         files: [
-                                            'scripts/controllers/medikament2/medikament2.js',
+                                            'scripts/controllers/medikament/medikament.js'
                                         ]
                                     })
                                 }
                             }
                         })
-                        .state('dashboard.medikament2Detail', {
-                            templateUrl: 'views/medikament2/medikament2Detail.html',
-                            url: '/medikament2/detail/:title',
-                            controller: 'Medikament2DetailCtrl',
+                        .state('dashboard.medikamentDetail', {
+                            templateUrl: 'views/medikament/medikamentDetail.html',
+                            url: '/medikament/detail/:pzn',
+                            controller: 'MedikamentDetailCtrl',
                             resolve: {
                                 loadMyFiles: function ($ocLazyLoad) {
                                     return $ocLazyLoad.load({
                                         name: 'sbAdminApp',
                                         files: [
-                                            'scripts/controllers/medikament2/medikament2Detail.js'
+                                            'scripts/controllers/medikament/medikamentDetail.js'
                                         ]
                                     })
                                 }
                             }
                         })
-                        .state('dashboard.medikament2Hinzufuegen', {
-                            templateUrl: 'views/medikament2/medikament2Hinzufuegen.html',
-                            url: '/medikament2/Hinzufuegen',
-                            controller: 'Medikament2HinzufuegenCtrl',
+                        .state('dashboard.uploadMedikament', {
+                            templateUrl: 'views/medikament/uploadMedikament.html',
+                            url: '/uploadMedikament',
+                            controller: 'UploadMedikamentCtrl',
                             resolve: {
                                 loadMyFiles: function ($ocLazyLoad) {
                                     return $ocLazyLoad.load({
                                         name: 'sbAdminApp',
                                         files: [
-                                            'scripts/controllers/medikament2/medikament2Hinzufuegen.js']
-                                    })
-                                }
-                            }
-                        })
-
-                        .state('dashboard.medikament2Bearbeiten', {
-                            templateUrl: 'views/medikament2/medikament2Bearbeiten.html',
-                            url: '/medikament2/bearbeiten/:title',
-                            controller: 'Medikament2BearbeitenCtrl',
-                            resolve: {
-                                loadMyFiles: function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load({
-                                        name: 'sbAdminApp',
-                                        files: [
-                                            'scripts/controllers/medikament2/medikament2Bearbeiten.js'
+                                            'scripts/controllers/medikament/uploadMedikament.js'
                                         ]
                                     })
                                 }
                             }
                         })
-                        .state('dashboard.update', {
-                            templateUrl: 'views/update.html',
-                            url: '/update',
-                            controller: 'UpdateCtrl',
+                        .state('dashboard.updateKonflikt', {
+                            templateUrl: 'views/updateKonflikt.html',
+                            url: '/updateKonflikt',
+                            controller: 'UpdateKonfliktCtrl',
                             resolve: {
                                 loadMyFiles: function ($ocLazyLoad) {
                                     return $ocLazyLoad.load({
                                         name: 'sbAdminApp',
                                         files: [
-                                            'scripts/controllers/update/update.js'
+                                            'scripts/controllers/update/updateKonflikt.js'
                                         ]
                                     })
                                 }
@@ -470,19 +439,18 @@ angular.module('sbAdminApp').config(function ($provide) {
     function createExternalLink(link) {
         console.log(link);
         if (link[0] != null) {
-            return '<a href=/#/dashboard/krankheit/detail/' + link[0] + '>' + link[0] + ' </a> ';
+
+            return '<a href=/#/dashboard/krankheit/detail/' + link[0].split(" ").join("%20") + '>' + link[0] + ' </a> ';
         }
         if (link[1] != null) {
-            return '<a href=/#/dashboard/prozedur/detail/' + link[1] + '>' + link[1] + ' </a> ';
+            return '<a href=/#/dashboard/prozedur/detail/' + link[1].split(" ").join("%20") + '>' + link[1] + ' </a> ';
         }
         if (link[2] != null) {
-            return '<font color="#008000">' + link[2] + ' </front><font color="#000000"> .</front>';
+            return '<a href=/#/dashboard/icd/detail/' + link[2].split(" ").join("%20") + '>' + link[2] + ' </a>';
         }
         if (link[3] != null) {
-            return '<font color="#FF0000">' + link[3] + ' </front><font color="#000000"> .</front>';
-        }
-        if (link[4] != null) {
-            return '<a href=/#/dashboard/medikament2/detail/' + link[4] + '>' + link[4] + ' </a> ';
+            return link[3].bezeichnung + ' (<a href=/#/dashboard/medikament/detail/' + link[3].pzn.split(" ").join("%20")
+                    + ' ><font color="#428BCD">' + link[3].pzn + '</font></a>)'; //428BCD FF8000
         }
     }
 
@@ -538,6 +506,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                                     $scope.currentPageP = 1;
                                 };
                             });
+
                             serviceAjax.icdGesamt().success(function (data) {
                                 $scope.icds = data;
                                 $scope.viewbyG = 10;
@@ -580,27 +549,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                                     $scope.currentPageM = 1;
                                 }
                             });
-                            serviceAjax.medika2().success(function (data) {
-                                $scope.medikament2s = data;
-                                $scope.viewbyM2 = 10;
-                                $scope.totalItemsM2 = $scope.medikament2s.length;
-                                $scope.currentPageM2 = 1;
-                                $scope.itemsPerPageM2 = $scope.viewbyP;
-                                $scope.maxSizeM2 = 5;
 
-                                $scope.setPageM2 = function (pageNoM2) {
-                                    $scope.currentPageM2 = pageNoM2;
-                                };
-
-                                $scope.pageChangedM2 = function () {
-                                    console.log('Page changed to: ' + $scope.currentPageM2);
-                                };
-
-                                $scope.setItemsPerPageM2 = function (num) {
-                                    $scope.itemsPerPageM2 = num;
-                                    $scope.currentPageM2 = 1;
-                                };
-                            });
                             $scope.ok = function () {
                                 $uibModalInstance.close($scope.link);
                             };
@@ -611,6 +560,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                                 reg[0] = krankheit.title;
                                 reg[1] = null;
                                 reg[2] = null;
+                                reg[3] = null;
                                 console.log(reg);
 
                                 $scope.link = reg;
@@ -623,7 +573,6 @@ angular.module('sbAdminApp').config(function ($provide) {
                                 reg[1] = prozedur.title;
                                 reg[2] = null;
                                 reg[3] = null;
-                                reg[4] = null;
 
                                 console.log(reg);
 
@@ -637,7 +586,6 @@ angular.module('sbAdminApp').config(function ($provide) {
                                 reg[1] = null;
                                 reg[2] = icd.code;
                                 reg[3] = null;
-                                reg[4] = null;
 
                                 console.log(reg);
 
@@ -650,22 +598,8 @@ angular.module('sbAdminApp').config(function ($provide) {
                                 reg[0] = null;
                                 reg[1] = null;
                                 reg[2] = null;
-                                reg[3] = medikament.name;
-                                reg[4] = null;
+                                reg[3] = medikament;
 
-                                console.log(reg);
-
-                                $scope.link = reg;
-                                $uibModalInstance.close($scope.link);
-                            };
-                            $scope.checkMedikamentlink = function (medikament2) {
-                                console.log(medikament2);
-                                var reg = [];
-                                reg[0] = null;
-                                reg[1] = null;
-                                reg[2] = null;
-                                reg[3] = null;
-                                reg[4] = medikament2.name;
                                 console.log(reg);
 
                                 $scope.link = reg;
@@ -675,7 +609,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                                 $uibModalInstance.dismiss('cancel');
                             };
                         },
-                        size: '500px'
+                        size: 'lg'
 
                     });
                     //define result modal , when user complete result information 

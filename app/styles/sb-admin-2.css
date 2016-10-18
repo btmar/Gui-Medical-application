@@ -373,3 +373,7 @@ width: 1000px;
 #notfall-col{
     color: #F82006;
 }
+.disabled {
+   pointer-events: none;
+   cursor: default;
+}

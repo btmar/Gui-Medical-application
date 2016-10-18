@@ -13,7 +13,6 @@ angular.module('sbAdminApp')
            $scope.currentPageP = 1;
            $scope.itemsPerPageP = $scope.viewbyP;
            $scope.maxSizeP = 5; 
-
            $scope.setPageP = function (pageNoP) {
             $scope.currentPageP = pageNoP;
         };
@@ -26,10 +25,7 @@ angular.module('sbAdminApp')
             $scope.itemsPerPageP = num;
             $scope.currentPageP = 1; 
         };
-
-
     });
-
     };
 
     $scope.removeItem = function(prozedur){
@@ -41,7 +37,5 @@ angular.module('sbAdminApp')
             }
         });
     }
-
     loadProzedurs();
-
 });
