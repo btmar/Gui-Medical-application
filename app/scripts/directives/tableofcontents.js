@@ -11,12 +11,15 @@ angular.module('sbAdminApp')
     return {
         restrict:'A',
         require:'?ngModel',
-        link : function(scope, elm, attrs,ngModel) {
+        link : function($scope, $element, attrs, ngModel) {
             function updateHeadlines() {
-            	console.log(elm);
-                scope.headlines=[];
-                angular.forEach(elm[0].querySelectorAll('h1,h2,h3,h4,h5,h6'), function(e){
-                    scope.headlines.push({ 
+                $scope.headlines=[];
+                console.log($element[0].querySelector('h1'));
+                console.log($element[0]);
+                var resizeBar = $element[0].querySelectorAll('h1,h2');
+                console.log(resizeBar);
+                angular.forEach($element[0].querySelectorAll('h1,h2,h3,h4,h5,h6'), function(e){
+                    $scope.headlines.push({ 
                         level: e.tagName[1], 
                         label: angular.element(e).text(),
                         element: e
@@ -24,16 +27,16 @@ angular.module('sbAdminApp')
                 });
             }
             // avoid memoryleaks from dom references
-            scope.$on('$destroy',function(){
-                scope.headlines=[];
+            $scope.$on('$destroy',function(){
+                $scope.headlines=[];
             });
             // scroll to one of the headlines
-            scope.scrollTo=function(headline){
+            $scope.scrollTo=function(headline){
                 headline.element.scrollIntoView();
-            }
-            // when the html updates whe update the headlines
+            };
+//            // when the html updates whe update the headlines
             ngModel.$render = updateHeadlines;
             updateHeadlines();
         }
-    }
-})
+    };
+});

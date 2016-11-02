@@ -27,27 +27,27 @@
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane fade in active" id="uebersicht">
-							<p ng-bind-html="prozedur.uebersicht.text"></p>
+							<p ng-bind-html="prozedur.uebersichtTxt"></p>
 
-							<h3 ng-if="prozedur.uebersicht.notfall" id="notfall-col">Notfall</h3>
-							<p ng-bind-html="prozedur.uebersicht.notfall"></p>
+							<h3 ng-if="prozedur.uebersichtNot" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.uebersichtNot"></p>
 						</div>
 						<div class="tab-pane fade" id="diagnostik">
-							<p ng-bind-html="prozedur.diagnostik.text"></p>
+							<p ng-bind-html="prozedur.diagnostikTxt"></p>
 
-							<h3 ng-if="prozedur.diagnostik.notfall" id="notfall-col">Notfall</h3>
-							<p ng-bind-html="prozedur.diagnostik.notfall"></p>
+							<h3 ng-if="prozedur.diagnostikNot" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.diagnostikNot"></p>
 						</div>
 						<div class="tab-pane fade" id="therapie">
-							<p ng-bind-html="prozedur.therapie.text"></p>
+							<p ng-bind-html="prozedur.therapieTxt"></p>
 
-							<h3 ng-if="prozedur.therapie.notfall" id="notfall-col">Notfall</h3>
-							<p ng-bind-html="prozedur.therapie.notfall"></p>
+							<h3 ng-if="prozedur.therapieNot" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.therapieNot"></p>
 						</div>
 						<div class="tab-pane fade" id="beratung">
-							<p ng-bind-html="prozedur.beratung.text"></p>
-							<h3 ng-if="prozedur.beratung.notfall" id="notfall-col">Notfall</h3>
-							<p ng-bind-html="prozedur.beratung.notfall"></p>
+							<p ng-bind-html="prozedur.beratungTxt"></p>
+							<h3 ng-if="prozedur.beratungNot" id="notfall-col">Notfall</h3>
+							<p ng-bind-html="prozedur.beratungNot"></p>
 						</div>
 						<div class="tab-pane fade" id="notes">
 							<p ng-bind-html="prozedur.notes"></p>

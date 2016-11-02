@@ -63,7 +63,8 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
     };
     $scope.krankheitBearbeiten = function (krankheit) {
         var index = $scope.krankheits.indexOf(krankheit);
-        serviceAjax.versionningKrankheit(krankheit).success(function () {
+        console.log(krankheit);
+        serviceAjax.bearbeitenKrankheit(krankheit).success(function () {
 
             $scope.krankheits.splice(index, 1);
             if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {
@@ -82,7 +83,7 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
     };
     $scope.prozedurBearbeiten = function (prozedur) {
         var index = $scope.prozedurs.indexOf(prozedur);
-        serviceAjax.versionningProzedur(prozedur).success(function () {
+        serviceAjax.bearbeitenProzedur(prozedur).success(function () {
 
             $scope.prozedurs.splice(index, 1);
             if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {

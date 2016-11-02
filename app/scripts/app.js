@@ -19,6 +19,7 @@ angular
             'ngDialog',
             'ckeditor',
             'ngTouch',
+//            'angular-toc',
             'ngFileUpload',
             'angularUtils.directives.dirPagination'
         ])
@@ -166,6 +167,21 @@ angular
                                         name: 'sbAdminApp',
                                         files: [
                                             'scripts/controllers/icd/uploadIcdNummer.js'
+                                        ]
+                                    })
+                                }
+                            }
+                        })
+                        .state('dashboard.image', {
+                            url: '/image',
+                            templateUrl: 'views/image.html',
+                            controller: 'ImageCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/icd/image.js'
                                         ]
                                     })
                                 }

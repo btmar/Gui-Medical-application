@@ -9,7 +9,10 @@
  */
 angular.module('sbAdminApp')
         .factory('serviceAjax', function serviceAjax($http) {
-
+//            $http.get('resources/application.properties').then(function (response) {
+//                var url = response.data.url;
+//                console.log('url is ', response.data.url);
+//            });
             return{
                 krank: function () {
                     return $http.get("http://localhost:8080/krankheit/query");
@@ -69,7 +72,7 @@ angular.module('sbAdminApp')
                     return $http.post("http://localhost:8080/medikament2/save", document);
                 },
                 medikamentRead: function () {
-                    return $http.get("http://localhost:8080/medikament/read");
+                    return $http.get("http://localhost:8080/medikament/query");
                 },
                 infoMedikament: function (pzn) {
                     return $http.post("http://localhost:8080/medikament/info", pzn);
@@ -105,53 +108,54 @@ angular.module('sbAdminApp')
 
                 },
                 icdRead: function () {
-                    return $http.get("http://localhost:8080/icdnummer/read");
-                },
-                icdHaupt: function () {
-                    return $http.get("http://localhost:8080/icdnummer/read/haupt");
-                },
-                icdGefaeh: function () {
-                    return $http.get("http://localhost:8080/icdnummer/read/gefaehrlich");
+                    return $http.get("http://localhost:8080/icd/query");
                 },
                 notesBearbeiten: function (response) {
-                    return $http.post("http://localhost:8080/icdnummer/notes/bearbeiten", response);
+                    return $http.post("http://localhost:8080/icd/notes/bearbeiten", response);
                 },
                 notesEntfernen: function (response) {
-                    return $http.post("http://localhost:8080/icdnummer/notes/entfernen", response);
+                    return $http.post("http://localhost:8080/icd/notes/entfernen", response);
                 },
                 infoICDNummer: function (pzn) {
-                    return $http.post("http://localhost:8080/icdnummer/info", pzn);
+                    return $http.post("http://localhost:8080/icd/info", pzn);
                 },
                 updateICDNummer: function (icdnummer) {
-                    return $http.post("http://localhost:8080/icdnummer/update", icdnummer);
+                    return $http.post("http://localhost:8080/icd/update", icdnummer);
                 },
                 icdnummerEntfernen: function (icdnummer) {
-                    return $http.post("http://localhost:8080/icdnummer/delete", icdnummer);
+                    return $http.post("http://localhost:8080/icd/delete", icdnummer);
                 },
                 icdnummerVersion: function () {
-                    return $http.get("http://localhost:8080/icdnummer/version");
+                    return $http.get("http://localhost:8080/icd/version");
                 },
                 icdnummerVersionRead: function (version) {
-                    return $http.post("http://localhost:8080/icdnummer/version/read", version);
+                    return $http.post("http://localhost:8080/icd/version/read", version);
                 },
                 saveICDNummer: function (icdnummer) {
-                    return $http.post("http://localhost:8080/icdnummer/save", icdnummer);
+                    return $http.post("http://localhost:8080/icd/save", icdnummer);
                 },
                 icdnummerListUsed: function (list) {
-                    return $http.post("http://localhost:8080/icdnummer/search/used/", list);
+                    return $http.post("http://localhost:8080/icd/search/used/", list);
                 },
                 icdnummerUsed: function (icdnummer) {
-                    return $http.post("http://localhost:8080/icdnummer/search/used/icdnummer", icdnummer);
+                    return $http.post("http://localhost:8080/icd/search/used/icd", icdnummer);
                 },
                 icdFile: function (file, version) {
                     var fd = new FormData();
                     fd.append('file', file);
-                    return $http.post("http://localhost:8080/icdnummer/save/" + version, fd, {
+                    return $http.post("http://localhost:8080/icd/save/" + version, fd, {
                         transformRequest: angular.identity,
                         headers: {'Content-Type': undefined}
-                    })
-
+                    });
+                },
+                imageFile: function (file, version) {
+                    var fd = new FormData();
+                    fd.append('file', file);
+                    return $http.post("http://localhost:8080/image/save/" + version, fd, {
+                        transformRequest: angular.identity,
+                        headers: {'Content-Type': undefined}
+                    });
                 }
 
-            }
+            };
         });
