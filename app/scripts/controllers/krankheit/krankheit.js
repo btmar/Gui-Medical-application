@@ -23,7 +23,7 @@ myApp.controller('KrankheitCtrl', function ($scope, serviceAjax, ngDialog) {
             $scope.setItemsPerPageK = function (num) {
                 $scope.itemsPerPageK = num;
                 $scope.currentPageK = 1;
-            }
+            };
         });
     };
 

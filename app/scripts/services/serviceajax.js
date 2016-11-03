@@ -143,9 +143,12 @@ angular.module('sbAdminApp')
                     return $http.post("http://localhost:8080/icdnummer/save/" + version, fd, {
                         transformRequest: angular.identity,
                         headers: {'Content-Type': undefined}
-                    })
+                    });
 
+                },
+                
+                addNewUser: function (document) {
+                    return $http.post("http://localhost:8080/user/addNewUser", document);
                 }
-
-            }
+            };
         });

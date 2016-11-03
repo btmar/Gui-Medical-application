@@ -346,7 +346,24 @@ angular
                                     return $ocLazyLoad.load({
                                         name: 'sbAdminApp',
                                         files: [
-                                            'scripts/controllers/krankheit/krankheit.js']
+                                            'scripts/controllers/krankheit/krankheit.js'
+                                        ]
+                                    });
+                                }
+                            }
+
+                        })
+                        .state('dashboard.userAdmin', {
+                            templateUrl: 'views/userAdmin.html',
+                            url: '/userAdmin',
+                            controller: 'userAdminCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/userAdmin/userAdmin.js'
+                                        ]
                                     });
                                 }
                             }
