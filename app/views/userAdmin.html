@@ -2,18 +2,16 @@
     <div class="col-md-11">
         <h1 class="page-header">Benutzerverwaltung</h1>
     </div>
-    <div class="col-m-1">
-        <input type="text" class="form-control" placeholder="Benutzername" ng-model="user.firstName">
-        
-
-        <!--
-        <a ui-sref="dashboard.krankheitHinzufuegen">             
-            <button type="button" class="page-header btn btn-success btn-circle btn-lg"><i class="fa fa-plus"></i> 
-            </button> 
-        </a>
-        -->
-    </div>
-    <p class="col-m-1" style="margin-top: 20px;">
-        <button type="submit" ng-click="addNewUser()" class="btn btn-default">Benutzer hinzufügen</button>
-    </p>
 </div>
+
+<p class="col-m-1" style="margin-top: 20px;">
+    <button type="submit" ng-click="register()" class="btn btn-default">Neuen Benutzer hinzufügen</button>
+</p>
+
+<p class="col-m-1" style="margin-top: 20px;">
+    <button type="submit" ng-click="logOn()" class="btn btn-default">Anmelden</button>
+</p>
+
+<p class="col-m-1" style="margin-top: 20px;">
+    <button type="submit" ng-click="showUserData()" class="btn btn-default">Meine Benutzerdaten anzeigen</button>
+</p>

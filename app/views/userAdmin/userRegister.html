@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-11">
+        <h1 class="page-header">Neuen Benutzer registrieren</h1>
+    </div>
+</div>
+
+<p class="col-m-1">
+    Benutzername: 
+    <input type="text" class="form-control" placeholder="Benutzername" ng-model="user.userName">
+
+    Passwort:
+    <input type="text" class="form-control" placeholder="Passwort" ng-model="user.password">
+
+    Passwort wiederholen:
+    <input type="text" class="form-control" placeholder="Passwort wiederholen" ng-model="passwordRepeated">
+
+</p>
+
+<p class="col-m-1" style="margin-top: 20px;">
+    <button type="submit" ng-click="addNewUser()" class="btn btn-default">Benutzer hinzufügen</button>
+</p>

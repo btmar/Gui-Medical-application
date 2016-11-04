@@ -2,18 +2,17 @@
 
 var myApp = angular.module('sbAdminApp');
 
-myApp.controller('userAdminCtrl', function ($scope, serviceAjax, ngDialog) {
+myApp.controller('userAdminCtrl', function ($scope, $state) {
 
-    //alert("Entered userAdmin controller");
-   
+    $scope.showUserData = function() {
+        $state.go('dashboard.userData');
+    };
 
-    $scope.addNewUser = function (item, event) {
+    $scope.logOn = function() {
+        $state.go('dashboard.userLogOn');
+    };
 
-        var formData = $scope.user;
-        alert("Trying to add new user: " + formData.firstName);
-        serviceAjax.addNewUser(formData).success(function (data) {
-            alert("New user added successfully.");
-            //$state.go('dashboard.krankheit');
-        });
+    $scope.register = function() {
+        $state.go('dashboard.userRegister');
     };
 });

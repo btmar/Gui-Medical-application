@@ -353,6 +353,12 @@ angular
                             }
 
                         })
+                        
+                        
+                        //
+                        // User administration
+                        //
+                        
                         .state('dashboard.userAdmin', {
                             templateUrl: 'views/userAdmin.html',
                             url: '/userAdmin',
@@ -369,6 +375,57 @@ angular
                             }
 
                         })
+                        .state('dashboard.userLogOn', {
+                            templateUrl: 'views/userAdmin/userLogOn.html',
+                            url: '/userAdmin/userLogOn',
+                            controller: 'userLogOnCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/userAdmin/userLogOn.js'
+                                        ]
+                                    });
+                                }
+                            }
+                        })
+                        .state('dashboard.userRegister', {
+                            templateUrl: 'views/userAdmin/userRegister.html',
+                            url: '/userAdmin/userRegister',
+                            controller: 'userRegisterCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/userAdmin/userRegister.js'
+                                        ]
+                                    });
+                                }
+                            }
+                        })
+                        .state('dashboard.userData', {
+                            templateUrl: 'views/userAdmin/userData.html',
+                            url: '/userAdmin/userData',
+                            controller: 'userDataCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/userAdmin/userData.js'
+                                        ]
+                                    });
+                                }
+                            }
+                        })
+
+
+                        //
+                        // Tests
+                        //
+                        
                         .state('dashboard.test', {
                             templateUrl: 'views/test.html',
                             url: '/test'

@@ -2,9 +2,25 @@
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav in" id="side-menu">
             <sidebar-search></sidebar-search>
+            <li ng-class="{active: collapseVar === 3}">
+                <a ui-sref="dashboard.userAdmin" ng-click="check(3)"><i class="fa fa-th-list"></i> Benutzerverwaltung</a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=2">
+                    <li>
+                        <a ui-sref="dashboard.userLogOn" ><i class="fa fa-wrench fa-fw"></i> Anmelden</a>
+                    </li>
+                    <li>
+                        <a ui-sref="dashboard.userRegister" ><i class="fa fa-wrench fa-fw"></i> Registrieren</a>
+                    </li>
+                    <li>
+                        <a ui-sref="dashboard.userData" ><i class="fa fa-wrench fa-fw"></i> Meine Daten</a>
+                    </li>                   
+                </ul>
+            </li>
+            <!--
             <li ui-sref-active="active">
                 <a ui-sref="dashboard.userAdmin"><i class="fa fa-stethoscope fa-fw"></i> Benutzerverwaltung</a>
             </li>
+            -->
             <li ui-sref-active="active">
                 <a ui-sref="dashboard.krankheit"><i class="fa fa-stethoscope fa-fw"></i> Krankheit</a>
             </li>
