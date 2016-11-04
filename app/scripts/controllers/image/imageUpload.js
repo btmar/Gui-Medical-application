@@ -9,7 +9,7 @@ app.filter('startFrom', function () {
         return [];
     };
 });
-app.controller('ImageCtrl', function ($scope, ngDialog, serviceAjax, Upload, $timeout) {
+app.controller('ImageUploadCtrl', function ($scope, ngDialog, serviceAjax, Upload, $timeout) {
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
     });

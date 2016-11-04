@@ -54,6 +54,9 @@
                                                     {{krankheit.uebersichtTxt}}
                                                 </div>-->
                         <p ng-bind-html="krankheit.uebersichtTxt"></p>
+                                                <p ng-bind-html="html"></p>
+                                                <p><img data-ng-src="data:image/PNG;base64,{{image}}"></p>
+                       
 
                         <h3 ng-if="krankheit.uebersichtNot" id="notfall-col">Notfall</h3>
                         <p ng-bind-html="krankheit.uebersichtNot"></p>

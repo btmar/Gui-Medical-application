@@ -148,13 +148,28 @@ angular.module('sbAdminApp')
                         headers: {'Content-Type': undefined}
                     });
                 },
-                imageFile: function (file, version) {
+                imageFile: function (file, title) {
                     var fd = new FormData();
                     fd.append('file', file);
-                    return $http.post("http://localhost:8080/image/save/" + version, fd, {
+                    var tit = title;
+                     var Indata = {title:'title',fd:'file'};
+
+                    return $http.post("http://localhost:8080/image/save/" ,Indata, {
                         transformRequest: angular.identity,
                         headers: {'Content-Type': undefined}
                     });
+                },
+                infoImage: function (title) {
+                    return $http.get("http://localhost:8080/image/"+ title);
+                },
+                updateImage: function (image) {
+                    return $http.post("http://localhost:8080/image/update", image);
+                },
+                deleteImage: function (title) {
+                    return $http.get("http://localhost:8080/image/delete/" + title);
+                },
+                QueryImage: function () {
+                    return $http.get("http://localhost:8080/image/query");
                 }
 
             };

@@ -28,7 +28,7 @@ angular
 
                 $ocLazyLoadProvider.config({
                     debug: false,
-                    events: true,
+                    events: true
                 });
 
                 $urlRouterProvider.otherwise('/dashboard/krankheit');
@@ -54,32 +54,32 @@ angular
                                                         files: ["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
                                                             "bower_components/angular-toggle-switch/angular-toggle-switch.css"
                                                         ]
-                                                    }),
+                                                    });
                                             $ocLazyLoad.load(
                                                     {
                                                         name: 'ngAnimate',
                                                         files: ['bower_components/angular-animate/angular-animate.js']
-                                                    })
+                                                    });
                                     $ocLazyLoad.load(
                                             {
                                                 name: 'ngCookies',
                                                 files: ['bower_components/angular-cookies/angular-cookies.js']
-                                            })
+                                            });
                                     $ocLazyLoad.load(
                                             {
                                                 name: 'ngResource',
                                                 files: ['bower_components/angular-resource/angular-resource.js']
-                                            })
+                                            });
                                     $ocLazyLoad.load(
                                             {
                                                 name: 'ngSanitize',
                                                 files: ['bower_components/angular-sanitize/angular-sanitize.js']
-                                            })
+                                            });
                                     $ocLazyLoad.load(
                                             {
                                                 name: 'ngTouch',
                                                 files: ['bower_components/angular-touch/angular-touch.js']
-                                            })
+                                            });
                                 }
                             }
                         })
@@ -94,7 +94,7 @@ angular
                                         files: [
                                             'scripts/controllers/icd/icdNummern.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -109,7 +109,7 @@ angular
                                         files: [
                                             'scripts/controllers/icd/IcdDetail.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -123,7 +123,7 @@ angular
                                         name: 'sbAdminApp',
                                         files: [
                                             'scripts/controllers/icd/icdHinzufuegen.js']
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -138,7 +138,7 @@ angular
                                         files: [
                                             'scripts/controllers/icd/icdBearbeiten.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -153,7 +153,7 @@ angular
                                         files: [
                                             'scripts/controllers/icd/icdVersion.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -168,7 +168,7 @@ angular
                                         files: [
                                             'scripts/controllers/icd/uploadIcdNummer.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -181,12 +181,59 @@ angular
                                     return $ocLazyLoad.load({
                                         name: 'sbAdminApp',
                                         files: [
-                                            'scripts/controllers/icd/image.js'
+                                            'scripts/controllers/image/image.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
+                         .state('imageDetail', {
+                            templateUrl: 'views/image/imageDetail.html',
+                            url: '/image/detail/:title',
+                            controller: 'ImageDetailCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/image/imageDetail.js'
+                                        ]
+                                    });
+                                }
+                            }
+                        })
+
+                        .state('dashboard.imageHinzufuegen', {
+                            templateUrl: 'views/image/imageHinzufuegen.html',
+                            url: '/image/hinzufuegen',
+                            controller: 'ImageHinzufuegenCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/image/imageHinzufuegen.js']
+                                    });
+                                }
+                            }
+                        })
+
+                        .state('dashboard.imageBearbeitentext', {
+                            templateUrl: 'views/image/imageBearbeiten.html',
+                            url: '/image/bearbeiten/:title',
+                            controller: 'ImageBearbeitenCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/image/imageBearbeiten.js'
+                                        ]
+                                    });
+                                }
+                            }
+                        })
+                       
                         .state('dashboard.krankheitNotfall', {
                             templateUrl: 'views/krankheit/krankheitNotfall.html',
                             url: '/krankheit/notfall/:title',
