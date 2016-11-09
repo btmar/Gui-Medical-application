@@ -187,7 +187,7 @@ angular
                                 }
                             }
                         })
-                         .state('imageDetail', {
+                         .state('dashboard.imageDetail', {
                             templateUrl: 'views/image/imageDetail.html',
                             url: '/image/detail/:title',
                             controller: 'ImageDetailCtrl',
@@ -245,7 +245,7 @@ angular
                                         files: [
                                             'scripts/controllers/krankheit/krankheitDetail.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -260,7 +260,7 @@ angular
                                         files: [
                                             'scripts/controllers/medikament/medikament.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -275,7 +275,7 @@ angular
                                         files: [
                                             'scripts/controllers/medikament/medikamentDetail.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -290,7 +290,7 @@ angular
                                         files: [
                                             'scripts/controllers/medikament/medikamentBearbeiten.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -305,7 +305,7 @@ angular
                                         files: [
                                             'scripts/controllers/medikament/medikamentVersion.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -319,7 +319,7 @@ angular
                                         name: 'sbAdminApp',
                                         files: [
                                             'scripts/controllers/medikament/medikamentHinzufuegen.js']
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -600,7 +600,7 @@ angular.module('sbAdminApp').config(function ($provide) {
             // add the button to the default toolbar definition
             taOptions.toolbar[1].push('table');
             return taOptions;
-        }])
+        }]);
 });
 
 
@@ -791,3 +791,76 @@ angular.module('sbAdminApp').config(function ($provide) {
             return taOptions;
         }]);
 });
+angular.module('sbAdminApp').config(function ($provide) {
+    function addImage(image) {
+
+
+        return 'image:'+image.title+'(siehe Bild unten)';
+    }
+    $provide.decorator('taOptions', ['taRegisterTool', 'serviceAjax', '$delegate', '$uibModal', function (taRegisterTool, serviceAjax, taOptions, $uibModal, $scope) {
+            taRegisterTool('image', {
+                iconclass: 'fa fa-image',
+                tooltiptext: 'Insert image',
+                action: function (promise, restoreSelection) {
+                    var that = this;
+                    var uibModalInstance = $uibModal.open({
+                        templateUrl: 'views/image/popup.html',
+                        controller: function ($scope, $http, $uibModalInstance, serviceAjax) {
+                            $scope.invitation = {};
+                            serviceAjax.QueryImage().success(function (data) {
+                                $scope.images = data;
+                                $scope.viewbyK = 10;
+                                $scope.totalItemsK = $scope.images.length;
+                                $scope.currentPageK = 1;
+                                $scope.itemsPerPageK = $scope.viewbyK;
+                                $scope.maxSizeK = 5;
+                                $scope.setPageK = function (pageNoK) {
+                                    $scope.currentPageK = pageNoK;
+                                };
+
+                                $scope.pageChangedK = function () {
+                                    console.log('Page changed to: ' + $scope.currentPageK);
+                                };
+
+                                $scope.setItemsPerPageK = function (num) {
+                                    $scope.itemsPerPageK = num;
+                                    $scope.currentPageK = 1;
+                                };
+                            });
+                           
+                            $scope.ok = function () {
+                                $uibModalInstance.close($scope.image);
+                            };
+
+                            $scope.checkImageLink = function (image) {
+                                console.log(image);
+                                $scope.image = image;
+                                $uibModalInstance.close($scope.image);
+                            };
+                           
+                            $scope.cancel = function () {
+                                $uibModalInstance.dismiss('cancel');
+                            };
+                        },
+                        size: 'lg'
+
+                    });
+                    //define result modal , when user complete result information 
+                    uibModalInstance.result.then(function (result) {
+                        if (result) {
+                            console.log(result);
+                            restoreSelection();
+                            var html = addImage(result);
+                            promise.resolve();
+                            return that.$editor().wrapSelection('insertHtml', html);
+                        }
+                    });
+                    return false;
+                }
+            });
+            // add the button to the default toolbar definition
+            taOptions.toolbar[1].push('image');
+            return taOptions;
+        }]);
+});
+

@@ -25,6 +25,7 @@
                 <thead>
                     <tr>
                         <th>Title</th>
+                        <th>Image</th>
                         <th> </th>
                         <th> </th>
 
@@ -33,9 +34,9 @@
                 <tbody>
                    <tr ng-repeat="image in (images| filter:searchImage).slice(((currentPageK-1)*itemsPerPageK), ((currentPageK)*itemsPerPageK))">                        
                        <td ng-bind="image.title"></td>
-                       <td><img data-ng-src="data:image/PNG;base64,{{image.image}}"></td>
+                       <td><img id="image" data-ng-src="data:image/PNG;base64,{{image.image}}"></td>
                     <td>
-                        <a ui-sref="imageDetail({ title: image.title })"> 
+                        <a ui-sref="dashboard.imageDetail({ title: image.title })"> 
                             <button type="button" ng-click="" class="btn btn-primary btn-circle">
                                 <i class="fa fa-list"></i>
                             </button>

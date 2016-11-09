@@ -1,5 +1,5 @@
 angular.module('sbAdminApp')
-        .controller('KrankheitHinzufuegenCtrl', function ($state, ngDialog, filterFilter, $scope, serviceAjax) {
+        .controller('KrankheitHinzufuegenCtrl', function ($state, ngDialog, $scope, serviceAjax) {
 
             function contains(a, obj) {
                 if (a !== undefined) {

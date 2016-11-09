@@ -28,32 +28,61 @@
 					<div class="tab-content">
 						<div class="tab-pane fade in active" id="uebersicht">
 							<p ng-bind-html="prozedur.uebersichtTxt"></p>
+                        <h3 ng-if="prozedur.uebersichtNot" id="notfall-col">Notfall</h3>
+                        <p ng-bind-html="prozedur.uebersichtNot"></p>
+                        <h3 ng-if="prozedur.listImgUebersicht.length" >Bilder</h3>
+                        <div ng-repeat="image in prozedur.listImgUebersicht">  
+                            <h4 ng-bind="image.title"></h4>
+                            <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+                        </div>
 
-							<h3 ng-if="prozedur.uebersichtNot" id="notfall-col">Notfall</h3>
-							<p ng-bind-html="prozedur.uebersichtNot"></p>
-						</div>
-						<div class="tab-pane fade" id="diagnostik">
-							<p ng-bind-html="prozedur.diagnostikTxt"></p>
+                    </div>
+                    <div class="tab-pane fade" id="diagnostik">
+                        <p ng-bind-html="prozedur.diagnostikTxt"></p>
 
-							<h3 ng-if="prozedur.diagnostikNot" id="notfall-col">Notfall</h3>
-							<p ng-bind-html="prozedur.diagnostikNot"></p>
-						</div>
-						<div class="tab-pane fade" id="therapie">
-							<p ng-bind-html="prozedur.therapieTxt"></p>
+                        <h3 ng-if="prozedur.diagnostikNot" id="notfall-col">Notfall</h3>
+                        <p ng-bind-html="prozedur.diagnostikNot"></p>
+                        <h3 ng-if="prozedur.listImgDiagnostik.length" >Bilder</h3>
+                        <div ng-repeat="image in prozedur.listImgDiagnostik">  
+                            <h4 ng-bind="image.title"></h4>
+                            <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="therapie">
+                        <p ng-bind-html="prozedur.therapieTxt"></p>
 
-							<h3 ng-if="prozedur.therapieNot" id="notfall-col">Notfall</h3>
-							<p ng-bind-html="prozedur.therapieNot"></p>
-						</div>
-						<div class="tab-pane fade" id="beratung">
-							<p ng-bind-html="prozedur.beratungTxt"></p>
-							<h3 ng-if="prozedur.beratungNot" id="notfall-col">Notfall</h3>
-							<p ng-bind-html="prozedur.beratungNot"></p>
-						</div>
-						<div class="tab-pane fade" id="notes">
-							<p ng-bind-html="prozedur.notes"></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        <h3 ng-if="prozedur.therapieNot" id="notfall-col">Notfall</h3>
+                        <p ng-bind-html="prozedur.therapieNot"></p>
+                        <h3 ng-if="prozedur.listImgTherapie.length" >Bilder</h3>
+                        <div ng-repeat="image in prozedur.listImgTherapie">  
+                            <h4 ng-bind="image.title"></h4>
+
+                            <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="beratung">
+                        <p ng-bind-html="prozedur.beratungTxt"></p>
+                        <h3 ng-if="prozedur.beratungNot" id="notfall-col">Notfall</h3>
+                        <p ng-bind-html="prozedur.beratungNot"></p>
+                        <h3 ng-if="prozedur.listImgBeratung.length" >Bilder</h3>
+                        <div ng-repeat="image in prozedur.listImgBeratung">  
+                            <h4 ng-bind="image.title"></h4>
+
+                            <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="notes">
+                        <p ng-bind-html="prozedur.notes"></p>
+                        <h3 ng-if="prozedur.listImgNotes.length" >Bilder</h3>
+                        <div ng-repeat="image in prozedur.listImgNotes">  
+                            <h4 ng-bind="image.title"></h4>
+
+                            <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

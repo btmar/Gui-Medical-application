@@ -151,10 +151,10 @@ angular.module('sbAdminApp')
                 imageFile: function (file, title) {
                     var fd = new FormData();
                     fd.append('file', file);
-                    var tit = title;
-                     var Indata = {title:'title',fd:'file'};
+//                    var tit = title;
+//                     var Indata = {title:'title',fd:'file'};
 
-                    return $http.post("http://localhost:8080/image/save/" ,Indata, {
+                    return $http.post("http://localhost:8080/image/save/" + title, fd, {
                         transformRequest: angular.identity,
                         headers: {'Content-Type': undefined}
                     });

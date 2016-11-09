@@ -354,10 +354,10 @@ table.dataTable thead .sorting:after {
 }
 
 #table-prozedur {
-  max-height: 230px;
+    max-height: 230px;
 }
 .selected {
-  background-color: red;
+    background-color: red;
 }
 #btn-margin-top{
     margin-top: 25px;
@@ -372,11 +372,19 @@ table.dataTable thead .sorting:after {
 }
 
 #boite-diag{
-width: 1000px;
+    width: 1000px;
 }
 #notfall-col{
     color: #F82006;
 }
 .ngdialog.ngdialog-theme-default.custom-width-1150 .ngdialog-content {
     width: 1150px;
+}
+#image{
+    width: 20%;
+    height: 20%;
+}
+#imageKr{
+    max-width: 100%;
+    height: auto;
 }

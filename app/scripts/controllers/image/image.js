@@ -29,19 +29,24 @@ myApp.controller('ImageCtrl', function ($scope, serviceAjax, ngDialog) {
 
     $scope.removeItem = function (image) {
         $scope.img = image;
-
         ngDialog.openConfirm({template: 'views/entfernenPopup.html',
             scope: $scope //Pass the scope object if you need to access in the template
         });
     };
 
     $scope.entfernen = function () {
-        var index = $scope.image.indexOf($scope.img);
-        serviceAjax.imageEntfernen($scope.img.title).success(function () {
-            if (index !== -1) {
-                $scope.image.splice(index, 1);
-            }
+        var index = $scope.images.indexOf($scope.img);
+        serviceAjax.deleteImage($scope.img.title).success(function (data) {
             ngDialog.closeAll();
+            if (data === true) {
+                if (index !== -1) {
+                    $scope.images.splice(index, 1);
+                }
+            } else {
+
+                alert("Dieses Bild ist von anderen Standards benutzt !");
+            }
+
         });
     };
 

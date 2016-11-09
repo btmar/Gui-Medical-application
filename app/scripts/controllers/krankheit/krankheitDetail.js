@@ -1,16 +1,16 @@
 angular.module('sbAdminApp')
 
-.controller('KrankheitDetailCtrl', function ($scope, $stateParams, serviceAjax) {
-	var title = $stateParams.title;
-serviceAjax.infoImage("bilel").success(function(data){
-            console.log(data);
-		$scope.image = data.image;
-	});
-	serviceAjax.infoKrankheit(title).success(function(data){
-		$scope.krankheit = data;
-                $scope.html="<img data-ng-src=\"data:image/PNG;base64,{{image}}\">";
+        .controller('KrankheitDetailCtrl', function ($scope, $stateParams, serviceAjax) {
+            var title = $stateParams.title;
 
-	});
+            serviceAjax.infoKrankheit(title).success(function (data) {
+                $scope.krankheit = data;
+
+                var resizeBar = angular.element('h1','h2');
+                console.log(resizeBar);
+
+
+            });
 //        window.onload = function () {
 //            console.log(document.getElementById("contents").innerHTML);
 //    var toc = "";
@@ -49,4 +49,4 @@ serviceAjax.infoImage("bilel").success(function(data){
 //                console.log(toc);
 //
 //};
-});
+        });
