@@ -55,11 +55,11 @@ angular
                                                             "bower_components/angular-toggle-switch/angular-toggle-switch.css"
                                                         ]
                                                     });
-                                            $ocLazyLoad.load(
-                                                    {
-                                                        name: 'ngAnimate',
-                                                        files: ['bower_components/angular-animate/angular-animate.js']
-                                                    });
+                                    $ocLazyLoad.load(
+                                            {
+                                                name: 'ngAnimate',
+                                                files: ['bower_components/angular-animate/angular-animate.js']
+                                            });
                                     $ocLazyLoad.load(
                                             {
                                                 name: 'ngCookies',
@@ -187,7 +187,7 @@ angular
                                 }
                             }
                         })
-                         .state('dashboard.imageDetail', {
+                        .state('dashboard.imageDetail', {
                             templateUrl: 'views/image/imageDetail.html',
                             url: '/image/detail/:title',
                             controller: 'ImageDetailCtrl',
@@ -233,7 +233,7 @@ angular
                                 }
                             }
                         })
-                       
+
                         .state('dashboard.krankheitNotfall', {
                             templateUrl: 'views/krankheit/krankheitNotfall.html',
                             url: '/krankheit/notfall/:title',
@@ -795,7 +795,7 @@ angular.module('sbAdminApp').config(function ($provide) {
     function addImage(image) {
 
 
-        return 'image:'+image.title+'(siehe Bild unten)';
+        return 'Bild:' + image.title + '(siehe Bild unten)';
     }
     $provide.decorator('taOptions', ['taRegisterTool', 'serviceAjax', '$delegate', '$uibModal', function (taRegisterTool, serviceAjax, taOptions, $uibModal, $scope) {
             taRegisterTool('image', {
@@ -805,7 +805,62 @@ angular.module('sbAdminApp').config(function ($provide) {
                     var that = this;
                     var uibModalInstance = $uibModal.open({
                         templateUrl: 'views/image/popup.html',
-                        controller: function ($scope, $http, $uibModalInstance, serviceAjax) {
+                        controller: function ($state, $scope, ngDialog, serviceAjax, Upload, $timeout, $http, $uibModalInstance) {
+                            $scope.$watch('files', function () {
+                                $scope.upload($scope.files);
+                            });
+                            $scope.$watch('file', function () {
+                                if ($scope.file !== null) {
+                                    $scope.files = [$scope.file];
+                                }
+                            });
+                            $scope.log = '';
+                            $scope.upload = function (files) {
+                                if (files && files.length) {
+                                    for (var i = 0; i < files.length; i++) {
+                                        var file = files[i];
+                                        if (file !== undefined) {
+                                            Upload.upload({
+                                                url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                                                data: {
+                                                    title: $scope.title,
+                                                    file: file
+                                                }
+                                            }).then(function (resp) {
+                                                $scope.file = file;
+                                                $timeout(function () {
+                                                    $scope.log = 'file: ' +
+                                                            resp.config.data.file.name +
+                                                            ', Response: ' + JSON.stringify(resp.data) +
+                                                            '\n' + $scope.log;
+                                                });
+                                            }, null, function (evt) {
+                                                var progressPercentage = parseInt(100.0 *
+                                                        evt.loaded / evt.total);
+                                                $scope.log = 'progress: ' + progressPercentage +
+                                                        '% ' + evt.config.data.file.name + '\n' +
+                                                        $scope.log;
+                                            });
+                                        }
+                                    }
+                                }
+
+                            };
+                            $scope.update = function () {
+
+                                serviceAjax.imageFile($scope.file, $scope.title).success(function (data) {
+                                    if (data === "") {
+                                        $scope.fehler = "Datei nicht geeignet";
+                                        ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                                            scope: $scope //Pass the scope object if you need to access in the template
+                                        });
+                                    } else {
+                                        $scope.image = data;
+                                        console.log($scope.image);
+                                        $uibModalInstance.close($scope.image);
+                                    }
+                                });
+                            };
                             $scope.invitation = {};
                             serviceAjax.QueryImage().success(function (data) {
                                 $scope.images = data;
@@ -827,7 +882,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                                     $scope.currentPageK = 1;
                                 };
                             });
-                           
+
                             $scope.ok = function () {
                                 $uibModalInstance.close($scope.image);
                             };
@@ -837,7 +892,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                                 $scope.image = image;
                                 $uibModalInstance.close($scope.image);
                             };
-                           
+
                             $scope.cancel = function () {
                                 $uibModalInstance.dismiss('cancel');
                             };
