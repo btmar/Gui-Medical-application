@@ -24,10 +24,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="version in (versions| filter:search).slice(((currentPageK - 1) * itemsPerPageK), ((currentPageK) * itemsPerPageK))">
+                    <!--<tr ng-repeat="version in (versions| filter:search).slice(((currentPageK - 1) * itemsPerPageK), ((currentPageK) * itemsPerPageK))">-->
+                    <tr dir-paginate="version in versions| filter:search|itemsPerPage:10"current-page="currentPageK" pagination-id="2">
                         <td ng-bind="version"></td>
-
-
                         <td>
                             <button type="button" ng-click="listVersion(version)" class="btn btn-primary btn-circle">
                                 <i class="fa fa-list"></i>
@@ -36,8 +35,15 @@
                     </tr>
                 </tbody>
             </table>
-            <uib-pagination total-items="totalItemsK" ng-model="currentPageK" max-size="maxSizeK" class="pagination-sm" boundary-link-numbers="true"style="
-                            margin-left: 20%;"></uib-pagination>
+            <!--            <uib-pagination total-items="totalItemsK" ng-model="currentPageK" max-size="maxSizeK" class="pagination-sm" boundary-link-numbers="true"style="
+                                        margin-left: 20%;"></uib-pagination>-->
+            <dir-pagination-controls
+                max-size="5"
+                direction-links="true"
+                boundary-links="true"
+                pagination-id="2"
+                style="margin-left: 30%;">
+            </dir-pagination-controls>
         </div>
         <div ng-if="medikaments" class="row">
             <div class="col-md-12">
@@ -66,7 +72,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="medikament in (medikaments| filter:searchMedikament).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">
+                    <!--<tr ng-repeat="medikament in (medikaments| filter:searchMedikament).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">-->
+                    <tr dir-paginate="medikament in medikaments| filter:searchMedikament|itemsPerPage:10"current-page="currentPageM" pagination-id="1">
                         <td ng-bind="medikament.pzn"></td>
                         <td ng-bind="medikament.bezeichnung"></td>
                         <td ng-bind="medikament.einheit"></td>
@@ -88,8 +95,15 @@
                     </tr>
                 </tbody>
             </table>
-            <uib-pagination total-items="totalItemsM" ng-model="currentPageM" max-size="maxSizeM" class="pagination-sm" boundary-link-numbers="true"style="
-                            margin-left: 20%;"></uib-pagination>
+            <!--            <uib-pagination total-items="totalItemsM" ng-model="currentPageM" max-size="maxSizeM" class="pagination-sm" boundary-link-numbers="true"style="
+                                        margin-left: 20%;"></uib-pagination>-->
+            <dir-pagination-controls
+                max-size="5"
+                direction-links="true"
+                boundary-links="true"
+                pagination-id="1"
+                style="margin-left: 30%;">
+            </dir-pagination-controls>
         </div>
     </div>
 </div>

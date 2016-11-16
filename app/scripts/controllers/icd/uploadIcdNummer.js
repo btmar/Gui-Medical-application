@@ -186,24 +186,7 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
                     $scope.new2 = data.new;
                     if ($scope.new2.length !== 0) {
                         $scope.new = data.new;
-                        $scope.viewbyM = 10;
-                        $scope.totalItemsM = $scope.new.length;
                         $scope.currentPageM = 1;
-                        $scope.itemsPerPageM = $scope.viewbyM;
-                        $scope.maxSizeM = 5;
-
-                        $scope.setPageM = function (pageNo) {
-                            $scope.currentPageM = pageNo;
-                        };
-
-                        $scope.pageChangedM = function () {
-                            console.log('Page changed to: ' + $scope.currentPageM);
-                        };
-
-                        $scope.setItemsPerPageM = function (num) {
-                            $scope.itemsPerPageM = num;
-                            $scope.currentPageM = 1;
-                        };
                     }
                     else {
                         $scope.new = null;
@@ -229,24 +212,8 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
                     $scope.deleted2 = data.deleted;
                     if ($scope.deleted2.length !== 0) {
                         $scope.deleted = data.deleted;
-                        $scope.viewbyD = 10;
-                        $scope.totalItemsD = $scope.deleted.length;
                         $scope.currentPageD = 1;
-                        $scope.itemsPerPageD = $scope.viewbyD;
-                        $scope.maxSizeD = 5;
-
-                        $scope.setPageM = function (pageNo) {
-                            $scope.currentPageD = pageNo;
-                        };
-
-                        $scope.pageChangedD = function () {
-                            console.log('Page changed to: ' + $scope.currentPageD);
-                        };
-
-                        $scope.setItemsPerPageM = function (num) {
-                            $scope.itemsPerPageD = num;
-                            $scope.currentPageD = 1;
-                        };
+                       
 
                         serviceAjax.icdnummerListUsed($scope.deleted).success(function (data) {
                             $scope.icd2 = data;

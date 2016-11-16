@@ -550,7 +550,6 @@ angular
 
 angular.module('sbAdminApp').config(function ($provide) {
     function createTable(colCount, rowCount) {
-        console.log(colCount);
         var tds = "";
         for (var idxCol = 0; idxCol < colCount; idxCol++) {
             tds = tds + "<td>&nbsp;</td>";
@@ -587,7 +586,6 @@ angular.module('sbAdminApp').config(function ($provide) {
                     //define result modal , when user complete result information 
                     uibModalInstance.result.then(function (result) {
                         if (result) {
-                            console.log(result);
                             restoreSelection();
                             var html = createTable(result.col, result.row);
                             promise.resolve();
@@ -606,7 +604,6 @@ angular.module('sbAdminApp').config(function ($provide) {
 
 angular.module('sbAdminApp').config(function ($provide) {
     function createExternalLink(link) {
-        console.log(link);
         if (link[0] !== null) {
 
             return '<a href=/#/dashboard/krankheit/detail/' + link[0].split(" ").join("%20") + '>' + link[0] + ' </a> ';
@@ -635,133 +632,58 @@ angular.module('sbAdminApp').config(function ($provide) {
                             $scope.invitation = {};
                             serviceAjax.krank().success(function (data) {
                                 $scope.krankheits = data;
-                                $scope.viewbyK = 10;
-                                $scope.totalItemsK = $scope.krankheits.length;
                                 $scope.currentPageK = 1;
-                                $scope.itemsPerPageK = $scope.viewbyK;
-                                $scope.maxSizeK = 5;
-                                $scope.setPageK = function (pageNoK) {
-                                    $scope.currentPageK = pageNoK;
-                                };
-
-                                $scope.pageChangedK = function () {
-                                    console.log('Page changed to: ' + $scope.currentPageK);
-                                };
-
-                                $scope.setItemsPerPageK = function (num) {
-                                    $scope.itemsPerPageK = num;
-                                    $scope.currentPageK = 1;
-                                };
                             });
                             serviceAjax.prozed().success(function (data) {
                                 $scope.prozedurs = data;
-                                $scope.viewbyP = 10;
-                                $scope.totalItemsP = $scope.prozedurs.length;
                                 $scope.currentPageP = 1;
-                                $scope.itemsPerPageP = $scope.viewbyP;
-                                $scope.maxSizeP = 5;
-
-                                $scope.setPageP = function (pageNoP) {
-                                    $scope.currentPageP = pageNoP;
-                                };
-
-                                $scope.pageChangedP = function () {
-                                    console.log('Page changed to: ' + $scope.currentPageP);
-                                };
-
-                                $scope.setItemsPerPageP = function (num) {
-                                    $scope.itemsPerPageP = num;
-                                    $scope.currentPageP = 1;
-                                };
 
                             });
                             serviceAjax.icdRead().success(function (data) {
                                 $scope.icds = data;
-                                $scope.viewbyG = 10;
-                                $scope.totalItemsG = $scope.icds.length;
                                 $scope.currentPageG = 1;
-                                $scope.itemsPerPageG = $scope.viewbyG;
-                                $scope.maxSizeG = 5;
-
-                                $scope.setPageG = function (pageNo) {
-                                    $scope.currentPageG = pageNo;
-                                };
-
-                                $scope.pageChangedG = function () {
-                                    console.log('Page changed to: ' + $scope.currentPageG);
-                                };
-
-                                $scope.setItemsPerPageG = function (num) {
-                                    $scope.itemsPerPageG = num;
-                                    $scope.currentPageG = 1;
-                                };
                             });
                             serviceAjax.medikamentRead().success(function (data) {
                                 $scope.medikaments = data;
-                                $scope.viewbyM = 10;
-                                $scope.totalItemsM = $scope.medikaments.length;
                                 $scope.currentPageM = 1;
-                                $scope.itemsPerPageM = $scope.viewbyM;
-                                $scope.maxSizeM = 5;
-
-                                $scope.setPageM = function (pageNo) {
-                                    $scope.currentPageM = pageNo;
-                                };
-
-                                $scope.pageChangedM = function () {
-                                    console.log('Page changed to: ' + $scope.currentPageM);
-                                };
-
-                                $scope.setItemsPerPageM = function (num) {
-                                    $scope.itemsPerPageM = num;
-                                    $scope.currentPageM = 1;
-                                };
                             });
                             $scope.ok = function () {
                                 $uibModalInstance.close($scope.link);
                             };
 
                             $scope.checkKrankheitlink = function (krankheit) {
-                                console.log(krankheit);
                                 var reg = [];
                                 reg[0] = krankheit.title;
                                 reg[1] = null;
                                 reg[2] = null;
-                                console.log(reg);
 
                                 $scope.link = reg;
                                 $uibModalInstance.close($scope.link);
                             };
                             $scope.checkProzedurlink = function (prozedur) {
-                                console.log(prozedur);
                                 var reg = [];
                                 reg[0] = null;
                                 reg[1] = prozedur.title;
                                 reg[2] = null;
-                                console.log(reg);
 
                                 $scope.link = reg;
                                 $uibModalInstance.close($scope.link);
                             };
                             $scope.checkICDlink = function (icd) {
-                                console.log(icd);
                                 var reg = [];
                                 reg[0] = null;
                                 reg[1] = null;
                                 reg[2] = icd.code;
-                                console.log(reg);
 
                                 $scope.link = reg;
                                 $uibModalInstance.close($scope.link);
                             };
                             $scope.checkMedikamentlink = function (medikament) {
-                                console.log(medikament);
                                 var reg = [];
                                 reg[0] = null;
                                 reg[1] = null;
                                 reg[2] = null;
                                 reg[3] = medikament;
-                                console.log(reg);
 
                                 $scope.link = reg;
                                 $uibModalInstance.close($scope.link);
@@ -776,7 +698,6 @@ angular.module('sbAdminApp').config(function ($provide) {
                     //define result modal , when user complete result information 
                     uibModalInstance.result.then(function (result) {
                         if (result) {
-                            console.log(result);
                             restoreSelection();
                             var html = createExternalLink(result);
                             promise.resolve();
@@ -856,7 +777,6 @@ angular.module('sbAdminApp').config(function ($provide) {
                                         });
                                     } else {
                                         $scope.image = data;
-                                        console.log($scope.image);
                                         $uibModalInstance.close($scope.image);
                                     }
                                 });
@@ -864,23 +784,8 @@ angular.module('sbAdminApp').config(function ($provide) {
                             $scope.invitation = {};
                             serviceAjax.QueryImage().success(function (data) {
                                 $scope.images = data;
-                                $scope.viewbyK = 10;
-                                $scope.totalItemsK = $scope.images.length;
                                 $scope.currentPageK = 1;
-                                $scope.itemsPerPageK = $scope.viewbyK;
-                                $scope.maxSizeK = 5;
-                                $scope.setPageK = function (pageNoK) {
-                                    $scope.currentPageK = pageNoK;
-                                };
-
-                                $scope.pageChangedK = function () {
-                                    console.log('Page changed to: ' + $scope.currentPageK);
-                                };
-
-                                $scope.setItemsPerPageK = function (num) {
-                                    $scope.itemsPerPageK = num;
-                                    $scope.currentPageK = 1;
-                                };
+                                
                             });
 
                             $scope.ok = function () {
@@ -888,7 +793,6 @@ angular.module('sbAdminApp').config(function ($provide) {
                             };
 
                             $scope.checkImageLink = function (image) {
-                                console.log(image);
                                 $scope.image = image;
                                 $uibModalInstance.close($scope.image);
                             };
@@ -903,7 +807,6 @@ angular.module('sbAdminApp').config(function ($provide) {
                     //define result modal , when user complete result information 
                     uibModalInstance.result.then(function (result) {
                         if (result) {
-                            console.log(result);
                             restoreSelection();
                             var html = addImage(result);
                             promise.resolve();

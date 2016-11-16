@@ -9,21 +9,7 @@ myApp.controller('ImageCtrl', function ($scope, serviceAjax, ngDialog) {
         $scope.images = [];
         serviceAjax.QueryImage().success(function (data) {
             $scope.images = data;
-            $scope.viewbyK = 10;
-            $scope.totalItemsK = $scope.images.length;
             $scope.currentPageK = 1;
-            $scope.itemsPerPageK = $scope.viewbyK;
-            $scope.maxSizeK = 5;
-            $scope.setPageK = function (pageNoK) {
-                $scope.currentPageK = pageNoK;
-            };
-            $scope.pageChangedK = function () {
-                console.log('Page changed to: ' + $scope.currentPageK);
-            };
-            $scope.setItemsPerPageK = function (num) {
-                $scope.itemsPerPageK = num;
-                $scope.currentPageK = 1;
-            };
         });
     };
 

@@ -100,7 +100,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in (new | filter:searchNew).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">
+                            <!--<tr ng-repeat="item in (new | filter:searchNew).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">-->
+                            <tr dir-paginate="item in new| filter:searchNew|itemsPerPage:10"current-page="currentPageM" pagination-id="2">
+
                                 <td ng-bind="item.pzn"></td>
                                 <td ng-bind="item.bezeichnung"></td>
                                 <td ng-bind="item.einheit"></td>
@@ -111,8 +113,15 @@
                             </tr>
                         </tbody>
                     </table>
-                    <uib-pagination total-items="totalItemsM" ng-model="currentPageM" max-size="maxSizeM" class="pagination-sm" boundary-link-numbers="true"style="
-                                    margin-left: 20%;"></uib-pagination>
+                    <!--                    <uib-pagination total-items="totalItemsM" ng-model="currentPageM" max-size="maxSizeM" class="pagination-sm" boundary-link-numbers="true"style="
+                                                        margin-left: 20%;"></uib-pagination>-->
+                    <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true"
+                        pagination-id="2"
+                        style="margin-left: 30%;">
+                    </dir-pagination-controls>
                 </div>
             </div>
         </div>
@@ -145,7 +154,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="itemDeleted in (deleted| filter:searchDeleted).slice(((currentPageD - 1) * itemsPerPageD), ((currentPageD) * itemsPerPageD))">
+                            <!--<tr ng-repeat="itemDeleted in (deleted| filter:searchDeleted).slice(((currentPageD - 1) * itemsPerPageD), ((currentPageD) * itemsPerPageD))">-->
+                            <tr dir-paginate="itemDeleted in deleted| filter:searchDeleted|itemsPerPage:10"current-page="currentPageD" pagination-id="3">
                                 <td ng-bind="itemDeleted.pzn"></td>
                                 <td ng-bind="itemDeleted.bezeichnung"></td>
                                 <td ng-bind="itemDeleted.einheit"></td>
@@ -155,8 +165,15 @@
                             </tr>
                         </tbody>
                     </table>
-                    <uib-pagination total-items="totalItemsD" ng-model="currentPageD" max-size="maxSizeD" class="pagination-sm" boundary-link-numbers="true"style="
-                                    margin-left: 20%;"></uib-pagination>
+                    <!--                    <uib-pagination total-items="totalItemsD" ng-model="currentPageD" max-size="maxSizeD" class="pagination-sm" boundary-link-numbers="true"style="
+                                                        margin-left: 20%;"></uib-pagination>-->
+                    <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true"
+                        pagination-id="3"
+                        style="margin-left: 30%;">
+                    </dir-pagination-controls>
                 </div>
             </div>
         </div>
@@ -190,7 +207,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="item in bezeichnung | filter:searchbezeichnung|itemsPerPage:10"current-page="currentPageB" pagination-id="2">
+                            <tr dir-paginate="item in bezeichnung | filter:searchbezeichnung|itemsPerPage:10"current-page="currentPageB" pagination-id="4">
                                 <td ng-bind="item.pzn"></td>
                                 <td ng-bind="item.bezeichnung"></td>
                                 <td ng-bind="item.einheit"></td>
@@ -205,7 +222,7 @@
                         max-size="5"
                         direction-links="true"
                         boundary-links="true"
-                        pagination-id="2"
+                        pagination-id="4"
                         style="margin-left: 30%;">
                     </dir-pagination-controls>
                 </div>
@@ -241,7 +258,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="item in einheit | filter:searcheinheit|itemsPerPage:10"current-page="currentPageE" pagination-id="1">
+                            <tr dir-paginate="item in einheit | filter:searcheinheit|itemsPerPage:10"current-page="currentPageE" pagination-id="5">
                                 <td ng-bind="item.pzn"></td>
                                 <td ng-bind="item.bezeichnung"></td>
                                 <td ng-bind="item.einheit"></td>
@@ -256,7 +273,7 @@
                         max-size="5"
                         direction-links="true"
                         boundary-links="true"
-                        pagination-id="1"
+                        pagination-id="5"
                         style="margin-left: 30%;">
                     </dir-pagination-controls>
                 </div>
@@ -292,7 +309,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="item in roteListe | filter:searchroteListe|itemsPerPage:10"current-page="currentPageR" pagination-id="3">
+                            <tr dir-paginate="item in roteListe | filter:searchroteListe|itemsPerPage:10"current-page="currentPageR" pagination-id="6">
                                 <td ng-bind="item.pzn"></td>
                                 <td ng-bind="item.bezeichnung"></td>
                                 <td ng-bind="item.einheit"></td>
@@ -307,7 +324,7 @@
                         max-size="5"
                         direction-links="true"
                         boundary-links="true"
-                        pagination-id="3"
+                        pagination-id="6"
                         style="margin-left: 30%;">
                     </dir-pagination-controls>
                 </div>
@@ -343,7 +360,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="item in inhaltsstoff | filter:searchinhaltsstoff|itemsPerPage:10"current-page="currentPageI" pagination-id="4">
+                            <tr dir-paginate="item in inhaltsstoff | filter:searchinhaltsstoff|itemsPerPage:10"current-page="currentPageI" pagination-id="7">
                                 <td ng-bind="item.pzn"></td>
                                 <td ng-bind="item.bezeichnung"></td>
                                 <td ng-bind="item.einheit"></td>
@@ -358,7 +375,7 @@
                         max-size="5"
                         direction-links="true"
                         boundary-links="true"
-                        pagination-id="4"
+                        pagination-id="7"
                         style="margin-left: 30%;">
                     </dir-pagination-controls>
                 </div>

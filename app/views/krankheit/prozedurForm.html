@@ -20,10 +20,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="prozedur in (prozedurs | filter:searchTitle).slice(((currentPageP-1)*itemsPerPageP), ((currentPageP)*itemsPerPageP))">
+                    <!--<tr ng-repeat="prozedur in (prozedurs | filter:searchTitle).slice(((currentPageP-1)*itemsPerPageP), ((currentPageP)*itemsPerPageP))">-->
+                    <tr dir-paginate="prozedur in prozedurs| filter:searchTitle|itemsPerPage:10"current-page="currentPageP" pagination-id="1">
+
                         <td ng-bind="prozedur.title"></td>
 
-                        
+
                         <td>
                             <button type="button" ng-click="checkProzedur(prozedur)" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
                         </td>
@@ -31,7 +33,14 @@
                 </tbody>
             </table>
         </div>
-        <uib-pagination total-items="totalItemsP" ng-model="currentPageP" max-size="maxSizeP" class="pagination-sm" boundary-link-numbers="true" style="
-        margin-left: 20%;"></uib-pagination>     
+        <!--        <uib-pagination total-items="totalItemsP" ng-model="currentPageP" max-size="maxSizeP" class="pagination-sm" boundary-link-numbers="true" style="
+                margin-left: 20%;"></uib-pagination>     -->
+        <dir-pagination-controls
+            max-size="5"
+            direction-links="true"
+            boundary-links="true"
+            pagination-id="1"
+            style="margin-left: 30%;">
+        </dir-pagination-controls>
     </div>
 </div>

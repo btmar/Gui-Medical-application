@@ -45,24 +45,7 @@ angular.module('sbAdminApp')
 
                 serviceAjax.prozed().success(function (data) {
                     $scope.prozedurs = data;
-                    $scope.viewbyP = 10;
-                    $scope.totalItemsP = $scope.prozedurs.length;
                     $scope.currentPageP = 1;
-                    $scope.itemsPerPageP = $scope.viewbyP;
-                    $scope.maxSizeP = 5;
-
-                    $scope.setPageP = function (pageNoP) {
-                        $scope.currentPageP = pageNoP;
-                    };
-
-                    $scope.pageChangedP = function () {
-                        console.log('Page changed to: ' + $scope.currentPageP);
-                    };
-
-                    $scope.setItemsPerPageP = function (num) {
-                        $scope.itemsPerPageP = num;
-                        $scope.currentPageP = 1;
-                    };
 
 
                 });
