@@ -16,7 +16,7 @@ angular.module('sbAdminApp')
             $scope.removeItem = function (prozedur) {
                 $scope.pr = prozedur;
 
-                ngDialog.openConfirm({template: 'views/entfernenPopup.html',
+                ngDialog.openConfirm({template: 'views/popup/entfernenPopup.html',
                     scope: $scope //Pass the scope object if you need to access in the template
                 });
             };

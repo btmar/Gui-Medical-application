@@ -18,7 +18,7 @@ app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
 
         $scope.med = medikament;
 
-        ngDialog.openConfirm({template: 'views/entfernenPopup.html',
+        ngDialog.openConfirm({template: 'views/popup/entfernenPopup.html',
             scope: $scope //Pass the scope object if you need to access in the template
         });
     };

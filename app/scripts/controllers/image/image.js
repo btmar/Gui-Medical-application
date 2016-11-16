@@ -15,7 +15,7 @@ myApp.controller('ImageCtrl', function ($scope, serviceAjax, ngDialog) {
 
     $scope.removeItem = function (image) {
         $scope.img = image;
-        ngDialog.openConfirm({template: 'views/entfernenPopup.html',
+        ngDialog.openConfirm({template: 'views/popup/entfernenPopup.html',
             scope: $scope //Pass the scope object if you need to access in the template
         });
     };

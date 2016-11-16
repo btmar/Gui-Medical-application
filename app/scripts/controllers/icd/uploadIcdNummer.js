@@ -23,7 +23,7 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
 
         $scope.saveIcd = item;
 
-        ngDialog.openConfirm({template: 'views/addedPopup.html',
+        ngDialog.openConfirm({template: 'views/popup/addedPopup.html',
             scope: $scope //Pass the scope object if you need to access in the template
         });
     };

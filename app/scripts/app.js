@@ -174,7 +174,7 @@ angular
                         })
                         .state('dashboard.image', {
                             url: '/image',
-                            templateUrl: 'views/image.html',
+                            templateUrl: 'views/image/image.html',
                             controller: 'ImageCtrl',
                             resolve: {
                                 loadMyFiles: function ($ocLazyLoad) {
@@ -386,7 +386,7 @@ angular
                             }
                         })
                         .state('dashboard.search', {
-                            templateUrl: 'views/search.html',
+                            templateUrl: 'views/search/search.html',
                             url: '/search/:searchWord',
                             controller: 'SearchCtrl',
                             resolve: {
@@ -401,7 +401,7 @@ angular
                             }
                         })
                         .state('dashboard.krankheit', {
-                            templateUrl: 'views/krankheit.html',
+                            templateUrl: 'views/krankheit/krankheit.html',
                             url: '/krankheit',
                             controller: 'KrankheitCtrl',
                             resolve: {
@@ -415,12 +415,8 @@ angular
                             }
 
                         })
-                        .state('dashboard.test', {
-                            templateUrl: 'views/test.html',
-                            url: '/test'
-                        })
                         .state('dashboard.prozedur', {
-                            templateUrl: 'views/prozedur.html',
+                            templateUrl: 'views/prozedur/prozedur.html',
                             url: '/prozedur',
                             controller: 'ProzedurCtrl',
                             resolve: {
@@ -568,7 +564,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                 action: function (promise, restoreSelection) {
                     var that = this;
                     var uibModalInstance = $uibModal.open({
-                        templateUrl: 'views/table.html',
+                        templateUrl: 'views/tablePopup.html',
                         controller: function ($scope, $uibModalInstance) {
                             $scope.invitation = {};
                             $scope.ok = function () {
@@ -627,7 +623,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                 action: function (promise, restoreSelection) {
                     var that = this;
                     var uibModalInstance = $uibModal.open({
-                        templateUrl: 'views/krankheit/popup.html',
+                        templateUrl: 'views/popup/linkPopup.html',
                         controller: function ($scope, $http, $uibModalInstance, serviceAjax) {
                             $scope.invitation = {};
                             serviceAjax.krank().success(function (data) {
@@ -725,7 +721,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                 action: function (promise, restoreSelection) {
                     var that = this;
                     var uibModalInstance = $uibModal.open({
-                        templateUrl: 'views/image/popup.html',
+                        templateUrl: 'views/popup/imagePopup.html',
                         controller: function ($state, $scope, ngDialog, serviceAjax, Upload, $timeout, $http, $uibModalInstance) {
                             $scope.$watch('files', function () {
                                 $scope.upload($scope.files);

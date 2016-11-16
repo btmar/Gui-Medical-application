@@ -36,7 +36,7 @@ app.controller('IcdNummernCtrl', function ($scope, ngDialog, serviceAjax) {
 
         $scope.icdnummer = icdnummer;
 
-        ngDialog.openConfirm({template: 'views/entfernenPopup.html',
+        ngDialog.openConfirm({template: 'views/popup/entfernenPopup.html',
             scope: $scope //Pass the scope object if you need to access in the template
         });
     };
