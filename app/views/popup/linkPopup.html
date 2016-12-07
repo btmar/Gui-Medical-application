@@ -33,7 +33,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="krankheit in (krankheits| filter:searchKrankheit).slice(((currentPageK - 1) * itemsPerPageK), ((currentPageK) * itemsPerPageK))">
+                        <!--<tr ng-repeat="krankheit in (krankheits| filter:searchKrankheit).slice(((currentPageK - 1) * itemsPerPageK), ((currentPageK) * itemsPerPageK))">-->
+                        <tr dir-paginate="krankheit in krankheits| filter:searchKrankheit|itemsPerPage:10"current-page="currentPageK" pagination-id="1">
+
                             <td ng-bind="krankheit.title"></td>
 
 
@@ -43,8 +45,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <uib-pagination total-items="totalItemsK" ng-model="currentPageK" max-size="maxSizeK" class="pagination-sm" boundary-link-numbers="true"style="
-                                margin-left: 30%;"></uib-pagination>
+                <!--                <uib-pagination total-items="totalItemsK" ng-model="currentPageK" max-size="maxSizeK" class="pagination-sm" boundary-link-numbers="true"style="
+                                                margin-left: 30%;"></uib-pagination>-->
+                <dir-pagination-controls
+                    max-size="5"
+                    direction-links="true"
+                    boundary-links="true"
+                    pagination-id="1"
+                    style="margin-left: 30%;">
+                </dir-pagination-controls>
 
             </div>
 
@@ -68,7 +77,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="prozedur in (prozedurs| filter:searchTitle).slice(((currentPageP - 1) * itemsPerPageP), ((currentPageP) * itemsPerPageP))">
+                            <!--<tr ng-repeat="prozedur in (prozedurs| filter:searchTitle).slice(((currentPageP - 1) * itemsPerPageP), ((currentPageP) * itemsPerPageP))">-->
+                            <tr dir-paginate="prozedur in prozedurs| filter:searchTitle|itemsPerPage:10"current-page="currentPageP" pagination-id="2">
+
                                 <td ng-bind="prozedur.title"></td>
                                 <td>
                                     <button type="button" ng-click="checkProzedurlink(prozedur)" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
@@ -78,8 +89,15 @@
                     </table>
 
                 </div>
-                <uib-pagination total-items="totalItemsP" ng-model="currentPageP" max-size="maxSizeP" class="pagination-sm" boundary-link-numbers="true" style="
-                                margin-left: 30%;"></uib-pagination>
+                <!--                <uib-pagination total-items="totalItemsP" ng-model="currentPageP" max-size="maxSizeP" class="pagination-sm" boundary-link-numbers="true" style="
+                                                margin-left: 30%;"></uib-pagination>-->
+                <dir-pagination-controls
+                    max-size="5"
+                    direction-links="true"
+                    boundary-links="true"
+                    pagination-id="2"
+                    style="margin-left: 30%;">
+                </dir-pagination-controls>
             </div>
             <div class="tab-pane fade" id="ICD-Nummer">
                 <div id="table-icd" class="table-responsive">
@@ -102,7 +120,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="icd in (icds| filter:searchIcd).slice(((currentPageG - 1) * itemsPerPageG), ((currentPageG) * itemsPerPageG))">
+                            <!--<tr ng-repeat="icd in (icds| filter:searchIcd).slice(((currentPageG - 1) * itemsPerPageG), ((currentPageG) * itemsPerPageG))">-->
+                            <tr dir-paginate="icd in icds| filter:searchIcd|itemsPerPage:10"current-page="currentPageG" pagination-id="3">       
                                 <td ng-bind="icd.code"></td>
                                 <td ng-bind="icd.diagnose"></td>
 
@@ -112,8 +131,15 @@
                             </tr>
                         </tbody>
                     </table>
-                    <uib-pagination total-items="totalItemsG" ng-model="currentPageG" max-size="maxSizeG" class="pagination-sm" boundary-link-numbers="true"style="
-                                    margin-left: 20%;"></uib-pagination>
+                    <!--                    <uib-pagination total-items="totalItemsG" ng-model="currentPageG" max-size="maxSizeG" class="pagination-sm" boundary-link-numbers="true"style="
+                                                        margin-left: 20%;"></uib-pagination>-->
+                    <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true"
+                        pagination-id="3"
+                        style="margin-left: 30%;">
+                    </dir-pagination-controls>
                 </div>
             </div>
             <div class="tab-pane fade" id="Medikament">
@@ -139,7 +165,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="medikament in (medikaments| filter:searchMedikament).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">
+                            <!--<tr ng-repeat="medikament in (medikaments| filter:searchMedikament).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">-->
+                            <tr dir-paginate="medikament in medikaments| filter:searchMedikament|itemsPerPage:10"current-page="currentPageM" pagination-id="4">
                                 <td ng-bind="medikament.pzn"></td>
                                 <td ng-bind="medikament.bezeichnung"></td>
                                 <td ng-bind="medikament.einheit"></td>
@@ -153,8 +180,15 @@
                             </tr>
                         </tbody>
                     </table>
-                    <uib-pagination total-items="totalItemsM" ng-model="currentPageM" max-size="maxSizeM" class="pagination-sm" boundary-link-numbers="true"style="
-                                    margin-left: 20%;"></uib-pagination>
+                    <!--                    <uib-pagination total-items="totalItemsM" ng-model="currentPageM" max-size="maxSizeM" class="pagination-sm" boundary-link-numbers="true"style="
+                                                        margin-left: 20%;"></uib-pagination>-->
+                    <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true"
+                        pagination-id="4"
+                        style="margin-left: 30%;">
+                    </dir-pagination-controls>
                 </div>
 
             </div>

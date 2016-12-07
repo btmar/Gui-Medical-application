@@ -1,6 +1,14 @@
 {
-    "elements": {},
+    "elements": {
+        "dir-pagination-controls": {
+            "attributes": {
+                "max-size": {}
+            }
+        }
+    },
     "attributes": {
+        "boundary-links": {},
+        "dir-paginate": {},
         "ui-sref": {
             "context": "a"
         }

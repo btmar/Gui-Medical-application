@@ -107,7 +107,6 @@ angular.module('sbAdminApp')
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 })
-
             },
             icdRead: function () {
                 return $http.get(apiServer + "/icd/query");
@@ -173,6 +172,5 @@ angular.module('sbAdminApp')
             QueryImage: function () {
                 return $http.get(apiServer + "/image/query");
             }
-
         };
     });

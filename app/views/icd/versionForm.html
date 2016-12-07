@@ -13,8 +13,6 @@
         <div class="tab-content">
             <div class="tab-pane fade in active" id="krankheit">
                 <div ng-if="krankheits" >
-                    <div class="col-lg-12">
-
                         <ul class="list-unstyled">
                             <li dir-paginate="krankheit in krankheits|itemsPerPage:1"current-page="currentPageK" pagination-id="1">
                                 <div class="header"> <strong class="primary-font"><h2 id="notfall-col" ng-bind="krankheit.title"></h2></strong>  </div>
@@ -32,7 +30,7 @@
                             pagination-id="1"
                             style="margin-left: 30%;">
                         </dir-pagination-controls>
-                    </div>
+                    
                 </div>
             </div>
             <div class="tab-pane fade" id="prozedur">

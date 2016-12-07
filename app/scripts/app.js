@@ -55,11 +55,11 @@ angular
                                                             "bower_components/angular-toggle-switch/angular-toggle-switch.css"
                                                         ]
                                                     });
-                                            $ocLazyLoad.load(
-                                                    {
-                                                        name: 'ngAnimate',
-                                                        files: ['bower_components/angular-animate/angular-animate.js']
-                                                    });
+                                    $ocLazyLoad.load(
+                                            {
+                                                name: 'ngAnimate',
+                                                files: ['bower_components/angular-animate/angular-animate.js']
+                                            });
                                     $ocLazyLoad.load(
                                             {
                                                 name: 'ngCookies',
@@ -174,7 +174,7 @@ angular
                         })
                         .state('dashboard.image', {
                             url: '/image',
-                            templateUrl: 'views/image.html',
+                            templateUrl: 'views/image/image.html',
                             controller: 'ImageCtrl',
                             resolve: {
                                 loadMyFiles: function ($ocLazyLoad) {
@@ -187,7 +187,7 @@ angular
                                 }
                             }
                         })
-                         .state('imageDetail', {
+                        .state('dashboard.imageDetail', {
                             templateUrl: 'views/image/imageDetail.html',
                             url: '/image/detail/:title',
                             controller: 'ImageDetailCtrl',
@@ -233,7 +233,7 @@ angular
                                 }
                             }
                         })
-                       
+
                         .state('dashboard.krankheitNotfall', {
                             templateUrl: 'views/krankheit/krankheitNotfall.html',
                             url: '/krankheit/notfall/:title',
@@ -245,7 +245,7 @@ angular
                                         files: [
                                             'scripts/controllers/krankheit/krankheitDetail.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -260,7 +260,7 @@ angular
                                         files: [
                                             'scripts/controllers/medikament/medikament.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -275,7 +275,7 @@ angular
                                         files: [
                                             'scripts/controllers/medikament/medikamentDetail.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -290,7 +290,7 @@ angular
                                         files: [
                                             'scripts/controllers/medikament/medikamentBearbeiten.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -305,7 +305,7 @@ angular
                                         files: [
                                             'scripts/controllers/medikament/medikamentVersion.js'
                                         ]
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -319,7 +319,7 @@ angular
                                         name: 'sbAdminApp',
                                         files: [
                                             'scripts/controllers/medikament/medikamentHinzufuegen.js']
-                                    })
+                                    });
                                 }
                             }
                         })
@@ -386,7 +386,7 @@ angular
                             }
                         })
                         .state('dashboard.search', {
-                            templateUrl: 'views/search.html',
+                            templateUrl: 'views/search/search.html',
                             url: '/search/:searchWord',
                             controller: 'SearchCtrl',
                             resolve: {
@@ -401,7 +401,7 @@ angular
                             }
                         })
                         .state('dashboard.krankheit', {
-                            templateUrl: 'views/krankheit.html',
+                            templateUrl: 'views/krankheit/krankheit.html',
                             url: '/krankheit',
                             controller: 'KrankheitCtrl',
                             resolve: {
@@ -415,12 +415,8 @@ angular
                             }
 
                         })
-                        .state('dashboard.test', {
-                            templateUrl: 'views/test.html',
-                            url: '/test'
-                        })
                         .state('dashboard.prozedur', {
-                            templateUrl: 'views/prozedur.html',
+                            templateUrl: 'views/prozedur/prozedur.html',
                             url: '/prozedur',
                             controller: 'ProzedurCtrl',
                             resolve: {
@@ -550,7 +546,6 @@ angular
 
 angular.module('sbAdminApp').config(function ($provide) {
     function createTable(colCount, rowCount) {
-        console.log(colCount);
         var tds = "";
         for (var idxCol = 0; idxCol < colCount; idxCol++) {
             tds = tds + "<td>&nbsp;</td>";
@@ -569,7 +564,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                 action: function (promise, restoreSelection) {
                     var that = this;
                     var uibModalInstance = $uibModal.open({
-                        templateUrl: 'views/table.html',
+                        templateUrl: 'views/tablePopup.html',
                         controller: function ($scope, $uibModalInstance) {
                             $scope.invitation = {};
                             $scope.ok = function () {
@@ -587,7 +582,6 @@ angular.module('sbAdminApp').config(function ($provide) {
                     //define result modal , when user complete result information 
                     uibModalInstance.result.then(function (result) {
                         if (result) {
-                            console.log(result);
                             restoreSelection();
                             var html = createTable(result.col, result.row);
                             promise.resolve();
@@ -600,13 +594,12 @@ angular.module('sbAdminApp').config(function ($provide) {
             // add the button to the default toolbar definition
             taOptions.toolbar[1].push('table');
             return taOptions;
-        }])
+        }]);
 });
 
 
 angular.module('sbAdminApp').config(function ($provide) {
     function createExternalLink(link) {
-        console.log(link);
         if (link[0] !== null) {
 
             return '<a href=/#/dashboard/krankheit/detail/' + link[0].split(" ").join("%20") + '>' + link[0] + ' </a> ';
@@ -630,138 +623,63 @@ angular.module('sbAdminApp').config(function ($provide) {
                 action: function (promise, restoreSelection) {
                     var that = this;
                     var uibModalInstance = $uibModal.open({
-                        templateUrl: 'views/krankheit/popup.html',
+                        templateUrl: 'views/popup/linkPopup.html',
                         controller: function ($scope, $http, $uibModalInstance, serviceAjax) {
                             $scope.invitation = {};
                             serviceAjax.krank().success(function (data) {
                                 $scope.krankheits = data;
-                                $scope.viewbyK = 10;
-                                $scope.totalItemsK = $scope.krankheits.length;
                                 $scope.currentPageK = 1;
-                                $scope.itemsPerPageK = $scope.viewbyK;
-                                $scope.maxSizeK = 5;
-                                $scope.setPageK = function (pageNoK) {
-                                    $scope.currentPageK = pageNoK;
-                                };
-
-                                $scope.pageChangedK = function () {
-                                    console.log('Page changed to: ' + $scope.currentPageK);
-                                };
-
-                                $scope.setItemsPerPageK = function (num) {
-                                    $scope.itemsPerPageK = num;
-                                    $scope.currentPageK = 1;
-                                };
                             });
                             serviceAjax.prozed().success(function (data) {
                                 $scope.prozedurs = data;
-                                $scope.viewbyP = 10;
-                                $scope.totalItemsP = $scope.prozedurs.length;
                                 $scope.currentPageP = 1;
-                                $scope.itemsPerPageP = $scope.viewbyP;
-                                $scope.maxSizeP = 5;
-
-                                $scope.setPageP = function (pageNoP) {
-                                    $scope.currentPageP = pageNoP;
-                                };
-
-                                $scope.pageChangedP = function () {
-                                    console.log('Page changed to: ' + $scope.currentPageP);
-                                };
-
-                                $scope.setItemsPerPageP = function (num) {
-                                    $scope.itemsPerPageP = num;
-                                    $scope.currentPageP = 1;
-                                };
 
                             });
                             serviceAjax.icdRead().success(function (data) {
                                 $scope.icds = data;
-                                $scope.viewbyG = 10;
-                                $scope.totalItemsG = $scope.icds.length;
                                 $scope.currentPageG = 1;
-                                $scope.itemsPerPageG = $scope.viewbyG;
-                                $scope.maxSizeG = 5;
-
-                                $scope.setPageG = function (pageNo) {
-                                    $scope.currentPageG = pageNo;
-                                };
-
-                                $scope.pageChangedG = function () {
-                                    console.log('Page changed to: ' + $scope.currentPageG);
-                                };
-
-                                $scope.setItemsPerPageG = function (num) {
-                                    $scope.itemsPerPageG = num;
-                                    $scope.currentPageG = 1;
-                                };
                             });
                             serviceAjax.medikamentRead().success(function (data) {
                                 $scope.medikaments = data;
-                                $scope.viewbyM = 10;
-                                $scope.totalItemsM = $scope.medikaments.length;
                                 $scope.currentPageM = 1;
-                                $scope.itemsPerPageM = $scope.viewbyM;
-                                $scope.maxSizeM = 5;
-
-                                $scope.setPageM = function (pageNo) {
-                                    $scope.currentPageM = pageNo;
-                                };
-
-                                $scope.pageChangedM = function () {
-                                    console.log('Page changed to: ' + $scope.currentPageM);
-                                };
-
-                                $scope.setItemsPerPageM = function (num) {
-                                    $scope.itemsPerPageM = num;
-                                    $scope.currentPageM = 1;
-                                };
                             });
                             $scope.ok = function () {
                                 $uibModalInstance.close($scope.link);
                             };
 
                             $scope.checkKrankheitlink = function (krankheit) {
-                                console.log(krankheit);
                                 var reg = [];
                                 reg[0] = krankheit.title;
                                 reg[1] = null;
                                 reg[2] = null;
-                                console.log(reg);
 
                                 $scope.link = reg;
                                 $uibModalInstance.close($scope.link);
                             };
                             $scope.checkProzedurlink = function (prozedur) {
-                                console.log(prozedur);
                                 var reg = [];
                                 reg[0] = null;
                                 reg[1] = prozedur.title;
                                 reg[2] = null;
-                                console.log(reg);
 
                                 $scope.link = reg;
                                 $uibModalInstance.close($scope.link);
                             };
                             $scope.checkICDlink = function (icd) {
-                                console.log(icd);
                                 var reg = [];
                                 reg[0] = null;
                                 reg[1] = null;
                                 reg[2] = icd.code;
-                                console.log(reg);
 
                                 $scope.link = reg;
                                 $uibModalInstance.close($scope.link);
                             };
                             $scope.checkMedikamentlink = function (medikament) {
-                                console.log(medikament);
                                 var reg = [];
                                 reg[0] = null;
                                 reg[1] = null;
                                 reg[2] = null;
                                 reg[3] = medikament;
-                                console.log(reg);
 
                                 $scope.link = reg;
                                 $uibModalInstance.close($scope.link);
@@ -776,7 +694,6 @@ angular.module('sbAdminApp').config(function ($provide) {
                     //define result modal , when user complete result information 
                     uibModalInstance.result.then(function (result) {
                         if (result) {
-                            console.log(result);
                             restoreSelection();
                             var html = createExternalLink(result);
                             promise.resolve();
@@ -791,3 +708,113 @@ angular.module('sbAdminApp').config(function ($provide) {
             return taOptions;
         }]);
 });
+angular.module('sbAdminApp').config(function ($provide) {
+    function addImage(image) {
+
+
+        return 'Bild:' + image.title + '(siehe Bild unten)';
+    }
+    $provide.decorator('taOptions', ['taRegisterTool', 'serviceAjax', '$delegate', '$uibModal', function (taRegisterTool, serviceAjax, taOptions, $uibModal, $scope) {
+            taRegisterTool('image', {
+                iconclass: 'fa fa-image',
+                tooltiptext: 'Insert image',
+                action: function (promise, restoreSelection) {
+                    var that = this;
+                    var uibModalInstance = $uibModal.open({
+                        templateUrl: 'views/popup/imagePopup.html',
+                        controller: function ($state, $scope, ngDialog, serviceAjax, Upload, $timeout, $http, $uibModalInstance) {
+                            $scope.$watch('files', function () {
+                                $scope.upload($scope.files);
+                            });
+                            $scope.$watch('file', function () {
+                                if ($scope.file !== null) {
+                                    $scope.files = [$scope.file];
+                                }
+                            });
+                            $scope.log = '';
+                            $scope.upload = function (files) {
+                                if (files && files.length) {
+                                    for (var i = 0; i < files.length; i++) {
+                                        var file = files[i];
+                                        if (file !== undefined) {
+                                            Upload.upload({
+                                                url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                                                data: {
+                                                    title: $scope.title,
+                                                    file: file
+                                                }
+                                            }).then(function (resp) {
+                                                $scope.file = file;
+                                                $timeout(function () {
+                                                    $scope.log = 'file: ' +
+                                                            resp.config.data.file.name +
+                                                            ', Response: ' + JSON.stringify(resp.data) +
+                                                            '\n' + $scope.log;
+                                                });
+                                            }, null, function (evt) {
+                                                var progressPercentage = parseInt(100.0 *
+                                                        evt.loaded / evt.total);
+                                                $scope.log = 'progress: ' + progressPercentage +
+                                                        '% ' + evt.config.data.file.name + '\n' +
+                                                        $scope.log;
+                                            });
+                                        }
+                                    }
+                                }
+
+                            };
+                            $scope.update = function () {
+
+                                serviceAjax.imageFile($scope.file, $scope.title).success(function (data) {
+                                    if (data === "") {
+                                        $scope.fehler = "Datei nicht geeignet";
+                                        ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                                            scope: $scope //Pass the scope object if you need to access in the template
+                                        });
+                                    } else {
+                                        $scope.image = data;
+                                        $uibModalInstance.close($scope.image);
+                                    }
+                                });
+                            };
+                            $scope.invitation = {};
+                            serviceAjax.QueryImage().success(function (data) {
+                                $scope.images = data;
+                                $scope.currentPageK = 1;
+                                
+                            });
+
+                            $scope.ok = function () {
+                                $uibModalInstance.close($scope.image);
+                            };
+
+                            $scope.checkImageLink = function (image) {
+                                $scope.image = image;
+                                $uibModalInstance.close($scope.image);
+                            };
+
+                            $scope.cancel = function () {
+                                $uibModalInstance.dismiss('cancel');
+                            };
+                        },
+                        size: 'lg'
+
+                    });
+                    //define result modal , when user complete result information 
+                    uibModalInstance.result.then(function (result) {
+                        if (result) {
+                            restoreSelection();
+                            var html = addImage(result);
+                            promise.resolve();
+                            return that.$editor().wrapSelection('insertHtml', html);
+                        }
+                    });
+                    return false;
+                }
+            });
+            // add the button to the default toolbar definition
+            taOptions.toolbar[1].push('image');
+            return taOptions;
+        }]);
+});
+
