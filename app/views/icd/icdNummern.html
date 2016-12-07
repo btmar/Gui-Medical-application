@@ -1,73 +1,119 @@
-<div class="col-md-11">
-    <h1 class="page-header">ICD-Nummern</h1>
-</div>
-<div class="col-m-1">                                    
-    <a ui-sref="dashboard.icdHinzufuegen">             
-        <button type="button" class="page-header btn btn-success btn-circle btn-lg"><i class="fa fa-plus"></i> 
-        </button> 
-    </a>
-</div>
-<div class="col-md-12">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="/dashboard/icdNummern/#gesamt" data-toggle="tab">ICD Gesamt</a>
-                </li>
-                <li><a  href="/dashboard/icdNummern/#haupt" data-toggle="tab">ICD Hauptdiagnose</a>
-                </li>
-                <li><a href="/dashboard/icdNummern/#gefaehrlich" data-toggle="tab">ICD Gefährlich</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="gesamt">
-                    <div class="dataTable_wrapper">
-                        <form>
-                            <div class="form-group" id="search-margin-top">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                                    <input type="text" class="form-control" placeholder="Code" ng-model="searchGesamt">
-                                </div>      
-                            </div>
-                        </form>
-                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Diagnose</th>
-                                    <th>Type</th>
-                                    <th> </th>
-                                    <th> </th>
-                                </tr>
-                            </thead>
-                            <tr ng-repeat="icdGesamt in (icdGesamts| filter:searchGesamt).slice(((currentPageG - 1) * itemsPerPageG), ((currentPageG) * itemsPerPageG))">
-                                <td ng-bind="icdGesamt.code"></td>
-                                <td ng-bind="icdGesamt.diagnose"></td>
-                                <td ng-bind="icdGesamt.type"></td>
-                                <td>
-                                    <a ui-sref="dashboard.icdBearbeiten({ code: icdGesamt.code })"> 
-                                        <button type="button" ng-click="" class="btn btn-primary btn-circle">
-                                            <i class="fa fa-list"></i>
+<div class="row">
+    <div class="col-md-11">
+        <h1 class="page-header">ICD-Nummern</h1>
+    </div>
+    <div class="col-m-1">                                    
+        <a ui-sref="dashboard.icdHinzufuegen">             
+            <button type="button" class="page-header btn btn-success btn-circle btn-lg"><i class="fa fa-plus"></i> 
+            </button> 
+        </a>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="/dashboard/icdNummern/#gesamt" data-toggle="tab">ICD Gesamt</a>
+                    </li>
+                    <li><a  href="/dashboard/icdNummern/#haupt" data-toggle="tab">ICD Hauptdiagnose</a>
+                    </li>
+                    <li><a href="/dashboard/icdNummern/#gefaehrlich" data-toggle="tab">ICD Gefährlich</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="gesamt">
+                        <div class="dataTable_wrapper">
+                            <form>
+                                <div class="form-group" id="search-margin-top">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                        <input type="text" class="form-control" placeholder="Code" ng-model="searchGesamt">
+                                    </div>      
+                                </div>
+                            </form>
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Diagnose</th>
+                                        <th>Type</th>
+                                        <th> </th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                                <!--<tr ng-repeat="icdGesamt in (icdGesamts| filter:searchGesamt).slice(((currentPageG - 1) * itemsPerPageG), ((currentPageG) * itemsPerPageG))">-->
+                                <tr dir-paginate="icdGesamt in icdGesamts|filter:searchGesamt|itemsPerPage:10"current-page="currentPageG" pagination-id="1">
+
+                                    <td ng-bind="icdGesamt.code"></td>
+                                    <td ng-bind="icdGesamt.diagnose"></td>
+                                    <td ng-bind="icdGesamt.type"></td>
+                                    <td>
+                                        <a ui-sref="dashboard.icdBearbeiten({ code: icdGesamt.code })"> 
+                                            <button type="button" ng-click="" class="btn btn-primary btn-circle">
+                                                <i class="fa fa-list"></i>
+                                            </button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <button type="button" ng-click="deleteICDNummer(icdGesamt)" class="btn btn-danger btn-circle">
+                                            <i class="fa fa-times"></i>
                                         </button>
-                                    </a>
-                                </td>
-                                <td>
-                                    <button type="button" ng-click="deleteICDNummer(icdGesamt)" class="btn btn-danger btn-circle">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </table>
-                        <uib-pagination total-items="totalItemsG" ng-model="currentPageG" max-size="maxSizeG" class="pagination-sm" boundary-link-numbers="true"style="
-                        margin-left: 40%;"></uib-pagination>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!--                        <uib-pagination total-items="totalItemsG" ng-model="currentPageG" max-size="maxSizeG" class="pagination-sm" boundary-link-numbers="true"style="
+                                                    margin-left: 40%;"></uib-pagination>-->
+                            <dir-pagination-controls
+                                max-size="5"
+                                direction-links="true"
+                                boundary-links="true"
+                                pagination-id="1"
+                                style="margin-left: 30%;">
+                            </dir-pagination-controls>
+                        </div>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="haupt">
-                    <div class="dataTable_wrapper">
+                    <div class="tab-pane fade" id="haupt">
+                        <div class="dataTable_wrapper">
+                            <form>
+                                <div class="form-group" id="search-margin-top">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                        <input type="text" class="form-control"  ng-model="searchHaupt" ng-change="filter()" placeholder="Search">
+                                    </div>      
+                                </div>
+                            </form>
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Diagnose</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--<tr ng-repeat="icdHaupt in (icdHaupts| filter:searchHaupt).slice(((currentPageH - 1) * itemsPerPageH), ((currentPageH) * itemsPerPageH))">-->
+                                    <tr dir-paginate="icdHaupt in icdHaupts|filter:searchHaupt|itemsPerPage:10"current-page="currentPageH" pagination-id="2">
+
+                                        <td ng-bind="icdHaupt.code"></td>
+                                        <td ng-bind="icdHaupt.diagnose"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!--                        <uib-pagination total-items="totalItemsH" ng-model="currentPageH" max-size="maxSizeH" class="pagination-sm" boundary-link-numbers="true"style="
+                                                    margin-left: 40%;"></uib-pagination>-->
+                            <dir-pagination-controls
+                                max-size="5"
+                                direction-links="true"
+                                boundary-links="true"
+                                pagination-id="2"
+                                style="margin-left: 30%;">
+                            </dir-pagination-controls>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="gefaehrlich">
                         <form>
                             <div class="form-group" id="search-margin-top">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                                    <input type="text" class="form-control"  ng-model="searchHaupt" ng-change="filter()" placeholder="Search">
+                                    <input type="text" class="form-control"  ng-model="searchGefaeh" ng-change="filter()" placeholder="Search">
                                 </div>      
                             </div>
                         </form>
@@ -79,41 +125,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="icdHaupt in (icdHaupts| filter:searchHaupt).slice(((currentPageH - 1) * itemsPerPageH), ((currentPageH) * itemsPerPageH))">
-                                    <td ng-bind="icdHaupt.code"></td>
-                                    <td ng-bind="icdHaupt.diagnose"></td>
+                                <!--<tr ng-repeat="icdGefaeh in filtered = (icdGefaehs| filter:searchGefaeh).slice(((currentPageN - 1) * itemsPerPageN), ((currentPageN) * itemsPerPageN))">-->
+                                <tr dir-paginate="icdGefaeh in icdGefaehs|filter:searchGefaeh|itemsPerPage:10"current-page="currentPageN" pagination-id="3">
+                                    <td ng-bind="icdGefaeh.code"></td>
+                                    <td ng-bind="icdGefaeh.diagnose"></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <uib-pagination total-items="totalItemsH" ng-model="currentPageH" max-size="maxSizeH" class="pagination-sm" boundary-link-numbers="true"style="
-                        margin-left: 40%;"></uib-pagination>
-
+                        <!--<uib-pagination total-items="totalItemsN" ng-model="currentPageN" max-size="maxSizeN" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>-->
+                        <dir-pagination-controls
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="true"
+                            pagination-id="3"
+                            style="margin-left: 30%;">
+                        </dir-pagination-controls>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="gefaehrlich">
-                    <form>
-                        <div class="form-group" id="search-margin-top">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                                <input type="text" class="form-control"  ng-model="searchGefaeh" ng-change="filter()" placeholder="Search">
-                            </div>      
-                        </div>
-                    </form>
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>Diagnose</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="icdGefaeh in filtered = (icdGefaehs| filter:searchGefaeh).slice(((currentPageN - 1) * itemsPerPageN), ((currentPageN) * itemsPerPageN))">
-                                <td ng-bind="icdGefaeh.code"></td>
-                                <td ng-bind="icdGefaeh.diagnose"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <uib-pagination total-items="totalItemsN" ng-model="currentPageN" max-size="maxSizeN" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
                 </div>
             </div>
         </div>

@@ -12,30 +12,13 @@ app.filter('startFrom', function () {
 app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
     serviceAjax.medikamentRead().success(function (data) {
         $scope.medikaments = data;
-        $scope.viewbyM = 10;
-        $scope.totalItemsM = $scope.medikaments.length;
         $scope.currentPageM = 1;
-        $scope.itemsPerPageM = $scope.viewbyM;
-        $scope.maxSizeM = 5;
-
-        $scope.setPageM = function (pageNo) {
-            $scope.currentPageM = pageNo;
-        };
-
-        $scope.pageChangedM = function () {
-            console.log('Page changed to: ' + $scope.currentPageM);
-        };
-
-        $scope.setItemsPerPageM = function (num) {
-            $scope.itemsPerPageM = num;
-            $scope.currentPageM = 1;
-        };
     });
     var removeMedikament = function (medikament) {
 
         $scope.med = medikament;
 
-        ngDialog.openConfirm({template: 'views/entfernenPopup.html',
+        ngDialog.openConfirm({template: 'views/popup/entfernenPopup.html',
             scope: $scope //Pass the scope object if you need to access in the template
         });
     };
@@ -59,43 +42,10 @@ app.controller('MedikamentCtrl', function ($scope, ngDialog, serviceAjax) {
         serviceAjax.medikamentUsed(medikament).success(function (data) {
             if (data.toString() !== "") {
                 $scope.krankheits = data.krankheits;
-                $scope.viewbyK = 10;
-                $scope.totalItemsK = $scope.krankheits.length;
                 $scope.currentPageK = 1;
-                $scope.itemsPerPageK = $scope.viewbyK;
-                $scope.maxSizeK = 5;
-                $scope.setPageK = function (pageNoK) {
-                    $scope.currentPageK = pageNoK;
-                };
-
-                $scope.pageChangedK = function () {
-                    console.log('Page changed to: ' + $scope.currentPageK);
-                };
-
-                $scope.setItemsPerPageK = function (num) {
-                    $scope.itemsPerPageK = num;
-                    $scope.currentPageK = 1;
-                };
                 if (data.prozedurs.length !== 0) {
                     $scope.prozedurs = data.prozedurs;
-                    $scope.viewbyP = 10;
-                    $scope.totalItemsP = $scope.prozedurs.length;
                     $scope.currentPageP = 1;
-                    $scope.itemsPerPageP = $scope.viewbyP;
-                    $scope.maxSizeP = 5;
-
-                    $scope.setPageP = function (pageNoP) {
-                        $scope.currentPageP = pageNoP;
-                    };
-
-                    $scope.pageChangedP = function () {
-                        console.log('Page changed to: ' + $scope.currentPageP);
-                    };
-
-                    $scope.setItemsPerPageP = function (num) {
-                        $scope.itemsPerPageP = num;
-                        $scope.currentPageP = 1;
-                    };
                 }
                     $scope.name = data.medikament.bezeichnung;
                     ngDialog.openConfirm({template: 'views/medikament/versionForm.html',

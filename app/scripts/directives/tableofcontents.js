@@ -11,7 +11,7 @@ angular.module('sbAdminApp')
     return {
         restrict:'A',
         require:'?ngModel',
-        link : function($scope, $element, attrs, ngModel) {
+        link : function($scope, $element, attrs, ngModel, ngBindHtml) {
             function updateHeadlines() {
                 $scope.headlines=[];
                 console.log($element[0].querySelector('h1'));
@@ -34,8 +34,9 @@ angular.module('sbAdminApp')
             $scope.scrollTo=function(headline){
                 headline.element.scrollIntoView();
             };
-//            // when the html updates whe update the headlines
+            // when the html updates whe update the headlines
             ngModel.$render = updateHeadlines;
+//            ngBindHtml.$render = updateHeadlines;
             updateHeadlines();
         }
     };

@@ -33,7 +33,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="medikament in (medikaments| filter:searchMedikament).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">
+                    <!--<tr ng-repeat="medikament in (medikaments| filter:searchMedikament).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">-->                        
+                    <tr dir-paginate="medikament in medikaments| filter:searchMedikament|itemsPerPage:10"current-page="currentPageM" pagination-id="1">
                         <td ng-bind="medikament.pzn"></td>
                         <td ng-bind="medikament.bezeichnung"></td>
                         <td ng-bind="medikament.einheit"></td>
@@ -55,8 +56,15 @@
                     </tr>
                 </tbody>
             </table>
-            <uib-pagination total-items="totalItemsM" ng-model="currentPageM" max-size="maxSizeM" class="pagination-sm" boundary-link-numbers="true"style="
-                            margin-left: 20%;"></uib-pagination>
+            <!--            <uib-pagination total-items="totalItemsM" ng-model="currentPageM" max-size="maxSizeM" class="pagination-sm" boundary-link-numbers="true"style="
+                                        margin-left: 20%;"></uib-pagination>-->
+            <dir-pagination-controls
+                max-size="5"
+                direction-links="true"
+                boundary-links="true"
+                pagination-id="1"
+                style="margin-left: 30%;">
+            </dir-pagination-controls>
         </div>
     </div>
 </div>

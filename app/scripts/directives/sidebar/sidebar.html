@@ -11,19 +11,19 @@
             <li ng-class="{active: collapseVar === 2}">
                 <a ui-sref="dashboard.icdNummern" ng-click="check(2)"><i class="fa fa-th-list"></i> ICD-Nummern</a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=2">
-<!--                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.uploadMedikament" > <i class="fa fa-list-alt Alte"></i> Alte Version</a>
-                    </li>-->
+                    <!--                    <li ui-sref-active="active">
+                                            <a ui-sref="dashboard.uploadMedikament" > <i class="fa fa-list-alt Alte"></i> Alte Version</a>
+                                        </li>-->
                     <li>
                         <a ui-sref="dashboard.uploadIcd" ><i class="fa fa-wrench fa-fw"></i> Upload neue Version</a>
                     </li>
                     <li>
                         <a ui-sref="dashboard.icdVersion" ><i class="fa fa-wrench fa-fw"></i> Alte Version</a>
                     </li>
-                   
+
                 </ul>
             </li>
-            
+
             <!--            <li ng-class="{active: collapseVar==1}">{{dropDown}}
                             <a  ui-sref="dashboard.icdNummern" ng-click="check(1)"><i class="fa fa-th-list"></i> ICD-Nummern<span
                                 class="fa arrow"></span>
@@ -38,24 +38,27 @@
                             </ul>
                         </li>-->
 
-<!--            <li ui-sref-active="active">
-                <a ui-sref="dashboard.medikament"><i class="fa fa-medkit"></i> Medikament</a>
-            </li>-->
+            <!--            <li ui-sref-active="active">
+                            <a ui-sref="dashboard.medikament"><i class="fa fa-medkit"></i> Medikament</a>
+                        </li>-->
             <li ng-class="{active: collapseVar === 1}">
                 <a  ui-sref="dashboard.medikament" ng-click="check(1)"><i class="fa fa-medkit"></i> Medikament
                 </a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=1">
-<!--                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.uploadMedikament" > <i class="fa fa-list-alt Alte"></i> Alte Version</a>
-                    </li>-->
+                    <!--                    <li ui-sref-active="active">
+                                            <a ui-sref="dashboard.uploadMedikament" > <i class="fa fa-list-alt Alte"></i> Alte Version</a>
+                                        </li>-->
                     <li>
                         <a ui-sref="dashboard.uploadMedikament" ><i class="fa fa-wrench fa-fw"></i> Upload neue Version</a>
                     </li>
                     <li>
                         <a ui-sref="dashboard.medikamentVersion" ><i class="fa fa-wrench fa-fw"></i> Alte Version</a>
                     </li>
-                   
+
                 </ul>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="dashboard.image"><i class="fa fa-image"></i> Image</a>
             </li>
             <!--     <li ui-sref-active="active">
                      <a ui-sref="dashboard.medikament2"><i class="fa fa-medkit"></i> Medikament2</a>
