@@ -5,6 +5,7 @@ angular.module("sbAdminApp")
             serviceAjax.infoMedikament(pzn).success(function (data) {
                 $scope.medikament = data;
                 serviceAjax.medikamentUsed($scope.medikament).success(function (data) {
+                    console.log(data);
                     if (data.toString() !== "") {
                         if (data.krankheits.length !== 0) {
                         $scope.krankheits = data.krankheits;

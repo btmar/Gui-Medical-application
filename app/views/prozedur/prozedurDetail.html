@@ -1,35 +1,36 @@
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-11">
-			<h1 class="page-header"ng-bind-html="prozedur.title "></h1>
-		</div>
-		<div class="col-m-1">                                    
-			<a ui-sref="dashboard.prozedurBearbeiten({ title: prozedur.title })"> 
-				<button type="button" class="page-header btn btn-info btn-circle btn-lg"><i class="fa fa-pencil "></i> 
-				</button>    
-			</a>
-		</div>
-	</div>
-		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="/dashboard/prozedur/detail/#uebersicht" data-toggle="tab">Übersicht</a>
-						</li>
-						<li><a  href="/dashboard/prozedur/detail/#diagnostik" data-toggle="tab">Diagnostik</a>
-						</li>
-						<li><a href="/dashboard/prozedur/detail/#therapie" data-toggle="tab">Therapie</a>
-						</li>
-						<li><a href="/dashboard/prozedur/detail/#beratung" data-toggle="tab">Beratung</a>
-						</li>
-						<li><a href="/dashboard/prozedur/detail/#notes" data-toggle="tab">Notes</a>
-						</li>
-					</ul>
-					<div class="tab-content">
-						<div class="tab-pane fade in active" id="uebersicht">
-							<p ng-bind-html="prozedur.uebersichtTxt"></p>
+    <div class="row">
+        <div class="col-lg-11">
+            <h1 class="page-header"ng-bind-html="prozedur.title"></h1>
+        </div>
+        <div class="col-m-1">                                    
+            <a ui-sref="dashboard.prozedurBearbeiten({ title: prozedur.title })"> 
+                <button type="button" class="page-header btn btn-info btn-circle btn-lg"><i class="fa fa-pencil "></i> 
+                </button>    
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="/dashboard/prozedur/detail/#uebersicht" data-toggle="tab">Übersicht</a>
+                    </li>
+                    <li><a  href="/dashboard/prozedur/detail/#diagnostik" data-toggle="tab">Vorbereitung</a>
+                    </li>
+                    <li><a href="/dashboard/prozedur/detail/#therapie" data-toggle="tab">Durchführung</a>
+                    </li>
+                    <li><a href="/dashboard/prozedur/detail/#beratung" data-toggle="tab">Nachbearbeitung</a>
+                    </li>
+                    <li><a href="/dashboard/prozedur/detail/#notes" data-toggle="tab">Notes</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="uebersicht">
                         <h3 ng-if="prozedur.uebersichtNot" id="notfall-col">Notfall</h3>
                         <p ng-bind-html="prozedur.uebersichtNot"></p>
+                        <h3 ng-if="prozedur.uebersichtTxt" id="notfall-col">Standard</h3>
+                        <p ng-bind-html="prozedur.uebersichtTxt"></p>
                         <h3 ng-if="prozedur.listImgUebersicht.length" >Bilder</h3>
                         <div ng-repeat="image in prozedur.listImgUebersicht">  
                             <h4 ng-bind="image.title"></h4>
@@ -38,10 +39,10 @@
 
                     </div>
                     <div class="tab-pane fade" id="diagnostik">
-                        <p ng-bind-html="prozedur.diagnostikTxt"></p>
-
                         <h3 ng-if="prozedur.diagnostikNot" id="notfall-col">Notfall</h3>
                         <p ng-bind-html="prozedur.diagnostikNot"></p>
+                        <h3 ng-if="prozedur.diagnostikTxt" id="notfall-col">Standard</h3>
+                        <p ng-bind-html="prozedur.diagnostikTxt"></p>
                         <h3 ng-if="prozedur.listImgDiagnostik.length" >Bilder</h3>
                         <div ng-repeat="image in prozedur.listImgDiagnostik">  
                             <h4 ng-bind="image.title"></h4>
@@ -49,10 +50,10 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="therapie">
-                        <p ng-bind-html="prozedur.therapieTxt"></p>
-
                         <h3 ng-if="prozedur.therapieNot" id="notfall-col">Notfall</h3>
                         <p ng-bind-html="prozedur.therapieNot"></p>
+                        <h3 ng-if="prozedur.therapieTxt" id="notfall-col">Standard</h3>
+                        <p ng-bind-html="prozedur.therapieTxt"></p>
                         <h3 ng-if="prozedur.listImgTherapie.length" >Bilder</h3>
                         <div ng-repeat="image in prozedur.listImgTherapie">  
                             <h4 ng-bind="image.title"></h4>
@@ -61,9 +62,10 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="beratung">
-                        <p ng-bind-html="prozedur.beratungTxt"></p>
                         <h3 ng-if="prozedur.beratungNot" id="notfall-col">Notfall</h3>
                         <p ng-bind-html="prozedur.beratungNot"></p>
+                        <h3 ng-if="prozedur.beratungTxt" id="notfall-col">Standard</h3>
+                        <p ng-bind-html="prozedur.beratungTxt"></p>
                         <h3 ng-if="prozedur.listImgBeratung.length" >Bilder</h3>
                         <div ng-repeat="image in prozedur.listImgBeratung">  
                             <h4 ng-bind="image.title"></h4>

@@ -7,37 +7,42 @@
  * # tableOfContents
  */
 angular.module('sbAdminApp')
-  .directive('tableOfContents', function(){
-    return {
-        restrict:'A',
-        require:'?ngModel',
-        link : function($scope, $element, attrs, ngModel, ngBindHtml) {
-            function updateHeadlines() {
-                $scope.headlines=[];
-                console.log($element[0].querySelector('h1'));
-                console.log($element[0]);
-                var resizeBar = $element[0].querySelectorAll('h1,h2');
-                console.log(resizeBar);
-                angular.forEach($element[0].querySelectorAll('h1,h2,h3,h4,h5,h6'), function(e){
-                    $scope.headlines.push({ 
-                        level: e.tagName[1], 
-                        label: angular.element(e).text(),
-                        element: e
+        .directive('tableOfContents', function () {
+            return {
+                restrict: 'A',
+                require: '?ngModel',
+                link: function ($scope, element, attrs, ngModel, ngBindHtml) {
+                    function updateHeadlines() {
+                        $scope.headlines = [];
+                        //console.log(element[0].innerHTML.querySelector('h1'));
+                        console.log(element[0]);
+                        console.log(element);
+
+                        var resizeBar = element[0].querySelectorAll('h1,h2');
+                        //  console.log(resizeBar);
+                        angular.forEach(element[0].querySelectorAll('h1,h2,h3,h4,h5,h6'), function (e) {
+                            $scope.headlines.push({
+                                level: e.tagName[1],
+                                label: angular.element(e).text(),
+                                element: e
+                            });
+
+                        });
+                        console.log($scope.headlines);
+
+
+                    }
+                    // avoid memoryleaks from dom references
+                    $scope.$on('$destroy', function () {
+                        $scope.headlines = [];
                     });
-                });
-            }
-            // avoid memoryleaks from dom references
-            $scope.$on('$destroy',function(){
-                $scope.headlines=[];
-            });
-            // scroll to one of the headlines
-            $scope.scrollTo=function(headline){
-                headline.element.scrollIntoView();
+                    // scroll to one of the headlines
+                    $scope.scrollTo = function (headline) {
+                        headline.element.scrollIntoView();
+                    };
+                    // when the html updates whe update the headlines
+                    ngModel.$render = updateHeadlines;
+                    updateHeadlines();
+                }
             };
-            // when the html updates whe update the headlines
-            ngModel.$render = updateHeadlines;
-//            ngBindHtml.$render = updateHeadlines;
-            updateHeadlines();
-        }
-    };
-});
+        });

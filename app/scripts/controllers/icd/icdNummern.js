@@ -66,6 +66,7 @@ app.controller('IcdNummernCtrl', function ($scope, ngDialog, serviceAjax) {
                     $scope.currentPageP = 1;
                 }
                 $scope.name = data.icd.diagnose;
+                $scope.code = data.icd.code;
                 ngDialog.openConfirm({template: 'views/icd/versionForm.html',
                     className: 'ngdialog-theme-default custom-width-1150',
                     scope: $scope

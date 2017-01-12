@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                        <input type="text" class="form-control" placeholder="Version" ng-model="search">
+                        <input type="text" class="form-control" placeholder="Version" ng-model="searchVersion">
                     </div>      
                 </div>
             </form>
@@ -25,7 +25,7 @@
                 </thead>
                 <tbody>
                     <!--<tr ng-repeat="version in (versions| filter:search).slice(((currentPageK - 1) * itemsPerPageK), ((currentPageK) * itemsPerPageK))">-->
-                    <tr dir-paginate="version in versions|filter:search|itemsPerPage:10"current-page="currentPageK" pagination-id="1">
+                    <tr dir-paginate="version in versions|filter:searchVersion|itemsPerPage:10"current-page="currentPageV" pagination-id="100">
 
                         <td ng-bind="version"></td>
 
@@ -44,7 +44,7 @@
                 max-size="5"
                 direction-links="true"
                 boundary-links="true"
-                pagination-id="1"
+                pagination-id="100"
                 style="margin-left: 30%;">
             </dir-pagination-controls>
         </div>
@@ -72,7 +72,7 @@
                 </thead>
                 <tbody>
                     <!--<tr ng-repeat="icd in (ICDNummers| filter:searchICD).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">-->
-                    <tr dir-paginate="icd in ICDNummers|filter:searchICD|itemsPerPage:10"current-page="currentPageK" pagination-id="2">
+                    <tr dir-paginate="icd in ICDNummers|filter:searchICD|itemsPerPage:10"current-page="currentPageM" pagination-id="2">
 
                         <td ng-bind="icd.code"></td>
                         <td ng-bind="icd.diagnose"></td>

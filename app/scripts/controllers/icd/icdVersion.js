@@ -8,7 +8,7 @@ myApp.controller('ICDNummerVersionCtrl', function ($scope, serviceAjax) {
 
     serviceAjax.icdnummerVersion().success(function (data) {
         $scope.versions = data;
-        $scope.currentPageK = 1;
+        $scope.currentPageV = 1;
     });
     $scope.listVersion = function (version) {
         serviceAjax.icdnummerVersionRead(version).success(function (data) {

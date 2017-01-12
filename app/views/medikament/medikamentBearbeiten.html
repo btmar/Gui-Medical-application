@@ -74,7 +74,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="krankheit in (krankheits| filter:searchKrankheit).slice(((currentPageK - 1) * itemsPerPageK), ((currentPageK) * itemsPerPageK))"> 
+                        <!--<tr ng-repeat="krankheit in (krankheits| filter:searchKrankheit).slice(((currentPageK - 1) * itemsPerPageK), ((currentPageK) * itemsPerPageK))">--> 
+                        <tr dir-paginate="krankheit in krankheits| filter:searchKrankheit|itemsPerPage:10"current-page="currentPageK" pagination-id="2">       
+
                             <td ng-bind="krankheit.title"></td>
                             <td ng-bind="krankheit.autor"></td>
                             <td ng-bind="krankheit.date"></td>
@@ -88,8 +90,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <uib-pagination total-items="totalItemsK" ng-model="currentPageK" max-size="maxSizeK" class="pagination-sm" boundary-link-numbers="true"style="
-                                margin-left: 40%;"></uib-pagination>
+                <!--                <uib-pagination total-items="totalItemsK" ng-model="currentPageK" max-size="maxSizeK" class="pagination-sm" boundary-link-numbers="true"style="
+                                                margin-left: 40%;"></uib-pagination>-->
+                <dir-pagination-controls
+                    max-size="5"
+                    direction-links="true"
+                    boundary-links="true"
+                    pagination-id="2"
+                    style="margin-left: 30%;">
+                </dir-pagination-controls>
             </div>
         </div>
     </div>

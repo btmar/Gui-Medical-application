@@ -41,12 +41,16 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="uebersicht">
-
+                        <!--<p ng-model="krankheit.uebersichtTxt">{{krankheit.uebersichtTxt}}</p>-->
+                        <!--
                                                 <a ng-repeat="headline in headlines" ng-click="scrollTo(headline)">{{headline.label}}</a>
-                                                <!--<div table-of-contents ng-model="html" ><h1>alo</h1> <h2>hello</h2></div>-->
-<!--                                                <p ng-bind-html="krankheit.uebersichtTxt"></p>-->
-                        <!--                                                                        <h3 ng-if="krankheit.uebersichtNot" id="notfall-col">Notfall</h3>
-                                                                                                <div ng-model="krankheit.uebersichtNot">{{krankheit.uebersichtNot}}</div>-->
+                                               <div table-of-contents ng-model="krankheit.uebersichtTxt" >{{krankheit.uebersichtTxt}}</div>
+                                                <div table-of-contents ng-model="html" >{{html}}</div>
+                                                <div table-of-contents ng-model="html" ><h1>title11</h1></div>
+                                                <div table-of-contents ng-model="krankheit.uebersichtTxt" ng-bind-html="krankheit.uebersichtTxt"></div>
+                        
+                                                <h3 ng-if="krankheit.uebersichtNot" id="notfall-col">Notfall</h3>
+                                                <div ng-model="krankheit.uebersichtNot">{{krankheit.uebersichtNot}}</div>-->
                         <!--                        <div id="toc">
                                                     <h3>Table of Contents</h3>
                                                 </div>
@@ -54,9 +58,10 @@
                                                 <div id="contents" ng-model="krankheit.uebersichtTxt">
                                                     {{krankheit.uebersichtTxt}}
                                                 </div>-->
-                        <p ng-bind-html="krankheit.uebersichtTxt"></p>
                         <h3 ng-if="krankheit.uebersichtNot" id="notfall-col">Notfall</h3>
                         <p ng-bind-html="krankheit.uebersichtNot"></p>
+                        <h3 ng-if="krankheit.uebersichtTxt" id="notfall-col">Standard</h3>
+                        <p ng-bind-html="krankheit.uebersichtTxt"></p>
                         <h3 ng-if="krankheit.listImgUebersicht.length" >Bilder</h3>
                         <div ng-repeat="image in krankheit.listImgUebersicht">  
                             <h4 ng-bind="image.title"></h4>
@@ -65,10 +70,12 @@
 
                     </div>
                     <div class="tab-pane fade" id="diagnostik">
-                        <p ng-bind-html="krankheit.diagnostikTxt"></p>
+
 
                         <h3 ng-if="krankheit.diagnostikNot" id="notfall-col">Notfall</h3>
                         <p ng-bind-html="krankheit.diagnostikNot"></p>
+                        <h3 ng-if="krankheit.diagnostikTxt" id="notfall-col">Standard</h3>
+                        <p ng-bind-html="krankheit.diagnostikTxt"></p>
                         <h3 ng-if="krankheit.listImgDiagnostik.length" >Bilder</h3>
                         <div ng-repeat="image in krankheit.listImgDiagnostik">  
                             <h4 ng-bind="image.title"></h4>
@@ -76,10 +83,12 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="therapie">
-                        <p ng-bind-html="krankheit.therapieTxt"></p>
 
                         <h3 ng-if="krankheit.therapieNot" id="notfall-col">Notfall</h3>
                         <p ng-bind-html="krankheit.therapieNot"></p>
+                        <h3 ng-if="krankheit.therapieTxt" id="notfall-col">Standard</h3>
+                        <p ng-bind-html="krankheit.therapieTxt"></p>
+
                         <h3 ng-if="krankheit.listImgTherapie.length" >Bilder</h3>
                         <div ng-repeat="image in krankheit.listImgTherapie">  
                             <h4 ng-bind="image.title"></h4>
@@ -88,9 +97,10 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="beratung">
-                        <p ng-bind-html="krankheit.beratungTxt"></p>
                         <h3 ng-if="krankheit.beratungNot" id="notfall-col">Notfall</h3>
                         <p ng-bind-html="krankheit.beratungNot"></p>
+                        <h3 ng-if="krankheit.beratungTxt" id="notfall-col">Standard</h3>
+                        <p ng-bind-html="krankheit.beratungTxt"></p>
                         <h3 ng-if="krankheit.listImgBeratung.length" >Bilder</h3>
                         <div ng-repeat="image in krankheit.listImgBeratung">  
                             <h4 ng-bind="image.title"></h4>

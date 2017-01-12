@@ -22,6 +22,7 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
     $scope.hinzufuegen = function (item) {
 
         $scope.saveIcd = item;
+        console.log(item);
 
         ngDialog.openConfirm({template: 'views/popup/addedPopup.html',
             scope: $scope //Pass the scope object if you need to access in the template
@@ -30,7 +31,7 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
     $scope.save = function () {
         var index = $scope.icd.indexOf($scope.saveIcd);
 
-        serviceAjax.saveICDNummer($scope.saveIcd.icdnummer).success(function () {
+        serviceAjax.saveICDNummer($scope.saveIcd.icd).success(function () {
             if (index !== -1) {
                 $scope.icd.splice(index, 1);
             }
@@ -47,7 +48,8 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
         } else {
             $scope.krankheits = item.krankheits;
             $scope.prozedurs = item.prozedurs;
-            $scope.name = item.icdnummer.bezeichnung;
+            $scope.name = item.icd.diagnose;
+            $scope.code = item.icd.code;            
             ngDialog.openConfirm({template: 'views/icd/versionForm.html',
                 className: 'ngdialog-theme-default custom-width-1150',
                 scope: $scope
@@ -187,16 +189,14 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
                     if ($scope.new2.length !== 0) {
                         $scope.new = data.new;
                         $scope.currentPageM = 1;
-                    }
-                    else {
+                    } else {
                         $scope.new = null;
                     }
                     $scope.diagnose2 = data.diagnose;
                     if ($scope.diagnose2.length !== 0) {
                         $scope.diagnose = data.diagnose;
                         $scope.currentPageD = 10;
-                    }
-                    else {
+                    } else {
                         $scope.diagnose = null;
                     }
                     $scope.type2 = data.type;
@@ -204,8 +204,7 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
                         $scope.type = data.type;
                         $scope.currentPageT = 10;
 
-                    }
-                    else {
+                    } else {
                         $scope.type = null;
                     }
 
@@ -213,7 +212,7 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
                     if ($scope.deleted2.length !== 0) {
                         $scope.deleted = data.deleted;
                         $scope.currentPageD = 1;
-                       
+
 
                         serviceAjax.icdnummerListUsed($scope.deleted).success(function (data) {
                             $scope.icd2 = data;

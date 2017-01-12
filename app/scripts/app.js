@@ -430,6 +430,21 @@ angular
                                 }
                             }
                         })
+                        .state('dashboard.prozedurNotfall', {
+                            templateUrl: 'views/prozedur/prozedurNotfall.html',
+                            url: '/prozedur/notfall/:title',
+                            controller: 'ProzedurDetailCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/prozedur/prozedurDetail.js'
+                                        ]
+                                    });
+                                }
+                            }
+                        })
                         .state('dashboard.prozedurDetail', {
                             templateUrl: 'views/prozedur/prozedurDetail.html',
                             url: '/prozedur/detail/:title',
@@ -564,7 +579,7 @@ angular.module('sbAdminApp').config(function ($provide) {
                 action: function (promise, restoreSelection) {
                     var that = this;
                     var uibModalInstance = $uibModal.open({
-                        templateUrl: 'views/tablePopup.html',
+                        templateUrl: 'views/popup/tablePopup.html',
                         controller: function ($scope, $uibModalInstance) {
                             $scope.invitation = {};
                             $scope.ok = function () {
