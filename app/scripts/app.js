@@ -727,7 +727,7 @@ angular.module('sbAdminApp').config(function ($provide) {
     function addImage(image) {
 
 
-        return 'Bild:' + image.title + '(siehe Bild unten)';
+        return 'Bild: ' + image.title + ' (siehe Bild unten)';
     }
     $provide.decorator('taOptions', ['taRegisterTool', 'serviceAjax', '$delegate', '$uibModal', function (taRegisterTool, serviceAjax, taOptions, $uibModal, $scope) {
             taRegisterTool('image', {

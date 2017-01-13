@@ -22,14 +22,29 @@
 
             <h3 ng-if="krankheit.uebersichtNot" id="notfall-col">Übersicht Notfall</h3>
             <p ng-bind-html="krankheit.uebersichtNot"></p>
-
             <h3 ng-if="krankheit.diagnostikNot" id="notfall-col">Diagnostik Notfall</h3>
             <p ng-bind-html="krankheit.diagnostikNot"></p>
-
             <h3 ng-if="krankheit.therapieNot" id="notfall-col">Therapie Notfall</h3>
             <p ng-bind-html="krankheit.therapieNot"></p>
             <h3 ng-if="krankheit.beratungNot" id="notfall-col">Beratung Notfall</h3>
             <p ng-bind-html="krankheit.beratungNot"></p>
+            <h3>Bilder </h3>
+            <div ng-repeat="image in krankheit.listImgUebersichtNot">  
+                <h4 ng-bind="image.title"></h4>
+                <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+            </div>
+            <div ng-repeat="image in krankheit.listImgDiagnostikNot">  
+                <h4 ng-bind="image.title"></h4>
+                <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+            </div>
+            <div ng-repeat="image in krankheit.listImgTherapieNot">  
+                <h4 ng-bind="image.title"></h4>
+                <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+            </div>
+            <div ng-repeat="image in krankheit.listImgBeratungNot">  
+                <h4 ng-bind="image.title"></h4>
+                <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+            </div>
 
         </div>
     </div>

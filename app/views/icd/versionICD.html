@@ -25,7 +25,7 @@
                 </thead>
                 <tbody>
                     <!--<tr ng-repeat="version in (versions| filter:search).slice(((currentPageK - 1) * itemsPerPageK), ((currentPageK) * itemsPerPageK))">-->
-                    <tr dir-paginate="version in versions|filter:searchVersion|itemsPerPage:10"current-page="currentPageV" pagination-id="100">
+                    <tr dir-paginate="version in versions|filter:searchVersion|itemsPerPage:10 track by $index"current-page="currentPageV" pagination-id="100">
 
                         <td ng-bind="version"></td>
 
@@ -72,7 +72,7 @@
                 </thead>
                 <tbody>
                     <!--<tr ng-repeat="icd in (ICDNummers| filter:searchICD).slice(((currentPageM - 1) * itemsPerPageM), ((currentPageM) * itemsPerPageM))">-->
-                    <tr dir-paginate="icd in ICDNummers|filter:searchICD|itemsPerPage:10"current-page="currentPageM" pagination-id="2">
+                    <tr dir-paginate="icd in ICDNummers|filter:searchICD|itemsPerPage:10"current-page="currentPageM" pagination-id="200">
 
                         <td ng-bind="icd.code"></td>
                         <td ng-bind="icd.diagnose"></td>
@@ -86,7 +86,7 @@
                 max-size="5"
                 direction-links="true"
                 boundary-links="true"
-                pagination-id="2"
+                pagination-id="200"
                 style="margin-left: 30%;">
             </dir-pagination-controls>
         </div>

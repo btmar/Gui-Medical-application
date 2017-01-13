@@ -23,6 +23,23 @@
         <p ng-bind-html="prozedur.therapieNot"></p>
         <h3 ng-if="prozedur.beratungNot" id="notfall-col">Nachbearbeitung Notfall</h3>
         <p ng-bind-html="prozedur.beratungNot"></p>
+        <h3>Bilder </h3>
+            <div ng-repeat="image in prozedur.listImgUebersichtNot">  
+                <h4 ng-bind="image.title"></h4>
+                <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+            </div>
+            <div ng-repeat="image in prozedur.listImgDiagnostikNot">  
+                <h4 ng-bind="image.title"></h4>
+                <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+            </div>
+            <div ng-repeat="image in prozedur.listImgTherapieNot">  
+                <h4 ng-bind="image.title"></h4>
+                <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+            </div>
+            <div ng-repeat="image in prozedur.listImgBeratungNot">  
+                <h4 ng-bind="image.title"></h4>
+                <p><img id="imageKr" data-ng-src="data:image/PNG;base64,{{image.image}}"></p>
+            </div>
     </div>
 </div>
 
