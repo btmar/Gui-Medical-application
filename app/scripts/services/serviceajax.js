@@ -137,6 +137,9 @@ angular.module('sbAdminApp')
                 icdnummerListUsed: function (list) {
                     return $http.post("http://localhost:8080/icd/search/used/", list);
                 },
+                icdnummerConflict: function () {
+                    return $http.get("http://localhost:8080/icd/read/conflict/");
+                },
                 icdnummerUsed: function (icdnummer) {
                     return $http.post("http://localhost:8080/icd/search/used/icd", icdnummer);
                 },

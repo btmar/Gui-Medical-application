@@ -113,6 +113,21 @@ angular
                                 }
                             }
                         })
+                        .state('dashboard.icdConflict', {
+                            templateUrl: 'views/icd/icdConflict.html',
+                            url: '/icd/conflict',
+                            controller: 'IcdConflictCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/icd/icdConflict.js'
+                                        ]
+                                    });
+                                }
+                            }
+                        })
                         .state('dashboard.icdHinzufuegen', {
                             templateUrl: 'views/icd/icdHinzufuegen.html',
                             url: '/icd/hinzufuegen',
