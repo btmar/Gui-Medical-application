@@ -112,17 +112,11 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
     $scope.update = function () {
         serviceAjax.medikamentVersion().success(function (data) {
             $scope.versions = data;
-        });
 
-        if (contains($scope.versions, $scope.version) || $scope.version === undefined || $scope.version === null || $scope.version === "" || $scope.file === undefined || $scope.file === null || $scope.version.indexOf(' ') > -1) {
-            if (contains($scope.versions, $scope.version)) {
-                $scope.fehler = "Diese Versionsname existiert bereits";
-                ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
-                    scope: $scope //Pass the scope object if you need to access in the template
-                });
-            } else {
-                if ($scope.file === undefined || $scope.file === null) {
-                    $scope.fehler = "Bitte laden Sie eine Datei hoch";
+
+            if (contains($scope.versions, $scope.version) || $scope.version === undefined || $scope.version === null || $scope.version === "" || $scope.file === undefined || $scope.file === null || $scope.version.indexOf(' ') > -1) {
+                if (contains($scope.versions, $scope.version)) {
+                    $scope.fehler = "Diese Versionsname existiert bereits";
                     ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
                         scope: $scope //Pass the scope object if you need to access in the template
                     });
@@ -133,101 +127,103 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
                             scope: $scope //Pass the scope object if you need to access in the template
                         });
                     } else {
-                        if ( $scope.version.indexOf(' ') > -1) {
-                            $scope.fehler = "Die vesionsname darf keine Leerzeichen enhalten";
+                        if ($scope.file === undefined || $scope.file === null) {
+                            $scope.fehler = "Bitte laden Sie eine Datei hoch";
                             ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
                                 scope: $scope //Pass the scope object if you need to access in the template
                             });
-                        }
-                    }
-
-                }
-            }
-        } else {
-            $scope.new2 = null;
-            $scope.new = null;
-            $scope.deleted2 = null;
-            $scope.deleted = null;
-            $scope.med2 = null;
-            $scope.med = null;
-            $scope.inhaltsstoff = null;
-            $scope.inhaltsstoff2 = null;
-            $scope.bezeichnung = null;
-            $scope.bezeichnung2 = null;
-            $scope.einheit = null;
-            $scope.einheit2 = null;
-            $scope.roteListe = null;
-            $scope.roteListe2 = null;
-
-            serviceAjax.medFile($scope.file, $scope.version).success(function (data) {
-                console.log(data);
-                if (data === "") {
-                    $scope.fehler = "Datei nicht geeignet";
-                    ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
-                        scope: $scope //Pass the scope object if you need to access in the template
-                    });
-                } else {
-                    $scope.new2 = data.new;
-                    if ($scope.new2.length !== 0) {
-                        $scope.new = data.new;
-                        $scope.currentPageM = 1;
-                    }
-                    else {
-                        $scope.new = null;
-                    }
-                    $scope.bezeichnung2 = data.bezeichnung;
-                    if ($scope.bezeichnung2.length !== 0) {
-                        $scope.bezeichnung = data.bezeichnung;
-                        $scope.currentPageB = 10;
-                    }
-                    else {
-                        $scope.bezeichnung = null;
-                    }
-                    $scope.einheit2 = data.einheit;
-                    if ($scope.einheit2.length !== 0) {
-                        $scope.einheit = data.einheit;
-                        $scope.currentPageE = 10;
-                    }
-                    else {
-                        $scope.einheit = null;
-                    }
-                    $scope.roteListe2 = data.roteListe;
-                    if ($scope.roteListe2.length !== 0) {
-                        $scope.roteListe = data.roteListe;
-                        $scope.currentPageR = 10;
-                    }
-                    else {
-                        $scope.roteListe = null;
-                    }
-                    $scope.inhaltsstoff2 = data.inhaltsstoff;
-                    if ($scope.inhaltsstoff2.length !== 0) {
-                        $scope.inhaltsstoff = data.inhaltsstoff;
-                        $scope.currentPageI = 10;
-                    }
-                    else {
-                        $scope.inhaltsstoff = null;
-                    }
-                    $scope.deleted2 = data.deleted;
-                    if ($scope.deleted2.length !== 0) {
-                        $scope.deleted = data.deleted;
-                        $scope.currentPageD = 1;
-
-                        serviceAjax.medikamentListUsed($scope.deleted).success(function (data) {
-                            $scope.med2 = data;
-                            if ($scope.med2.length !== 0) {
-                                $scope.med = data;
-
-                                $scope.currentPageMK = 1;
-                                $scope.currentPageK = 1;
+                        } else {
+                            if ($scope.version.indexOf(' ') > -1) {
+                                $scope.fehler = "Die vesionsname darf keine Leerzeichen enhalten";
+                                ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                                    scope: $scope //Pass the scope object if you need to access in the template
+                                });
                             }
+                        }
+
+                    }
+                }
+            } else {
+                $scope.new2 = null;
+                $scope.new = null;
+                $scope.deleted2 = null;
+                $scope.deleted = null;
+                $scope.med2 = null;
+                $scope.med = null;
+                $scope.inhaltsstoff = null;
+                $scope.inhaltsstoff2 = null;
+                $scope.bezeichnung = null;
+                $scope.bezeichnung2 = null;
+                $scope.einheit = null;
+                $scope.einheit2 = null;
+                $scope.roteListe = null;
+                $scope.roteListe2 = null;
+
+                serviceAjax.medFile($scope.file, $scope.version).success(function (data) {
+                    console.log(data);
+                    if (data === "") {
+                        $scope.fehler = "Datei nicht geeignet";
+                        ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                            scope: $scope //Pass the scope object if you need to access in the template
                         });
                     } else {
-                        $scope.deleted = null;
-                        $scope.med = null;
+                        $scope.new2 = data.new;
+                        if ($scope.new2.length !== 0) {
+                            $scope.new = data.new;
+                            $scope.currentPageM = 1;
+                        } else {
+                            $scope.new = null;
+                        }
+                        $scope.bezeichnung2 = data.bezeichnung;
+                        if ($scope.bezeichnung2.length !== 0) {
+                            $scope.bezeichnung = data.bezeichnung;
+                            $scope.currentPageB = 10;
+                        } else {
+                            $scope.bezeichnung = null;
+                        }
+                        $scope.einheit2 = data.einheit;
+                        if ($scope.einheit2.length !== 0) {
+                            $scope.einheit = data.einheit;
+                            $scope.currentPageE = 10;
+                        } else {
+                            $scope.einheit = null;
+                        }
+                        $scope.roteListe2 = data.roteListe;
+                        if ($scope.roteListe2.length !== 0) {
+                            $scope.roteListe = data.roteListe;
+                            $scope.currentPageR = 10;
+                        } else {
+                            $scope.roteListe = null;
+                        }
+                        $scope.inhaltsstoff2 = data.inhaltsstoff;
+                        if ($scope.inhaltsstoff2.length !== 0) {
+                            $scope.inhaltsstoff = data.inhaltsstoff;
+                            $scope.currentPageI = 10;
+                        } else {
+                            $scope.inhaltsstoff = null;
+                        }
+                        $scope.deleted2 = data.deleted;
+                        if ($scope.deleted2.length !== 0) {
+                            $scope.deleted = data.deleted;
+                            $scope.currentPageD = 1;
+
+                            serviceAjax.medikamentListUsed($scope.deleted).success(function (data) {
+                                $scope.med2 = data;
+                                if ($scope.med2.length !== 0) {
+                                    $scope.med = data;
+
+                                    $scope.currentPageMK = 1;
+                                    $scope.currentPageK = 1;
+                                }
+                            });
+                        } else {
+                            $scope.deleted = null;
+                            $scope.med = null;
+                        }
                     }
-                }
-            });
-        }
+                });
+            }
+        });
     };
     $scope.upload = function (files) {
         if (files && files.length) {

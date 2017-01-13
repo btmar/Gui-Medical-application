@@ -137,8 +137,8 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
     $scope.update = function () {
         serviceAjax.icdnummerVersion().success(function (data) {
             $scope.versions = data;
-                                           console.log($scope.versions);
-        });
+                                           
+        
 
         if (contains($scope.versions, $scope.version) || $scope.version === undefined || $scope.version === null || $scope.version === "" || $scope.file === undefined || $scope.file === null || $scope.version.indexOf(' ') > -1) {
 
@@ -232,5 +232,7 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
                 }
             });
         }
+         });
     };
+   
 });
