@@ -294,6 +294,21 @@ angular
                                 }
                             }
                         })
+                        .state('dashboard.medikamentConflict', {
+                            templateUrl: 'views/medikament/medikamentConflict.html',
+                            url: '/medikament/conflict',
+                            controller: 'MedikamentConflictCtrl',
+                            resolve: {
+                                loadMyFiles: function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        name: 'sbAdminApp',
+                                        files: [
+                                            'scripts/controllers/medikament/medikamentConflict.js'
+                                        ]
+                                    });
+                                }
+                            }
+                        })
                         .state('dashboard.medikamentBearbeiten', {
                             templateUrl: 'views/medikament/medikamentBearbeiten.html',
                             url: '/medikament/bearbeiten/:pzn',

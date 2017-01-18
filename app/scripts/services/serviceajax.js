@@ -98,6 +98,12 @@ angular.module('sbAdminApp')
                 medikamentUsed: function (medikament) {
                     return $http.post("http://localhost:8080/medikament/search/used/medikament", medikament);
                 },
+                medikamentConflict: function () {
+                    return $http.get("http://localhost:8080/medikament/read/conflict/");
+                },
+                medikamentDeleteConflict: function (medikament) {
+                    return $http.post("http://localhost:8080/medikament/delete/conflict/", medikament);
+                },
                 medFile: function (file, version) {
                     var fd = new FormData();
                     fd.append('file', file);
@@ -140,6 +146,9 @@ angular.module('sbAdminApp')
                 icdnummerConflict: function () {
                     return $http.get("http://localhost:8080/icd/read/conflict/");
                 },
+                icdnummerDeleteConflict: function (icd) {
+                    return $http.post("http://localhost:8080/icd/delete/conflict/", icd);
+                },
                 icdnummerUsed: function (icdnummer) {
                     return $http.post("http://localhost:8080/icd/search/used/icd", icdnummer);
                 },
@@ -163,7 +172,7 @@ angular.module('sbAdminApp')
                     });
                 },
                 infoImage: function (title) {
-                    return $http.get("http://localhost:8080/image/"+ title);
+                    return $http.get("http://localhost:8080/image/" + title);
                 },
                 updateImage: function (image) {
                     return $http.post("http://localhost:8080/image/update", image);

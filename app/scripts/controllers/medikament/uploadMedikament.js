@@ -19,86 +19,10 @@ app.controller('UploadMedikamentCtrl', function ($scope, ngDialog, serviceAjax, 
         }
     });
     $scope.log = '';
-    $scope.hinzufuegen = function (item) {
-
-        $scope.saveMedikament = item;
-
-        ngDialog.openConfirm({template: 'views/popup/addedPopup.html',
-            scope: $scope //Pass the scope object if you need to access in the template
-        });
-    };
-    $scope.save = function () {
-        var index = $scope.med.indexOf($scope.saveMedikament);
-
-        serviceAjax.saveMedikament($scope.saveMedikament.medikament).success(function () {
-            if (index !== -1) {
-                $scope.med.splice(index, 1);
-            }
-
-            ngDialog.closeAll();
-        });
-    };
-
     $scope.cancel = function () {
         ngDialog.closeAll();
     };
-    $scope.detail = function (item) {
-        console.log(item);
-        if (item.krankheits.length === 0 && item.prozedurs.length === 0) {
-        } else {
-            $scope.krankheits = item.krankheits;
-            $scope.prozedurs = item.prozedurs;
-            $scope.name = item.medikament.bezeichnung;
-            ngDialog.openConfirm({template: 'views/medikament/versionForm.html',
-                className: 'ngdialog-theme-default custom-width-1150',
-                scope: $scope
-            }).then(
-                    function (value) {
 
-                    },
-                    function (value) {
-                    }
-            );
-        }
-    };
-    $scope.krankheitBearbeiten = function (krankheit) {
-        var index = $scope.krankheits.indexOf(krankheit);
-        console.log(krankheit);
-        serviceAjax.bearbeitenKrankheit(krankheit).success(function () {
-
-            $scope.krankheits.splice(index, 1);
-            if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {
-                ngDialog.closeAll();
-            }
-
-        });
-    };
-
-    $scope.krankheitIgnorieren = function (krankheit) {
-        var index = $scope.krankheits.indexOf(krankheit);
-        $scope.krankheits.splice(index, 1);
-        if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {
-            ngDialog.closeAll();
-        }
-    };
-    $scope.prozedurBearbeiten = function (prozedur) {
-        var index = $scope.prozedurs.indexOf(prozedur);
-        serviceAjax.bearbeitenProzedur(prozedur).success(function () {
-
-            $scope.prozedurs.splice(index, 1);
-            if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {
-                ngDialog.closeAll();
-            }
-        });
-    };
-
-    $scope.prozedurIgnorieren = function (prozedur) {
-        var index = $scope.prozedurs.indexOf(prozedur);
-        $scope.prozedurs.splice(index, 1);
-        if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {
-            ngDialog.closeAll();
-        }
-    };
     function contains(a, obj) {
         if (a !== undefined) {
             for (var i = 0; i < a.length; i++) {

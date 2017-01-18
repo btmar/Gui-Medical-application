@@ -19,80 +19,13 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
         }
     });
     $scope.log = '';
-    $scope.hinzufuegen = function (item) {
+   
 
-        $scope.saveIcd = item;
-        console.log(item);
-
-        ngDialog.openConfirm({template: 'views/popup/addedPopup.html',
-            scope: $scope //Pass the scope object if you need to access in the template
-        });
-    };
-    $scope.save = function () {
-        var index = $scope.icd.indexOf($scope.saveIcd);
-
-        serviceAjax.saveICDNummer($scope.saveIcd.icd).success(function () {
-            if (index !== -1) {
-                $scope.icd.splice(index, 1);
-            }
-
-            ngDialog.closeAll();
-        });
-    };
 
     $scope.cancel = function () {
         ngDialog.closeAll();
     };
-    $scope.detail = function (item) {
-        if (item.krankheits.length === 0 && item.prozedurs.length === 0) {
-        } else {
-            $scope.krankheits = item.krankheits;
-            $scope.prozedurs = item.prozedurs;
-            $scope.name = item.icd.diagnose;
-            $scope.code = item.icd.code;            
-            ngDialog.openConfirm({template: 'views/icd/versionForm.html',
-                className: 'ngdialog-theme-default custom-width-1150',
-                scope: $scope
-            });
-        }
-    };
-    $scope.krankheitBearbeiten = function (krankheit) {
-        var index = $scope.krankheits.indexOf(krankheit);
-        serviceAjax.versionningIcdKrankheit(krankheit).success(function () {
 
-            $scope.krankheits.splice(index, 1);
-            if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {
-                ngDialog.closeAll();
-            }
-
-        });
-    };
-
-    $scope.krankheitIgnorieren = function (krankheit) {
-        var index = $scope.krankheits.indexOf(krankheit);
-        $scope.krankheits.splice(index, 1);
-        if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {
-            ngDialog.closeAll();
-        }
-    };
-    $scope.prozedurBearbeiten = function (prozedur) {
-        var index = $scope.prozedurs.indexOf(prozedur);
-        serviceAjax.versionningIcdProzedur(prozedur).success(function () {
-
-            $scope.prozedurs.splice(index, 1);
-            if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {
-                ngDialog.closeAll();
-            }
-        });
-    };
-
-    $scope.prozedurIgnorieren = function (prozedur) {
-        var index = $scope.prozedurs.indexOf(prozedur);
-        $scope.prozedurs.splice(index, 1);
-        if ($scope.prozedurs.length === 0 && $scope.krankheits.length === 0) {
-            ngDialog.closeAll();
-        }
-    };
     function contains(a, obj) {
         if (a !== undefined) {
             for (var i = 0; i < a.length; i++) {
@@ -137,19 +70,11 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
     $scope.update = function () {
         serviceAjax.icdnummerVersion().success(function (data) {
             $scope.versions = data;
-                                           
-        
 
-        if (contains($scope.versions, $scope.version) || $scope.version === undefined || $scope.version === null || $scope.version === "" || $scope.file === undefined || $scope.file === null || $scope.version.indexOf(' ') > -1) {
+            if (contains($scope.versions, $scope.version) || $scope.version === undefined || $scope.version === null || $scope.version === "" || $scope.file === undefined || $scope.file === null || $scope.version.indexOf(' ') > -1) {
 
-            if (contains($scope.versions, $scope.version)) {
-                $scope.fehler = "Diese Versionsname existiert bereits";
-                ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
-                    scope: $scope //Pass the scope object if you need to access in the template
-                });
-            } else {
-                if ($scope.file === undefined || $scope.file === null) {
-                    $scope.fehler = "Bitte laden Sie eine Datei hoch";
+                if (contains($scope.versions, $scope.version)) {
+                    $scope.fehler = "Diese Versionsname existiert bereits";
                     ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
                         scope: $scope //Pass the scope object if you need to access in the template
                     });
@@ -160,79 +85,85 @@ app.controller('UploadICDNummerCtrl', function ($scope, ngDialog, serviceAjax, U
                             scope: $scope //Pass the scope object if you need to access in the template
                         });
                     } else {
-                        if ($scope.version.indexOf(' ') > -1) {
-                            $scope.fehler = "Die vesionsname darf keine Leerzeichen enhalten";
+                        if ($scope.file === undefined || $scope.file === null) {
+                            $scope.fehler = "Bitte laden Sie eine Datei hoch";
                             ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
                                 scope: $scope //Pass the scope object if you need to access in the template
                             });
-                        }
-                    }
-
-                }
-            }
-        } else {
-            $scope.new2 = null;
-            $scope.new = null;
-            $scope.diagnose2 = null;
-            $scope.diagnose = null;
-            $scope.type2 = null;
-            $scope.type = null;
-            $scope.deleted2 = null;
-            $scope.deleted = null;
-            $scope.icd2 = null;
-            $scope.icd = null;
-            serviceAjax.icdFile($scope.file, $scope.version).success(function (data) {
-                if (data === "") {
-                    $scope.fehler = "Datei nicht geeignet";
-                    ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
-                        scope: $scope //Pass the scope object if you need to access in the template
-                    });
-                } else {
-                    $scope.new2 = data.new;
-                    if ($scope.new2.length !== 0) {
-                        $scope.new = data.new;
-                        $scope.currentPageM = 1;
-                    } else {
-                        $scope.new = null;
-                    }
-                    $scope.diagnose2 = data.diagnose;
-                    if ($scope.diagnose2.length !== 0) {
-                        $scope.diagnose = data.diagnose;
-                        $scope.currentPageD = 10;
-                    } else {
-                        $scope.diagnose = null;
-                    }
-                    $scope.type2 = data.type;
-                    if ($scope.type2.length !== 0) {
-                        $scope.type = data.type;
-                        $scope.currentPageT = 10;
-
-                    } else {
-                        $scope.type = null;
-                    }
-
-                    $scope.deleted2 = data.deleted;
-                    if ($scope.deleted2.length !== 0) {
-                        $scope.deleted = data.deleted;
-                        $scope.currentPageD = 1;
-
-
-                        serviceAjax.icdnummerListUsed($scope.deleted).success(function (data) {
-                            $scope.icd2 = data;
-                            if ($scope.icd2.length !== 0) {
-                                $scope.icd = data;
-                                $scope.currentPageMK = 1;
-                                $scope.currentPageK = 1;
+                        } else {
+                            if ($scope.version.indexOf(' ') > -1) {
+                                $scope.fehler = "Die vesionsname darf keine Leerzeichen enhalten";
+                                ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                                    scope: $scope //Pass the scope object if you need to access in the template
+                                });
                             }
+                        }
+
+                    }
+                }
+            } else {
+                $scope.new2 = null;
+                $scope.new = null;
+                $scope.diagnose2 = null;
+                $scope.diagnose = null;
+                $scope.type2 = null;
+                $scope.type = null;
+                $scope.deleted2 = null;
+                $scope.deleted = null;
+                $scope.icd2 = null;
+                $scope.icd = null;
+                serviceAjax.icdFile($scope.file, $scope.version).success(function (data) {
+                    if (data === "") {
+                        $scope.fehler = "Datei nicht geeignet";
+                        ngDialog.openConfirm({template: 'views/popup/fehlerPopup.html',
+                            scope: $scope //Pass the scope object if you need to access in the template
                         });
                     } else {
-                        $scope.deleted = null;
-                        $scope.icd = null;
+                        $scope.new2 = data.new;
+                        if ($scope.new2.length !== 0) {
+                            $scope.new = data.new;
+                            $scope.currentPageM = 1;
+                        } else {
+                            $scope.new = null;
+                        }
+                        $scope.diagnose2 = data.diagnose;
+                        if ($scope.diagnose2.length !== 0) {
+                            $scope.diagnose = data.diagnose;
+                            $scope.currentPageD = 10;
+                        } else {
+                            $scope.diagnose = null;
+                        }
+                        $scope.type2 = data.type;
+                        if ($scope.type2.length !== 0) {
+                            $scope.type = data.type;
+                            $scope.currentPageT = 10;
+
+                        } else {
+                            $scope.type = null;
+                        }
+
+                        $scope.deleted2 = data.deleted;
+                        if ($scope.deleted2.length !== 0) {
+                            $scope.deleted = data.deleted;
+                            $scope.currentPageD = 1;
+
+
+                            serviceAjax.icdnummerListUsed($scope.deleted).success(function (data) {
+                                $scope.icd2 = data;
+                                if ($scope.icd2.length !== 0) {
+                                    $scope.icd = data;
+                                    $scope.currentPageMK = 1;
+                                    $scope.currentPageK = 1;
+                                }
+                            });
+                        } else {
+                            $scope.deleted = null;
+                            $scope.icd = null;
+                        }
                     }
-                }
-            });
-        }
-         });
+                });
+            }
+        });
     };
-   
+
 });
